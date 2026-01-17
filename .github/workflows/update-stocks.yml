@@ -1,0 +1,39 @@
+name: Update Stock Data
+
+on:
+  schedule:
+    # Run every day at 6:00 AM UTC (7:00 AM CET, 8:00 AM CEST)
+    - cron: '0 6 * * *'
+  workflow_dispatch: # Allow manual triggering
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        
+    - name: Fetch stock data and generate HTML
+      run: |
+        python fetch_stocks.py
+        
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add index.html data/stocks.json
+        git diff --staged --quiet || git commit -m "Update stock data - $(date +'%Y-%m-%d %H:%M:%S')"
+        git push

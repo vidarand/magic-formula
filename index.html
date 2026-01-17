@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Formula Sverige | Stockholmsbörsen Investeringsanalys</title>
+    <meta name="description" content="Magic Formula-investeringsstrategi för Stockholmsbörsen. Hitta undervärderade aktier med hög avkastning baserat på Joel Greenblatt's beprövade metod.">
+    <meta name="keywords" content="Magic Formula, aktier, Stockholmsbörsen, investering, värdering, Joel Greenblatt">
+    <meta name="author" content="Magic Formula Sverige">
+    <meta property="og:title" content="Magic Formula Sverige - Stockholmsbörsen">
+    <meta property="og:description" content="Aktierankingar baserat på Magic Formula-strategin">
+    <meta property="og:type" content="website">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            padding: 0;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .page-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+        .nav-links a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        .nav-links a:hover {
+            background: #f0f0f0;
+            transform: translateY(-1px);
+        }
+        .nav-links a.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        h1 {
+            margin: 0 0 10px 0;
+            color: #333;
+            font-size: 2.2em;
+            font-weight: 700;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 0.95em;
+        }
+        .content {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .content p {
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: white;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="header">
+            <div class="header-top">
+                <div>
+                    <h1>🇸🇪 Magic Formula Sverige</h1>
+                    <p class="subtitle">Stockholmsbörsen Investeringsanalys</p>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html" class="active">Hem</a>
+                    <a href="stocks.html">📊 Aktuella Rankingar</a>
+                    <a href="history.html">📈 Historik</a>
+                    <a href="faq.html">❓ FAQ</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <h2>Välkommen till Magic Formula Sverige</h2>
+            <p>Här kan du hitta undervärderade aktier på Stockholmsbörsen baserat på Joel Greenblatt's beprövade Magic Formula-strategi.</p>
+            <p>Magic Formula rankar aktier baserat på två nyckeltal:</p>
+            <ul style="line-height: 2; color: #666;">
+                <li><strong>Earnings Yield (EY)</strong> - Avkastning på intäkter = EBIT / Företagsvärde</li>
+                <li><strong>Return on Capital (ROC)</strong> - Avkastning på kapital = EBIT / (Totala tillgångar - Kortfristiga skulder)</li>
+            </ul>
+            <p>Aktier rankas genom att kombinera dessa två mått - lägre kombinerad rankning är bättre.</p>
+            <p style="margin-top: 30px;">
+                <a href="stocks.html" style="display: inline-block; padding: 12px 24px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: all 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'" onmouseout="this.style.transform=''; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.2)'">
+                    📊 Visa Aktuella Rankingar →
+                </a>
+            </p>
+        </div>
+        
+        <div class="footer">
+            <p>Uppdateras dagligen med senaste aktiedata | Magic Formula Sverige</p>
+        </div>
+    </div>
+</body>
+</html>

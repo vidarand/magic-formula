@@ -1,0 +1,261 @@
+#!/usr/bin/env python3
+"""
+Stock Data Schema Definition
+
+This schema defines the standard structure for stock data objects.
+All scripts should follow this schema to maintain consistency.
+
+The most complete data source is: data/current_stocks.json (from fetch_stocks_smart.py)
+"""
+
+from typing import Optional, Union
+from datetime import datetime
+
+# Type aliases
+StockValue = Union[int, float, str, None]  # Can be number, "N/A", or None
+
+
+class StockSchema:
+    """
+    Standard schema for stock data objects - streamlined for Magic Formula.
+
+    All stock data dictionaries should follow this structure.
+    Missing or unavailable fields should be set to "N/A" (string), not None or empty.
+    """
+
+    # Required fields (always present)
+    ticker: str  # Stock ticker symbol (e.g., "AZN", "ABB")
+    name: str  # Company name (e.g., "AstraZeneca PLC")
+    yfinance_ticker: str  # Yahoo Finance ticker with suffix (e.g., "AZN.ST")
+    last_updated: str  # ISO format timestamp (e.g., "2026-01-16T18:41:59.602852")
+    error: Optional[str]  # Error message if fetch failed, None if successful
+
+    # Basic price data
+    price: StockValue  # Current price (float) or "N/A"
+    change: StockValue  # Price change from previous close (float) or "N/A"
+    change_percent: StockValue  # Percentage change (float) or "N/A"
+    currency: str  # Currency code (e.g., "SEK", "USD", "NOK")
+
+    # Market data
+    market_cap: StockValue  # Market capitalization (int/float) or "N/A"
+    volume: StockValue  # Current volume (int) or "N/A"
+
+    # Descriptive/Classification fields
+    sector: (
+        str  # Sector name or "N/A" (needed to filter Financial Services/Real Estate)
+    )
+    industry: str  # Industry name or "N/A"
+    country: str  # Country name or "N/A"
+    market: str  # Market/exchange identifier (e.g., "se_market", "us_market") or "N/A"
+    description: str  # Company description/business summary or "N/A"
+    market_cap_category: str  # Market cap classification: "Large-cap", "Mid-cap", "Small-cap", "Micro-cap", or "N/A"
+
+    # Interesting metrics
+    pe_ratio: StockValue  # P/E ratio (float) or "N/A"
+    dividend_yield: StockValue  # Dividend yield (float, as decimal) or "N/A"
+
+    # Magic Formula required fields
+    enterprise_value: StockValue  # Enterprise value (int/float) or "N/A"
+    ebit: StockValue  # Earnings Before Interest and Taxes (int/float) or "N/A"
+    total_assets: (
+        StockValue  # Total Assets (for Magic Formula calculation) (int/float) or "N/A"
+    )
+    current_assets: StockValue  # Current Assets (for Working Capital calculation) (int/float) or "N/A"
+    current_liabilities: StockValue  # Total Current Liabilities (int/float) or "N/A"
+    net_fixed_assets: (
+        StockValue  # Net Fixed Assets / PP&E (for ROC calculation) (int/float) or "N/A"
+    )
+
+    # Calculated Magic Formula score (lower is better, "N/A" if cannot be calculated)
+    magic_formula_score: StockValue  # Combined rank score (int/float) or "N/A"
+
+
+# Schema definition as a dictionary for validation
+STOCK_SCHEMA = {
+    # Required fields
+    "ticker": str,
+    "name": str,
+    "yfinance_ticker": str,
+    "last_updated": str,
+    "error": (str, type(None)),
+    # Basic price data
+    "price": (int, float, str),
+    "change": (int, float, str),
+    "change_percent": (int, float, str),
+    "currency": str,
+    # Market data
+    "market_cap": (int, float, str),
+    "volume": (int, str),
+    # Descriptive/Classification
+    "sector": str,
+    "industry": str,
+    "country": str,
+    "market": str,
+    "description": str,
+    "market_cap_category": str,
+    # Interesting metrics
+    "pe_ratio": (int, float, str),
+    "dividend_yield": (int, float, str),
+    # Magic Formula required fields
+    "enterprise_value": (int, float, str),
+    "ebit": (int, float, str),
+    "total_assets": (int, float, str),
+    "current_assets": (int, float, str),
+    "current_liabilities": (int, float, str),
+    "net_fixed_assets": (int, float, str),
+    "magic_formula_score": (int, float, str),
+}
+
+
+def create_empty_stock(ticker: str, name: str, yfinance_ticker: str) -> dict:
+    """
+    Create an empty stock object following the schema.
+    All fields are set to "N/A" except required fields.
+    """
+    return {
+        "ticker": ticker,
+        "name": name,
+        "yfinance_ticker": yfinance_ticker,
+        "last_updated": datetime.now().isoformat(),
+        "error": None,
+        # Basic price data
+        "price": "N/A",
+        "change": "N/A",
+        "change_percent": "N/A",
+        "currency": "SEK",
+        # Market data
+        "market_cap": "N/A",
+        "volume": "N/A",
+        # Descriptive/Classification
+        "sector": "N/A",
+        "industry": "N/A",
+        "country": "Sweden",
+        "market": "N/A",
+        "description": "N/A",
+        "market_cap_category": "N/A",
+        # Interesting metrics
+        "pe_ratio": "N/A",
+        "dividend_yield": "N/A",
+        # Magic Formula required fields
+        "enterprise_value": "N/A",
+        "ebit": "N/A",
+        "total_assets": "N/A",
+        "current_assets": "N/A",
+        "current_liabilities": "N/A",
+        "net_fixed_assets": "N/A",
+        "magic_formula_score": "N/A",
+    }
+
+
+def validate_stock(stock: dict) -> tuple[bool, list[str]]:
+    """
+    Validate a stock object against the schema.
+
+    Returns:
+        (is_valid, errors): Tuple of validation result and list of error messages
+    """
+    errors = []
+
+    # Check required fields
+    required_fields = ["ticker", "name", "yfinance_ticker", "last_updated", "error"]
+    for field in required_fields:
+        if field not in stock:
+            errors.append(f"Missing required field: {field}")
+
+    # Check field types (basic validation)
+    for field, expected_types in STOCK_SCHEMA.items():
+        if field in stock:
+            value = stock[field]
+            if value is not None and value != "N/A":
+                if not isinstance(value, expected_types):
+                    errors.append(
+                        f"Field '{field}' has wrong type: {type(value).__name__}, "
+                        f"expected one of {[t.__name__ for t in expected_types if isinstance(t, type)]}"
+                    )
+
+    return len(errors) == 0, errors
+
+
+def normalize_stock(stock: dict) -> dict:
+    """
+    Normalize a stock object to match the schema.
+    Fills in missing fields with "N/A" defaults.
+    """
+    normalized = create_empty_stock(
+        stock.get("ticker", "UNKNOWN"),
+        stock.get("name", "Unknown Company"),
+        stock.get("yfinance_ticker", "UNKNOWN.ST"),
+    )
+
+    # Copy all existing fields
+    normalized.update(stock)
+
+    # Ensure error is None if not set or empty
+    if normalized.get("error") == "":
+        normalized["error"] = None
+
+    # Ensure last_updated is set
+    if "last_updated" not in normalized or not normalized["last_updated"]:
+        normalized["last_updated"] = datetime.now().isoformat()
+
+    return normalized
+
+
+# Field categories for documentation
+FIELD_CATEGORIES = {
+    "required": ["ticker", "name", "yfinance_ticker", "last_updated", "error"],
+    "price": ["price", "change", "change_percent", "currency"],
+    "market": ["market_cap", "volume"],
+    "descriptive": [
+        "sector",
+        "industry",
+        "country",
+        "market",
+        "description",
+        "market_cap_category",
+    ],
+    "metrics": ["pe_ratio", "dividend_yield"],
+    "magic_formula": [
+        "enterprise_value",
+        "ebit",
+        "total_assets",
+        "current_assets",
+        "current_liabilities",
+        "net_fixed_assets",
+        "magic_formula_score",
+    ],
+}
+
+
+if __name__ == "__main__":
+    # Example usage
+    print("Stock Data Schema")
+    print("=" * 60)
+    print(f"Total fields: {len(STOCK_SCHEMA)}")
+    print(f"Required fields: {len(FIELD_CATEGORIES['required'])}")
+    print("\nField categories:")
+    for category, fields in FIELD_CATEGORIES.items():
+        print(f"  {category}: {len(fields)} fields")
+
+    # Test create_empty_stock
+    print("\n" + "=" * 60)
+    print("Example empty stock:")
+    example = create_empty_stock("TEST", "Test Company", "TEST.ST")
+    print(f"  Ticker: {example['ticker']}")
+    print(f"  Fields: {len(example)}")
+
+    # Test validation
+    print("\n" + "=" * 60)
+    print("Validation test:")
+    valid_stock = {
+        "ticker": "TEST",
+        "name": "Test",
+        "yfinance_ticker": "TEST.ST",
+        "last_updated": datetime.now().isoformat(),
+        "error": None,
+        "price": 100.0,
+    }
+    is_valid, errors = validate_stock(valid_stock)
+    print(f"  Valid: {is_valid}")
+    if errors:
+        print(f"  Errors: {errors}")

@@ -1,0 +1,3042 @@
+[
+  {
+    "ticker": "AZN",
+    "name": "AstraZeneca PLC"
+  },
+  {
+    "ticker": "ABB",
+    "name": "ABB Ltd"
+  },
+  {
+    "ticker": "INVE.A",
+    "name": "Investor AB (publ)"
+  },
+  {
+    "ticker": "INVE.B",
+    "name": "Investor AB (publ)"
+  },
+  {
+    "ticker": "ATCO.A",
+    "name": "Atlas Copco AB (publ)"
+  },
+  {
+    "ticker": "ATCO.B",
+    "name": "Atlas Copco AB (publ)"
+  },
+  {
+    "ticker": "VOLV.A",
+    "name": "AB Volvo (publ)"
+  },
+  {
+    "ticker": "VOLV.B",
+    "name": "AB Volvo (publ)"
+  },
+  {
+    "ticker": "NDA-HE",
+    "name": "Nordea Bank Abp"
+  },
+  {
+    "ticker": "EQT",
+    "name": "EQT AB (publ)"
+  },
+  {
+    "ticker": "SAND",
+    "name": "Sandvik AB (publ)"
+  },
+  {
+    "ticker": "ASSA.B",
+    "name": "ASSA ABLOY AB (publ)"
+  },
+  {
+    "ticker": "SEB.A",
+    "name": "Skandinaviska Enskilda Banken AB (publ)"
+  },
+  {
+    "ticker": "SEB.C",
+    "name": "Skandinaviska Enskilda Banken AB (publ)"
+  },
+  {
+    "ticker": "SWED.A",
+    "name": "Swedbank AB (publ)"
+  },
+  {
+    "ticker": "DNBO",
+    "name": "DNB Bank ASA"
+  },
+  {
+    "ticker": "SAAB.B",
+    "name": "Saab AB (publ)"
+  },
+  {
+    "ticker": "NOKIA",
+    "name": "Nokia Oyj"
+  },
+  {
+    "ticker": "ERIC.A",
+    "name": "Telefonaktiebolaget LM Ericsson (publ)"
+  },
+  {
+    "ticker": "ERIC.B",
+    "name": "Telefonaktiebolaget LM Ericsson (publ)"
+  },
+  {
+    "ticker": "HEXA.B",
+    "name": "Hexagon AB (publ)"
+  },
+  {
+    "ticker": "HM.B",
+    "name": "H & M Hennes & Mauritz AB (publ)"
+  },
+  {
+    "ticker": "SAMPO.SDB",
+    "name": "Sampo Oyj"
+  },
+  {
+    "ticker": "SHB.A",
+    "name": "Svenska Handelsbanken AB (publ)"
+  },
+  {
+    "ticker": "SHB.B",
+    "name": "Svenska Handelsbanken AB (publ)"
+  },
+  {
+    "ticker": "EPI.A",
+    "name": "Epiroc AB (publ)"
+  },
+  {
+    "ticker": "EPI.B",
+    "name": "Epiroc AB (publ)"
+  },
+  {
+    "ticker": "KOGO",
+    "name": "Kongsberg Gruppen ASA"
+  },
+  {
+    "ticker": "ALFA",
+    "name": "Alfa Laval AB (publ)"
+  },
+  {
+    "ticker": "LUMI",
+    "name": "Lundin Mining Corporation"
+  },
+  {
+    "ticker": "LUG",
+    "name": "Lundin Gold Inc."
+  },
+  {
+    "ticker": "INDU.A",
+    "name": "AB Industrivärden (publ)"
+  },
+  {
+    "ticker": "INDU.C",
+    "name": "AB Industrivärden (publ)"
+  },
+  {
+    "ticker": "ESSITY.A",
+    "name": "Essity AB (publ)"
+  },
+  {
+    "ticker": "ESSITY.B",
+    "name": "Essity AB (publ)"
+  },
+  {
+    "ticker": "BOL",
+    "name": "Boliden AB (publ)"
+  },
+  {
+    "ticker": "8TRA",
+    "name": "Traton SE"
+  },
+  {
+    "ticker": "VSURE",
+    "name": "Verisure plc"
+  },
+  {
+    "ticker": "TELIA",
+    "name": "Telia Company AB (publ)"
+  },
+  {
+    "ticker": "LIFCO.B",
+    "name": "Lifco AB (publ)"
+  },
+  {
+    "ticker": "LATO.B",
+    "name": "Investment AB Latour (publ)"
+  },
+  {
+    "ticker": "LUND.B",
+    "name": "L E Lundbergföretagen AB (publ)"
+  },
+  {
+    "ticker": "EVO",
+    "name": "Evolution AB (publ)"
+  },
+  {
+    "ticker": "SOBI",
+    "name": "Swedish Orphan Biovitrum AB (publ)"
+  },
+  {
+    "ticker": "SKF.A",
+    "name": "AB SKF (publ)"
+  },
+  {
+    "ticker": "SKF.B",
+    "name": "AB SKF (publ)"
+  },
+  {
+    "ticker": "SKA.B",
+    "name": "Skanska AB (publ)"
+  },
+  {
+    "ticker": "TEL2.A",
+    "name": "Tele2 AB (publ)"
+  },
+  {
+    "ticker": "TEL2.B",
+    "name": "Tele2 AB (publ)"
+  },
+  {
+    "ticker": "VOLCAR.B",
+    "name": "Volvo Car AB (publ.)"
+  },
+  {
+    "ticker": "STE.A",
+    "name": "Stora Enso Oyj"
+  },
+  {
+    "ticker": "STE.R",
+    "name": "Stora Enso Oyj"
+  },
+  {
+    "ticker": "ALIV.SDB",
+    "name": "Autoliv, Inc."
+  },
+  {
+    "ticker": "TREL.B",
+    "name": "Trelleborg AB (publ)"
+  },
+  {
+    "ticker": "INDT",
+    "name": "Indutrade AB (publ)"
+  },
+  {
+    "ticker": "ADDT.B",
+    "name": "Addtech AB (publ.)"
+  },
+  {
+    "ticker": "SCA.A",
+    "name": "Svenska Cellulosa Aktiebolaget SCA (publ)"
+  },
+  {
+    "ticker": "SCA.B",
+    "name": "Svenska Cellulosa Aktiebolaget SCA (publ)"
+  },
+  {
+    "ticker": "SECU.B",
+    "name": "Securitas AB (publ)"
+  },
+  {
+    "ticker": "BALD.B",
+    "name": "Fastighets AB Balder (publ)"
+  },
+  {
+    "ticker": "SSAB.A",
+    "name": "SSAB AB (publ)"
+  },
+  {
+    "ticker": "SSAB.B",
+    "name": "SSAB AB (publ)"
+  },
+  {
+    "ticker": "NIBE.B",
+    "name": "NIBE Industrier AB (publ)"
+  },
+  {
+    "ticker": "BEIJ.B",
+    "name": "Beijer Ref AB (publ)"
+  },
+  {
+    "ticker": "SAGA.A",
+    "name": "AB Sagax (publ)"
+  },
+  {
+    "ticker": "SAGA.B",
+    "name": "AB Sagax (publ)"
+  },
+  {
+    "ticker": "SAGA.D",
+    "name": "AB Sagax (publ)"
+  },
+  {
+    "ticker": "SAVE",
+    "name": "Nordnet AB (publ)"
+  },
+  {
+    "ticker": "AAK",
+    "name": "AAK AB (publ.)"
+  },
+  {
+    "ticker": "AXFO",
+    "name": "Axfood AB (publ)"
+  },
+  {
+    "ticker": "NOBA",
+    "name": "NOBA Bank Group AB (publ)"
+  },
+  {
+    "ticker": "GETI.B",
+    "name": "Getinge AB (publ)"
+  },
+  {
+    "ticker": "CAST",
+    "name": "Castellum AB (publ)"
+  },
+  {
+    "ticker": "HOLM.A",
+    "name": "Holmen AB (publ)"
+  },
+  {
+    "ticker": "HOLM.B",
+    "name": "Holmen AB (publ)"
+  },
+  {
+    "ticker": "AZA",
+    "name": "Avanza Bank Holding AB (publ)"
+  },
+  {
+    "ticker": "SWEC.A",
+    "name": "Sweco AB (publ)"
+  },
+  {
+    "ticker": "SWEC.B",
+    "name": "Sweco AB (publ)"
+  },
+  {
+    "ticker": "FROO",
+    "name": "Frontline plc"
+  },
+  {
+    "ticker": "BIOA.B",
+    "name": "BioArctic AB (publ)"
+  },
+  {
+    "ticker": "SECT.B",
+    "name": "Sectra AB (publ)"
+  },
+  {
+    "ticker": "MYCR",
+    "name": "Mycronic AB (publ)"
+  },
+  {
+    "ticker": "LAGR.B",
+    "name": "Lagercrantz Group AB (publ)"
+  },
+  {
+    "ticker": "CAMX",
+    "name": "Camurus AB (publ)"
+  },
+  {
+    "ticker": "PNDX.B",
+    "name": "Pandox AB (publ)"
+  },
+  {
+    "ticker": "MCOV.B",
+    "name": "Medicover AB (publ)"
+  },
+  {
+    "ticker": "MTRS",
+    "name": "Munters Group AB (publ)"
+  },
+  {
+    "ticker": "ASKER",
+    "name": "Asker Healthcare Group AB"
+  },
+  {
+    "ticker": "HPOL.B",
+    "name": "HEXPOL AB (publ)"
+  },
+  {
+    "ticker": "CATE",
+    "name": "Catena AB (publ)"
+  },
+  {
+    "ticker": "WIHL",
+    "name": "Wihlborgs Fastigheter AB (publ)"
+  },
+  {
+    "ticker": "HUSQ.A",
+    "name": "Husqvarna AB (publ)"
+  },
+  {
+    "ticker": "HUSQ.B",
+    "name": "Husqvarna AB (publ)"
+  },
+  {
+    "ticker": "WALL.B",
+    "name": "Wallenstam AB (publ)"
+  },
+  {
+    "ticker": "FABG",
+    "name": "Fabege AB (publ)"
+  },
+  {
+    "ticker": "ASMDEE.B",
+    "name": "Asmodee Group AB (publ)"
+  },
+  {
+    "ticker": "LOOMIS",
+    "name": "Loomis AB (publ)"
+  },
+  {
+    "ticker": "ROKO.B",
+    "name": "Röko AB (publ)"
+  },
+  {
+    "ticker": "THULE",
+    "name": "Thule Group AB (publ)"
+  },
+  {
+    "ticker": "PEAB.B",
+    "name": "Peab AB (publ)"
+  },
+  {
+    "ticker": "HUFV.A",
+    "name": "Hufvudstaden AB (publ)"
+  },
+  {
+    "ticker": "TIETOS",
+    "name": "TietoEVRY Oyj"
+  },
+  {
+    "ticker": "KINV.A",
+    "name": "Kinnevik AB"
+  },
+  {
+    "ticker": "KINV.B",
+    "name": "Kinnevik AB"
+  },
+  {
+    "ticker": "BILL",
+    "name": "Billerud AB (publ)"
+  },
+  {
+    "ticker": "EKTA.B",
+    "name": "Elekta AB (publ)"
+  },
+  {
+    "ticker": "NCC.A",
+    "name": "NCC AB (publ)"
+  },
+  {
+    "ticker": "NCC.B",
+    "name": "NCC AB (publ)"
+  },
+  {
+    "ticker": "ATRLJ.B",
+    "name": "Atrium Ljungberg AB (publ)"
+  },
+  {
+    "ticker": "SINCH",
+    "name": "Sinch AB (publ)"
+  },
+  {
+    "ticker": "ALLEI",
+    "name": "Alleima AB (publ)"
+  },
+  {
+    "ticker": "SHOT",
+    "name": "Scandic Hotels Group AB (publ)"
+  },
+  {
+    "ticker": "ARION.SDB",
+    "name": "Arion banki hf."
+  },
+  {
+    "ticker": "HMS",
+    "name": "HMS Networks AB (publ)"
+  },
+  {
+    "ticker": "STOR.B",
+    "name": "Storskogen Group AB (publ)"
+  },
+  {
+    "ticker": "OEM.B",
+    "name": "OEM International AB (publ)"
+  },
+  {
+    "ticker": "BUFAB",
+    "name": "Bufab AB (publ)"
+  },
+  {
+    "ticker": "IPCO",
+    "name": "International Petroleum Corporation"
+  },
+  {
+    "ticker": "CLAS.B",
+    "name": "Clas Ohlson AB (publ)"
+  },
+  {
+    "ticker": "ALIF.B",
+    "name": "AddLife AB (publ)"
+  },
+  {
+    "ticker": "BETS.B",
+    "name": "Betsson AB (publ)"
+  },
+  {
+    "ticker": "BRAV",
+    "name": "Bravida Holding AB (publ)"
+  },
+  {
+    "ticker": "ELUX.A",
+    "name": "AB Electrolux (publ)"
+  },
+  {
+    "ticker": "ELUX.B",
+    "name": "AB Electrolux (publ)"
+  },
+  {
+    "ticker": "SYSR",
+    "name": "Systemair AB (publ)"
+  },
+  {
+    "ticker": "BURE",
+    "name": "Bure Equity AB (publ)"
+  },
+  {
+    "ticker": "EPRO.B",
+    "name": "Electrolux Professional AB (publ)"
+  },
+  {
+    "ticker": "VITR",
+    "name": "Vitrolife AB (publ)"
+  },
+  {
+    "ticker": "AQ",
+    "name": "AQ Group AB (publ)"
+  },
+  {
+    "ticker": "AFRY",
+    "name": "Afry AB"
+  },
+  {
+    "ticker": "BEIA.B",
+    "name": "Beijer Alma AB (publ)"
+  },
+  {
+    "ticker": "HAUTOO",
+    "name": "Höegh Autoliners ASA"
+  },
+  {
+    "ticker": "INTEA.B",
+    "name": "Intea Fastigheter AB (publ)"
+  },
+  {
+    "ticker": "INTEA.D",
+    "name": "Intea Fastigheter AB (publ)"
+  },
+  {
+    "ticker": "HACK",
+    "name": "Hacksaw AB (publ)"
+  },
+  {
+    "ticker": "NOLA.B",
+    "name": "Nolato AB (publ)"
+  },
+  {
+    "ticker": "PDX",
+    "name": "Paradox Interactive AB (publ)"
+  },
+  {
+    "ticker": "NP3",
+    "name": "NP3 Fastigheter AB (publ)"
+  },
+  {
+    "ticker": "VIMIAN",
+    "name": "Vimian Group AB (publ)"
+  },
+  {
+    "ticker": "GRNG",
+    "name": "Gränges AB (publ)"
+  },
+  {
+    "ticker": "DOM",
+    "name": "Dometic Group AB (publ)"
+  },
+  {
+    "ticker": "ALIG",
+    "name": "Alimak Group AB (publ)"
+  },
+  {
+    "ticker": "NEWA.B",
+    "name": "New Wave Group AB (publ)"
+  },
+  {
+    "ticker": "HEM",
+    "name": "Hemnet Group AB (publ)"
+  },
+  {
+    "ticker": "LIAB",
+    "name": "Lindab International AB (publ)"
+  },
+  {
+    "ticker": "NYF",
+    "name": "Nyfosa AB (publ)"
+  },
+  {
+    "ticker": "BONEX",
+    "name": "Bonesupport Holding AB (publ)"
+  },
+  {
+    "ticker": "IVSO",
+    "name": "Invisio AB (publ)"
+  },
+  {
+    "ticker": "SKIS.B",
+    "name": "SkiStar AB (publ)"
+  },
+  {
+    "ticker": "RATO.A",
+    "name": "Ratos AB (publ)"
+  },
+  {
+    "ticker": "RATO.B",
+    "name": "Ratos AB (publ)"
+  },
+  {
+    "ticker": "MTG.A",
+    "name": "Modern Times Group MTG AB"
+  },
+  {
+    "ticker": "MTG.B",
+    "name": "Modern Times Group MTG AB"
+  },
+  {
+    "ticker": "NORION",
+    "name": "Norion Bank AB (publ)"
+  },
+  {
+    "ticker": "ANOD.B",
+    "name": "Addnode Group AB (publ)"
+  },
+  {
+    "ticker": "RUSTA",
+    "name": "Rusta AB (publ)"
+  },
+  {
+    "ticker": "ENGCON.B",
+    "name": "engcon AB (publ)"
+  },
+  {
+    "ticker": "CIBUS",
+    "name": "Cibus Nordic Real Estate AB (publ)"
+  },
+  {
+    "ticker": "CLA.B",
+    "name": "Cloetta AB (publ)"
+  },
+  {
+    "ticker": "BILI.A",
+    "name": "Bilia AB (publ)"
+  },
+  {
+    "ticker": "ATT",
+    "name": "Attendo AB (publ)"
+  },
+  {
+    "ticker": "SLP.B",
+    "name": "Swedish Logistic Property AB"
+  },
+  {
+    "ticker": "EMBRAC.B",
+    "name": "Embracer Group AB (publ)"
+  },
+  {
+    "ticker": "VIT.B",
+    "name": "Vitec Software Group AB (publ)"
+  },
+  {
+    "ticker": "KAR",
+    "name": "Karnov Group AB (publ)"
+  },
+  {
+    "ticker": "BIOG.B",
+    "name": "BioGaia AB (publ)"
+  },
+  {
+    "ticker": "AMBEA",
+    "name": "Ambea AB (publ)"
+  },
+  {
+    "ticker": "DYVOX",
+    "name": "Dynavox Group AB (publ)"
+  },
+  {
+    "ticker": "CORE.A",
+    "name": "Corem Property Group AB (publ)"
+  },
+  {
+    "ticker": "CORE.B",
+    "name": "Corem Property Group AB (publ)"
+  },
+  {
+    "ticker": "CORE.D",
+    "name": "Corem Property Group AB (publ)"
+  },
+  {
+    "ticker": "TFBANK",
+    "name": "TF Bank AB (publ)"
+  },
+  {
+    "ticker": "BWEO",
+    "name": "BW Energy Limited"
+  },
+  {
+    "ticker": "CRED.A",
+    "name": "Creades AB"
+  },
+  {
+    "ticker": "VBG.B",
+    "name": "VBG Group AB (publ)"
+  },
+  {
+    "ticker": "HOFI",
+    "name": "Hoist Finance AB (publ)"
+  },
+  {
+    "ticker": "SBB.B",
+    "name": "Samhällsbyggnadsbolaget i Norden AB (publ)"
+  },
+  {
+    "ticker": "SBB.D",
+    "name": "Samhällsbyggnadsbolaget i Norden AB (publ)"
+  },
+  {
+    "ticker": "INWI",
+    "name": "Inwido AB (publ)"
+  },
+  {
+    "ticker": "SYNSAM",
+    "name": "Synsam AB (publ)"
+  },
+  {
+    "ticker": "ACAD",
+    "name": "AcadeMedia AB (publ)"
+  },
+  {
+    "ticker": "FPAR.A",
+    "name": "FastPartner AB (publ)"
+  },
+  {
+    "ticker": "FPAR.D",
+    "name": "FastPartner AB (publ)"
+  },
+  {
+    "ticker": "JM",
+    "name": "JM AB (publ)"
+  },
+  {
+    "ticker": "DIOS",
+    "name": "Diös Fastigheter AB (publ)"
+  },
+  {
+    "ticker": "APOTEA",
+    "name": "Apotea AB (publ)"
+  },
+  {
+    "ticker": "PLAZ.B",
+    "name": "Platzer Fastigheter Holding AB (publ)"
+  },
+  {
+    "ticker": "TROAX",
+    "name": "Troax Group AB (publ)"
+  },
+  {
+    "ticker": "MIPS",
+    "name": "Mips AB (publ)"
+  },
+  {
+    "ticker": "NCAB",
+    "name": "NCAB Group AB (publ)"
+  },
+  {
+    "ticker": "MER",
+    "name": "Meren Energy Inc."
+  },
+  {
+    "ticker": "SVEAF",
+    "name": "Sveafastigheter AB (publ)"
+  },
+  {
+    "ticker": "ARJO.B",
+    "name": "Arjo AB (publ)"
+  },
+  {
+    "ticker": "VOLO",
+    "name": "Volati AB (publ)"
+  },
+  {
+    "ticker": "BERG.B",
+    "name": "Bergman & Beving AB (publ)"
+  },
+  {
+    "ticker": "CS",
+    "name": "CoinShares International Limited"
+  },
+  {
+    "ticker": "MCAP",
+    "name": "MedCap AB (publ)"
+  },
+  {
+    "ticker": "EMIL.B",
+    "name": "Fastighetsbolaget Emilshus AB (publ)"
+  },
+  {
+    "ticker": "RAY.B",
+    "name": "RaySearch Laboratories AB (publ)"
+  },
+  {
+    "ticker": "LOGI.A",
+    "name": "Logistea AB (publ)"
+  },
+  {
+    "ticker": "LOGI.B",
+    "name": "Logistea AB (publ)"
+  },
+  {
+    "ticker": "MMGR.B",
+    "name": "Momentum Group AB (publ)"
+  },
+  {
+    "ticker": "INSTAL",
+    "name": "Instalco AB (publ)"
+  },
+  {
+    "ticker": "SDIP.B",
+    "name": "Sdiptech AB (publ)"
+  },
+  {
+    "ticker": "ALLIGO.B",
+    "name": "Alligo AB (publ)"
+  },
+  {
+    "ticker": "FLAT.B",
+    "name": "Flat Capital AB (publ)"
+  },
+  {
+    "ticker": "FAG",
+    "name": "Fagerhult Group AB"
+  },
+  {
+    "ticker": "MILDEF",
+    "name": "MilDef Group AB (publ)"
+  },
+  {
+    "ticker": "XVIVO",
+    "name": "Xvivo Perfusion AB (publ)"
+  },
+  {
+    "ticker": "FOI.B",
+    "name": "Fenix Outdoor International AG"
+  },
+  {
+    "ticker": "GOTL.A",
+    "name": "Rederiaktiebolaget Gotland (publ)"
+  },
+  {
+    "ticker": "GOTL.B",
+    "name": "Rederiaktiebolaget Gotland (publ)"
+  },
+  {
+    "ticker": "SVOL.A",
+    "name": "Svolder AB (publ)"
+  },
+  {
+    "ticker": "SVOL.B",
+    "name": "Svolder AB (publ)"
+  },
+  {
+    "ticker": "BETCO",
+    "name": "Better Collective A/S"
+  },
+  {
+    "ticker": "STORY.B",
+    "name": "Storytel AB (publ)"
+  },
+  {
+    "ticker": "YUBICO",
+    "name": "Yubico AB"
+  },
+  {
+    "ticker": "SCST",
+    "name": "Scandi Standard AB (publ)"
+  },
+  {
+    "ticker": "STEF.B",
+    "name": "Stendörren Fastigheter AB (publ)"
+  },
+  {
+    "ticker": "BOOZT",
+    "name": "Boozt AB (publ)"
+  },
+  {
+    "ticker": "RVRC",
+    "name": "RVRC Holding AB (publ)"
+  },
+  {
+    "ticker": "INTRUM",
+    "name": "Intrum AB (publ)"
+  },
+  {
+    "ticker": "HANZA",
+    "name": "Hanza AB (publ)"
+  },
+  {
+    "ticker": "OVZON",
+    "name": "Ovzon AB (publ)"
+  },
+  {
+    "ticker": "ACAST",
+    "name": "Acast AB (publ)"
+  },
+  {
+    "ticker": "SECARE",
+    "name": "Swedencare AB (publ)"
+  },
+  {
+    "ticker": "BHG",
+    "name": "BHG Group AB (publ)"
+  },
+  {
+    "ticker": "TRUE.B",
+    "name": "Truecaller AB (publ)"
+  },
+  {
+    "ticker": "NMAN",
+    "name": "Nederman Holding AB (publ)"
+  },
+  {
+    "ticker": "ZZ.B",
+    "name": "Zinzino AB (publ)"
+  },
+  {
+    "ticker": "BAHN.B",
+    "name": "Bahnhof AB (publ)"
+  },
+  {
+    "ticker": "ENITY",
+    "name": "Enity Holding AB (publ)"
+  },
+  {
+    "ticker": "ORES",
+    "name": "Investment AB Öresund (publ)"
+  },
+  {
+    "ticker": "JOMA",
+    "name": "John Mattson Fastighetsföretagen AB (publ)"
+  },
+  {
+    "ticker": "HEBA.B",
+    "name": "Heba Fastighets AB (publ)"
+  },
+  {
+    "ticker": "XANO.B",
+    "name": "XANO Industri AB (publ)"
+  },
+  {
+    "ticker": "EAST",
+    "name": "Eastnine AB (publ)"
+  },
+  {
+    "ticker": "DUNI",
+    "name": "Duni AB (publ)"
+  },
+  {
+    "ticker": "NOTE",
+    "name": "NOTE AB (publ)"
+  },
+  {
+    "ticker": "VISC",
+    "name": "Gruvaktiebolaget Viscaria"
+  },
+  {
+    "ticker": "SNM",
+    "name": "ShaMaran Petroleum Corp."
+  },
+  {
+    "ticker": "HTRO",
+    "name": "Hexatronic Group AB (publ)"
+  },
+  {
+    "ticker": "COFFEE.B",
+    "name": "Coffee Stain Studios AB"
+  },
+  {
+    "ticker": "VPLAY.A",
+    "name": "Viaplay Group AB (publ)"
+  },
+  {
+    "ticker": "VPLAY.B",
+    "name": "Viaplay Group AB (publ)"
+  },
+  {
+    "ticker": "ITAB",
+    "name": "ITAB Shop Concept AB (publ)"
+  },
+  {
+    "ticker": "COOR",
+    "name": "Coor Service Management Holding AB"
+  },
+  {
+    "ticker": "KCCO",
+    "name": "Klaveness Combination Carriers ASA"
+  },
+  {
+    "ticker": "VER",
+    "name": "Verve Group SE"
+  },
+  {
+    "ticker": "NYAB",
+    "name": "Nyab AB (publ)"
+  },
+  {
+    "ticker": "SFAST",
+    "name": "Stenhus Fastigheter i Norden AB (publ)"
+  },
+  {
+    "ticker": "REJL.B",
+    "name": "Rejlers AB (publ)"
+  },
+  {
+    "ticker": "PRISMA",
+    "name": "Prisma Properties AB (publ)"
+  },
+  {
+    "ticker": "NIVI.B",
+    "name": "Nivika Fastigheter AB (publ)"
+  },
+  {
+    "ticker": "MEDIO",
+    "name": "Medistim ASA"
+  },
+  {
+    "ticker": "MEKO",
+    "name": "Meko AB (publ)"
+  },
+  {
+    "ticker": "IDUN.B",
+    "name": "Idun Industrier AB (publ)"
+  },
+  {
+    "ticker": "HAYPP",
+    "name": "Haypp Group AB (publ)"
+  },
+  {
+    "ticker": "CEVI",
+    "name": "CellaVision AB (publ)"
+  },
+  {
+    "ticker": "TRIAN.B",
+    "name": "Fastighets AB Trianon (publ)"
+  },
+  {
+    "ticker": "SVED.B",
+    "name": "Svedbergs Group AB (publ)"
+  },
+  {
+    "ticker": "BRIN.B",
+    "name": "Brinova Fastigheter AB (publ)"
+  },
+  {
+    "ticker": "LINC",
+    "name": "Linc AB"
+  },
+  {
+    "ticker": "KARNEL.B",
+    "name": "Karnell Group AB (publ)"
+  },
+  {
+    "ticker": "TRAC.B",
+    "name": "AB Traction"
+  },
+  {
+    "ticker": "LIME",
+    "name": "Lime Technologies AB (publ)"
+  },
+  {
+    "ticker": "HUMBLE",
+    "name": "Humble Group AB (publ)"
+  },
+  {
+    "ticker": "BONAV.A",
+    "name": "Bonava AB (publ)"
+  },
+  {
+    "ticker": "BONAV.B",
+    "name": "Bonava AB (publ)"
+  },
+  {
+    "ticker": "EPEN",
+    "name": "Ependion AB"
+  },
+  {
+    "ticker": "HNSA",
+    "name": "Hansa Biopharma AB (publ)"
+  },
+  {
+    "ticker": "NELLY",
+    "name": "Nelly Group AB (publ)"
+  },
+  {
+    "ticker": "GOMX",
+    "name": "GomSpace Group AB (publ)"
+  },
+  {
+    "ticker": "KAMBI",
+    "name": "Kambi Group plc"
+  },
+  {
+    "ticker": "VICO",
+    "name": "Vicore Pharma Holding AB (publ)"
+  },
+  {
+    "ticker": "FMM.B",
+    "name": "FM Mattsson AB (publ)"
+  },
+  {
+    "ticker": "BMAX",
+    "name": "Byggmax Group AB (publ)"
+  },
+  {
+    "ticker": "NREST",
+    "name": "Nordrest Holding AB (publ)"
+  },
+  {
+    "ticker": "KNOW",
+    "name": "Knowit AB (publ)"
+  },
+  {
+    "ticker": "KFAST.B",
+    "name": "K-Fast Holding AB (publ)"
+  },
+  {
+    "ticker": "SEYE",
+    "name": "Smart Eye AB (publ)"
+  },
+  {
+    "ticker": "MORROW",
+    "name": "Morrow Bank AB"
+  },
+  {
+    "ticker": "VIVA",
+    "name": "Viva Wine Group AB"
+  },
+  {
+    "ticker": "ENVIPO",
+    "name": "Envipco Holding N.V."
+  },
+  {
+    "ticker": "BRE2",
+    "name": "Bredband2 i Skandinavien AB (publ)"
+  },
+  {
+    "ticker": "SANION",
+    "name": "Saniona AB (publ)"
+  },
+  {
+    "ticker": "AGROUP",
+    "name": "Arlandastad Group AB (publ)"
+  },
+  {
+    "ticker": "VESTUM",
+    "name": "Vestum AB (publ)"
+  },
+  {
+    "ticker": "TEQ",
+    "name": "Teqnion AB (publ)"
+  },
+  {
+    "ticker": "PACT",
+    "name": "Proact IT Group AB (publ)"
+  },
+  {
+    "ticker": "SF",
+    "name": "Stillfront Group AB (publ)"
+  },
+  {
+    "ticker": "FLERIE",
+    "name": "Flerie AB (publ)"
+  },
+  {
+    "ticker": "NEOBO",
+    "name": "Neobo Fastigheter AB (publ)"
+  },
+  {
+    "ticker": "BTS.B",
+    "name": "BTS Group AB (publ)"
+  },
+  {
+    "ticker": "GREEN",
+    "name": "Green Landscaping Group AB (publ)"
+  },
+  {
+    "ticker": "BESQAB",
+    "name": "Besqab AB (publ)"
+  },
+  {
+    "ticker": "VNV",
+    "name": "VNV Global AB (publ)"
+  },
+  {
+    "ticker": "KLARA.B",
+    "name": "KlaraBo Sverige AB (publ)"
+  },
+  {
+    "ticker": "CAT.A",
+    "name": "Catella AB (publ)"
+  },
+  {
+    "ticker": "CAT.B",
+    "name": "Catella AB (publ)"
+  },
+  {
+    "ticker": "DUST",
+    "name": "Dustin Group AB (publ)"
+  },
+  {
+    "ticker": "NOBI",
+    "name": "Nobia AB (publ)"
+  },
+  {
+    "ticker": "ELAN.B",
+    "name": "Elanders AB (publ)"
+  },
+  {
+    "ticker": "HUM",
+    "name": "Humana AB (publ)"
+  },
+  {
+    "ticker": "KBC",
+    "name": "KB Components AB (publ)"
+  },
+  {
+    "ticker": "ABSO",
+    "name": "Absolent Air Care Group AB (publ)"
+  },
+  {
+    "ticker": "CTT",
+    "name": "CTT Systems AB (publ)"
+  },
+  {
+    "ticker": "SVIK",
+    "name": "Studsvik AB (publ)"
+  },
+  {
+    "ticker": "VEFAB",
+    "name": "VEF AB (publ)"
+  },
+  {
+    "ticker": "CRNO.B",
+    "name": "Cereno Scientific AB (publ)"
+  },
+  {
+    "ticker": "MAHA.A",
+    "name": "Maha Capital AB (publ)"
+  },
+  {
+    "ticker": "GPG",
+    "name": "Genova Property Group AB (publ)"
+  },
+  {
+    "ticker": "LYKO.A",
+    "name": "Lyko Group AB (publ)"
+  },
+  {
+    "ticker": "VERT.B",
+    "name": "Vertiseit AB (publ)"
+  },
+  {
+    "ticker": "BINV",
+    "name": "BioInvent International AB (publ)"
+  },
+  {
+    "ticker": "EXS",
+    "name": "Exsitec Holding AB (publ)"
+  },
+  {
+    "ticker": "KABE.B",
+    "name": "KABE Group AB (publ.)"
+  },
+  {
+    "ticker": "BYGGP",
+    "name": "ByggPartner Gruppen AB (publ)"
+  },
+  {
+    "ticker": "BERNER.B",
+    "name": "Berner Industrier AB"
+  },
+  {
+    "ticker": "CARA",
+    "name": "Carasent AB (publ)"
+  },
+  {
+    "ticker": "DVYSR",
+    "name": "Devyser Diagnostics AB (publ)"
+  },
+  {
+    "ticker": "ARISE",
+    "name": "Arise AB (publ)"
+  },
+  {
+    "ticker": "AJA.B",
+    "name": "Byggmästare Anders J Ahlström Holding AB (publ)"
+  },
+  {
+    "ticker": "DMYD.B",
+    "name": "Diamyd Medical AB (publ)"
+  },
+  {
+    "ticker": "EGTX",
+    "name": "Egetis Therapeutics AB (publ)"
+  },
+  {
+    "ticker": "TRAIN.B",
+    "name": "Train Alliance AB (publ)"
+  },
+  {
+    "ticker": "EWRK",
+    "name": "Ework Group AB (publ)"
+  },
+  {
+    "ticker": "EQL",
+    "name": "EQL Pharma AB (publ)"
+  },
+  {
+    "ticker": "FG",
+    "name": "Fasadgruppen Group AB (publ)"
+  },
+  {
+    "ticker": "ARP",
+    "name": "Arctic Paper S.A."
+  },
+  {
+    "ticker": "PCELL",
+    "name": "PowerCell Sweden AB (publ)"
+  },
+  {
+    "ticker": "SUS",
+    "name": "Surgical Science Sweden AB (publ)"
+  },
+  {
+    "ticker": "STIL",
+    "name": "Stille AB"
+  },
+  {
+    "ticker": "INT",
+    "name": "Intellego Technologies AB"
+  },
+  {
+    "ticker": "LEA",
+    "name": "Lea Bank AB"
+  },
+  {
+    "ticker": "SFAB",
+    "name": "Solid Försäkringsaktiebolag (publ)"
+  },
+  {
+    "ticker": "DMXSE.SDB",
+    "name": "District Metals Corp."
+  },
+  {
+    "ticker": "BORG",
+    "name": "Björn Borg AB (publ)"
+  },
+  {
+    "ticker": "ANNE.B",
+    "name": "Annehem Fastigheter AB"
+  },
+  {
+    "ticker": "ENEA",
+    "name": "Enea AB (publ)"
+  },
+  {
+    "ticker": "ELTEL",
+    "name": "Eltel AB (publ)"
+  },
+  {
+    "ticker": "FNOVA.B",
+    "name": "Fortinova Fastigheter AB (Publ)"
+  },
+  {
+    "ticker": "RUG",
+    "name": "RugVista Group AB (publ)"
+  },
+  {
+    "ticker": "ORRON",
+    "name": "Orrön Energy AB (publ)"
+  },
+  {
+    "ticker": "GENO",
+    "name": "Genovis AB (publ.)"
+  },
+  {
+    "ticker": "CANTA",
+    "name": "Cantargia AB (publ)"
+  },
+  {
+    "ticker": "VSSAB.B",
+    "name": "Viking Supply Ships AB (publ)"
+  },
+  {
+    "ticker": "FPIP",
+    "name": "Formpipe Software AB (publ)"
+  },
+  {
+    "ticker": "MSON.A",
+    "name": "Midsona AB (publ)"
+  },
+  {
+    "ticker": "MSON.B",
+    "name": "Midsona AB (publ)"
+  },
+  {
+    "ticker": "BICO",
+    "name": "BICO Group AB (publ)"
+  },
+  {
+    "ticker": "SYNACT",
+    "name": "SynAct Pharma AB"
+  },
+  {
+    "ticker": "PREV.B",
+    "name": "Prevas AB"
+  },
+  {
+    "ticker": "CLAV",
+    "name": "Clavister Holding AB (publ.)"
+  },
+  {
+    "ticker": "NETI.B",
+    "name": "Net Insight AB (publ)"
+  },
+  {
+    "ticker": "PAX",
+    "name": "Paxman AB (publ)"
+  },
+  {
+    "ticker": "SIVI",
+    "name": "Siljansvik AB (publ)"
+  },
+  {
+    "ticker": "ALM",
+    "name": "ALM Equity AB (publ)"
+  },
+  {
+    "ticker": "STUDBO",
+    "name": "Studentbostäder i Norden AB (publ)"
+  },
+  {
+    "ticker": "EG7",
+    "name": "Enad Global 7 AB (publ)"
+  },
+  {
+    "ticker": "ONCO",
+    "name": "Oncopeptides AB (publ)"
+  },
+  {
+    "ticker": "INISS.B",
+    "name": "Inission AB (publ)"
+  },
+  {
+    "ticker": "BOKUS",
+    "name": "Bokusgruppen AB (publ)"
+  },
+  {
+    "ticker": "XSPRAY",
+    "name": "Xspray Pharma AB (publ)"
+  },
+  {
+    "ticker": "OSSD",
+    "name": "OssDsign AB (publ)"
+  },
+  {
+    "ticker": "MSAB.B",
+    "name": "Micro Systemation AB (publ)"
+  },
+  {
+    "ticker": "SOF.B",
+    "name": "Softronic AB (publ)"
+  },
+  {
+    "ticker": "SIVE",
+    "name": "Sivers Semiconductors AB (publ)"
+  },
+  {
+    "ticker": "FIRE",
+    "name": "Firefly AB (publ)"
+  },
+  {
+    "ticker": "ORX",
+    "name": "Orexo AB (publ)"
+  },
+  {
+    "ticker": "CRAD.B",
+    "name": "C-Rad AB (publ)"
+  },
+  {
+    "ticker": "CHEF",
+    "name": "Cheffelo AB (publ)"
+  },
+  {
+    "ticker": "EOLU.B",
+    "name": "Eolus Aktiebolag (publ)"
+  },
+  {
+    "ticker": "BULTEN",
+    "name": "Bulten AB (publ)"
+  },
+  {
+    "ticker": "ARPL",
+    "name": "Arla Plast AB"
+  },
+  {
+    "ticker": "SEDANA",
+    "name": "Sedana Medical AB (publ)"
+  },
+  {
+    "ticker": "CINT",
+    "name": "Cint Group AB (publ)"
+  },
+  {
+    "ticker": "PIERCE",
+    "name": "Pierce Group AB (publ)"
+  },
+  {
+    "ticker": "ADDV.A",
+    "name": "ADDvise Group AB (publ)"
+  },
+  {
+    "ticker": "ADDV.B",
+    "name": "ADDvise Group AB (publ)"
+  },
+  {
+    "ticker": "W5",
+    "name": "W5 Solutions AB (publ)"
+  },
+  {
+    "ticker": "SES",
+    "name": "Scandinavian Enviro Systems AB (publ)"
+  },
+  {
+    "ticker": "QBEN",
+    "name": "Qben Infra AB (publ)"
+  },
+  {
+    "ticker": "G2M",
+    "name": "Gentoo Media Inc."
+  },
+  {
+    "ticker": "MANG",
+    "name": "Mangold Fondkommission AB"
+  },
+  {
+    "ticker": "NTEK.B",
+    "name": "Novotek AB"
+  },
+  {
+    "ticker": "CTEK",
+    "name": "CTEK AB (publ)"
+  },
+  {
+    "ticker": "CINPHA",
+    "name": "Cinclus Pharma Holding AB (publ)"
+  },
+  {
+    "ticker": "LUC",
+    "name": "Lucara Diamond Corp."
+  },
+  {
+    "ticker": "NANOFS",
+    "name": "Nanoform Finland Oyj"
+  },
+  {
+    "ticker": "PROF.B",
+    "name": "ProfilGruppen AB (publ)"
+  },
+  {
+    "ticker": "EMBELL",
+    "name": "Embellence Group AB (publ)"
+  },
+  {
+    "ticker": "ACCON",
+    "name": "Acconeer AB (publ)"
+  },
+  {
+    "ticker": "AAC",
+    "name": "AAC Clyde Space AB (publ)"
+  },
+  {
+    "ticker": "NORSEO",
+    "name": "Norse Atlantic ASA"
+  },
+  {
+    "ticker": "ADVE",
+    "name": "Advenica AB (publ)"
+  },
+  {
+    "ticker": "SEZI",
+    "name": "Senzime AB (publ)"
+  },
+  {
+    "ticker": "GARO",
+    "name": "Garo Aktiebolag (publ)"
+  },
+  {
+    "ticker": "SALT.B",
+    "name": "SaltX Technology Holding AB (publ)"
+  },
+  {
+    "ticker": "NORB.B",
+    "name": "Nordisk Bergteknik AB (publ)"
+  },
+  {
+    "ticker": "CAG",
+    "name": "CAG Group AB (publ)"
+  },
+  {
+    "ticker": "FRACTL",
+    "name": "Fractal Gaming Group AB (publ)"
+  },
+  {
+    "ticker": "CASE",
+    "name": "Case Group AB (publ)"
+  },
+  {
+    "ticker": "LUMEN",
+    "name": "LumenRadio AB (publ)"
+  },
+  {
+    "ticker": "KAPIAB",
+    "name": "Kallebäck Property Invest AB (publ)"
+  },
+  {
+    "ticker": "NIL.B",
+    "name": "Nilörngruppen AB"
+  },
+  {
+    "ticker": "PRIC.B",
+    "name": "Pricer AB (publ)"
+  },
+  {
+    "ticker": "RROS",
+    "name": "Rottneros AB (publ)"
+  },
+  {
+    "ticker": "CDON",
+    "name": "CDON AB"
+  },
+  {
+    "ticker": "SKOLON",
+    "name": "Skolon AB (publ)"
+  },
+  {
+    "ticker": "GRANGX",
+    "name": "Grangex AB"
+  },
+  {
+    "ticker": "G5EN",
+    "name": "G5 Entertainment AB (publ)"
+  },
+  {
+    "ticker": "RAIL",
+    "name": "Railcare Group AB (publ)"
+  },
+  {
+    "ticker": "ATIC",
+    "name": "Actic Group AB (publ)"
+  },
+  {
+    "ticker": "HILB.B",
+    "name": "Hilbert Group AB (publ)"
+  },
+  {
+    "ticker": "SINT",
+    "name": "SinterCast AB (publ)"
+  },
+  {
+    "ticker": "CX",
+    "name": "CombinedX AB (publ)"
+  },
+  {
+    "ticker": "ENVAR",
+    "name": "Envar Holding AB (publ)"
+  },
+  {
+    "ticker": "BIM",
+    "name": "BIMobject AB"
+  },
+  {
+    "ticker": "FNM",
+    "name": "Ferronordic AB (publ)"
+  },
+  {
+    "ticker": "TINGS.A",
+    "name": "Tingsvalvet Fastighets AB (publ)"
+  },
+  {
+    "ticker": "TINGS.B",
+    "name": "Tingsvalvet Fastighets AB (publ)"
+  },
+  {
+    "ticker": "IBT.B",
+    "name": "Infant Bacterial Therapeutics AB (publ)"
+  },
+  {
+    "ticker": "TITA.B",
+    "name": "Titania Holding AB (publ)"
+  },
+  {
+    "ticker": "HAKI.A",
+    "name": "HAKI Safety AB (publ)"
+  },
+  {
+    "ticker": "HAKI.B",
+    "name": "HAKI Safety AB (publ)"
+  },
+  {
+    "ticker": "ITECH",
+    "name": "I-Tech AB"
+  },
+  {
+    "ticker": "SKMO",
+    "name": "Skåne-möllan AB (publ)"
+  },
+  {
+    "ticker": "DONE",
+    "name": "Done.ai Group AB"
+  },
+  {
+    "ticker": "ONEF",
+    "name": "Oneflow AB (publ)"
+  },
+  {
+    "ticker": "QSYS",
+    "name": "Qualisys Holding AB (publ)"
+  },
+  {
+    "ticker": "DURC.B",
+    "name": "Duroc AB (publ)"
+  },
+  {
+    "ticker": "SNX",
+    "name": "Premium Snacks Nordic AB (publ)"
+  },
+  {
+    "ticker": "GENI",
+    "name": "Generic Sweden AB"
+  },
+  {
+    "ticker": "BACTI.B",
+    "name": "Bactiguard Holding AB (publ)"
+  },
+  {
+    "ticker": "WTW.A",
+    "name": "Wall to Wall Group AB"
+  },
+  {
+    "ticker": "CARE",
+    "name": "Careium AB (Publ)"
+  },
+  {
+    "ticker": "ALCA",
+    "name": "Alcadon Group AB (publ)"
+  },
+  {
+    "ticker": "CEDER",
+    "name": "Cedergrenska AB (publ)"
+  },
+  {
+    "ticker": "DICOT",
+    "name": "Dicot Pharma AB"
+  },
+  {
+    "ticker": "TERNOR",
+    "name": "Terranor Group AB (publ)"
+  },
+  {
+    "ticker": "FLUO",
+    "name": "FluoGuide A/S"
+  },
+  {
+    "ticker": "NANEXA",
+    "name": "Nanexa AB (publ)"
+  },
+  {
+    "ticker": "DOXA",
+    "name": "Doxa AB (publ)"
+  },
+  {
+    "ticker": "CNCJO.B",
+    "name": "Concejo AB (publ)"
+  },
+  {
+    "ticker": "GIG.SDB",
+    "name": "GiG Software p.l.c."
+  },
+  {
+    "ticker": "GAPW.B",
+    "name": "Gapwaves AB (publ)"
+  },
+  {
+    "ticker": "META",
+    "name": "Metacon AB (publ)"
+  },
+  {
+    "ticker": "SLEEP",
+    "name": "Sleep Cycle AB (publ)"
+  },
+  {
+    "ticker": "ADTR",
+    "name": "Adtraction Group AB"
+  },
+  {
+    "ticker": "BEGR",
+    "name": "BE Group AB (publ)"
+  },
+  {
+    "ticker": "UPSALE",
+    "name": "Upsales Technology AB (publ)"
+  },
+  {
+    "ticker": "ACUVI",
+    "name": "Acuvi AB"
+  },
+  {
+    "ticker": "ARCT",
+    "name": "Arctic Minerals AB (publ)"
+  },
+  {
+    "ticker": "OPTER",
+    "name": "Opter AB (publ)"
+  },
+  {
+    "ticker": "ORT.B",
+    "name": "Ortoma AB (publ)"
+  },
+  {
+    "ticker": "QLINEA",
+    "name": "Q-linea AB (publ)"
+  },
+  {
+    "ticker": "KJELL",
+    "name": "Kjell Group AB (publ)"
+  },
+  {
+    "ticker": "ENZY",
+    "name": "Enzymatica AB (publ)"
+  },
+  {
+    "ticker": "BOTX",
+    "name": "Botnia Gold AB (publ)"
+  },
+  {
+    "ticker": "BOAT",
+    "name": "Nimbus Group AB (Publ)"
+  },
+  {
+    "ticker": "KEBNI.B",
+    "name": "KebNi AB (publ)"
+  },
+  {
+    "ticker": "QLIRO",
+    "name": "Qliro AB (publ)"
+  },
+  {
+    "ticker": "WPTG.B",
+    "name": "White Pearl Technology Group AB"
+  },
+  {
+    "ticker": "SGG",
+    "name": "Sensys Gatso Group AB (publ)"
+  },
+  {
+    "ticker": "AEC",
+    "name": "Africa Energy Corp."
+  },
+  {
+    "ticker": "UNIBAP",
+    "name": "Unibap Space Solutions AB (publ)"
+  },
+  {
+    "ticker": "AVT.B",
+    "name": "AVTECH Sweden AB (publ)"
+  },
+  {
+    "ticker": "4C",
+    "name": "4C Group AB (publ)"
+  },
+  {
+    "ticker": "MIDS",
+    "name": "Midsummer AB (publ)"
+  },
+  {
+    "ticker": "GULD",
+    "name": "Guldbrev Holding AB (publ)"
+  },
+  {
+    "ticker": "OBAB",
+    "name": "Online Brands Nordic AB (publ)"
+  },
+  {
+    "ticker": "TOBII",
+    "name": "Tobii AB (publ)"
+  },
+  {
+    "ticker": "BMC",
+    "name": "Brock Milton Capital AB (publ)"
+  },
+  {
+    "ticker": "FREJA",
+    "name": "Freja eID Group AB (publ)"
+  },
+  {
+    "ticker": "TRAD",
+    "name": "TradeDoubler AB (publ)"
+  },
+  {
+    "ticker": "MOB",
+    "name": "Moberg Pharma AB (publ)"
+  },
+  {
+    "ticker": "SOLNA",
+    "name": "Solnaberg Property AB (publ)"
+  },
+  {
+    "ticker": "ACRI.A",
+    "name": "Acrinova AB (publ)"
+  },
+  {
+    "ticker": "ACRI.B",
+    "name": "Acrinova AB (publ)"
+  },
+  {
+    "ticker": "NAXS",
+    "name": "NAXS AB (publ)"
+  },
+  {
+    "ticker": "LEMSE",
+    "name": "Leading Edge Materials Corp."
+  },
+  {
+    "ticker": "BOHO",
+    "name": "Boho Group AB (publ)"
+  },
+  {
+    "ticker": "INFREA",
+    "name": "Infrea AB"
+  },
+  {
+    "ticker": "SAFETY.B",
+    "name": "mySafety Group AB"
+  },
+  {
+    "ticker": "K33",
+    "name": "K33 AB (publ)"
+  },
+  {
+    "ticker": "SIBEK",
+    "name": "Sibek AB (publ)"
+  },
+  {
+    "ticker": "SUBGEN",
+    "name": "Subgen AI Limited"
+  },
+  {
+    "ticker": "K2A.B",
+    "name": "K2A Knaust & Andersson Fastigheter AB (publ)"
+  },
+  {
+    "ticker": "DEDI",
+    "name": "Dedicare AB (publ)"
+  },
+  {
+    "ticker": "AGES.B",
+    "name": "AGES Industri AB (publ)"
+  },
+  {
+    "ticker": "ACE",
+    "name": "Ascelia Pharma AB (publ)"
+  },
+  {
+    "ticker": "SEAF",
+    "name": "Seafire AB (publ)"
+  },
+  {
+    "ticker": "PRFO",
+    "name": "Profoto Holding AB (publ)"
+  },
+  {
+    "ticker": "NAVIGO.STAM",
+    "name": "Navigo Invest AB (publ)"
+  },
+  {
+    "ticker": "B3",
+    "name": "B3 Consulting Group AB (publ)"
+  },
+  {
+    "ticker": "CLBIO",
+    "name": "Corline Biomedical AB"
+  },
+  {
+    "ticker": "MNTC",
+    "name": "Mentice AB (publ)"
+  },
+  {
+    "ticker": "BALCO",
+    "name": "Balco Group AB"
+  },
+  {
+    "ticker": "FREEM",
+    "name": "Freemelt Holding AB (publ)"
+  },
+  {
+    "ticker": "TRANS",
+    "name": "Transtema Group AB"
+  },
+  {
+    "ticker": "NIO",
+    "name": "Nordic Iron Ore AB (publ)"
+  },
+  {
+    "ticker": "IMMU",
+    "name": "Mendus AB (publ)"
+  },
+  {
+    "ticker": "CAPSLO",
+    "name": "Capsol Technologies ASA"
+  },
+  {
+    "ticker": "POLYG",
+    "name": "Polygiene Group AB"
+  },
+  {
+    "ticker": "OGUN.B",
+    "name": "Ogunsen AB (publ)"
+  },
+  {
+    "ticker": "BEAMMW.B",
+    "name": "BeammWave AB (publ)"
+  },
+  {
+    "ticker": "MAGLE",
+    "name": "Magle Chemoswed Holding AB (publ)"
+  },
+  {
+    "ticker": "GREAT",
+    "name": "Greater Than AB (publ)"
+  },
+  {
+    "ticker": "BONAS",
+    "name": "Bonäsudden Holding AB (publ)"
+  },
+  {
+    "ticker": "ACARIX",
+    "name": "Acarix AB (publ)"
+  },
+  {
+    "ticker": "WBGR.B",
+    "name": "Wästbygg Gruppen AB (publ)"
+  },
+  {
+    "ticker": "WAYS",
+    "name": "Waystream Holding AB (publ)"
+  },
+  {
+    "ticker": "LIPUM",
+    "name": "Lipum AB (publ)"
+  },
+  {
+    "ticker": "AVEN",
+    "name": "Avensia AB (publ)"
+  },
+  {
+    "ticker": "QAIR",
+    "name": "QleanAir AB (publ)"
+  },
+  {
+    "ticker": "IVACC",
+    "name": "Intervacc AB (publ)"
+  },
+  {
+    "ticker": "ELIC",
+    "name": "Elicera Therapeutics AB (publ)"
+  },
+  {
+    "ticker": "LAMM.B",
+    "name": "Lammhults Design Group AB (publ)"
+  },
+  {
+    "ticker": "MAVEN",
+    "name": "Maven Wireless Sweden AB (Publ)"
+  },
+  {
+    "ticker": "ELON",
+    "name": "Elon AB (publ)"
+  },
+  {
+    "ticker": "INTEG.B",
+    "name": "Integrum AB (publ)"
+  },
+  {
+    "ticker": "MEAB.B",
+    "name": "Malmbergs Elektriska AB (publ)"
+  },
+  {
+    "ticker": "LITI",
+    "name": "Litium AB (publ)"
+  },
+  {
+    "ticker": "BINERO",
+    "name": "Binero Group AB (publ)"
+  },
+  {
+    "ticker": "TAGM.B",
+    "name": "TagMaster AB (publ)"
+  },
+  {
+    "ticker": "CANDLE.B",
+    "name": "Candles Scandinavia AB (publ)"
+  },
+  {
+    "ticker": "ENRO",
+    "name": "Eniro Group AB (publ)"
+  },
+  {
+    "ticker": "PRO",
+    "name": "Promimic AB (publ)"
+  },
+  {
+    "ticker": "ATIN",
+    "name": "Athanase Innovation AB (publ)"
+  },
+  {
+    "ticker": "UTG",
+    "name": "Unlimited Travel Group UTG AB (publ)"
+  },
+  {
+    "ticker": "TENEO",
+    "name": "Teneo AI AB (publ)"
+  },
+  {
+    "ticker": "CALVIK",
+    "name": "Calviks AB (publ)"
+  },
+  {
+    "ticker": "FERRO",
+    "name": "Ferroamp AB (publ)"
+  },
+  {
+    "ticker": "PION.B",
+    "name": "PION Group AB (publ)"
+  },
+  {
+    "ticker": "OBSE",
+    "name": "Observit AB"
+  },
+  {
+    "ticker": "OXE",
+    "name": "OXE Marine AB (publ)"
+  },
+  {
+    "ticker": "XBRANE",
+    "name": "Xbrane Biopharma AB (publ)"
+  },
+  {
+    "ticker": "EMB",
+    "name": "EMB Mission Bound AB (publ)"
+  },
+  {
+    "ticker": "XINT",
+    "name": "Xintela AB (publ)"
+  },
+  {
+    "ticker": "CAVENO",
+    "name": "Cavendish Hydrogen ASA"
+  },
+  {
+    "ticker": "SBOK",
+    "name": "ScandBook Holding AB (publ)"
+  },
+  {
+    "ticker": "CLS.B",
+    "name": "Clinical Laserthermia Systems AB (publ)"
+  },
+  {
+    "ticker": "AGTIRA.B",
+    "name": "Agtira AB"
+  },
+  {
+    "ticker": "ALZCUR",
+    "name": "AlzeCure Pharma AB (publ)"
+  },
+  {
+    "ticker": "KLAR",
+    "name": "Klaria Pharma Holding AB (publ.)"
+  },
+  {
+    "ticker": "MVIR",
+    "name": "Medivir AB (publ)"
+  },
+  {
+    "ticker": "NETEL",
+    "name": "Netel Holding AB (publ)"
+  },
+  {
+    "ticker": "MAGI",
+    "name": "MAG Interactive AB (publ)"
+  },
+  {
+    "ticker": "SOLT",
+    "name": "SolTech Energy Sweden AB (publ)"
+  },
+  {
+    "ticker": "CFISH",
+    "name": "Crunchfish AB (publ)"
+  },
+  {
+    "ticker": "HIGHCO.B",
+    "name": "High Coast Distillery AB (Publ)"
+  },
+  {
+    "ticker": "INIT",
+    "name": "Initiator Pharma A/S"
+  },
+  {
+    "ticker": "BOUL",
+    "name": "Boule Diagnostics AB (publ)"
+  },
+  {
+    "ticker": "CDMIL",
+    "name": "CodeMill AB (publ)"
+  },
+  {
+    "ticker": "LYGRD",
+    "name": "Lyckegård Group AB (publ)"
+  },
+  {
+    "ticker": "NOTEK",
+    "name": "Norditek Group AB (publ)"
+  },
+  {
+    "ticker": "PRCO.B",
+    "name": "Precio Fishbone AB (publ)"
+  },
+  {
+    "ticker": "MODEL",
+    "name": "Modelon AB (publ)"
+  },
+  {
+    "ticker": "DSNO",
+    "name": "Desenio Group AB (publ)"
+  },
+  {
+    "ticker": "ISOFOL",
+    "name": "Isofol Medical AB (publ)"
+  },
+  {
+    "ticker": "VUXEN",
+    "name": "Vuxen Group AB"
+  },
+  {
+    "ticker": "PTRK",
+    "name": "Physitrack PLC"
+  },
+  {
+    "ticker": "NEXAM",
+    "name": "Nexam Chemical Holding AB (publ)"
+  },
+  {
+    "ticker": "HULT.B",
+    "name": "Hultstrom Group AB (publ)"
+  },
+  {
+    "ticker": "ORGC",
+    "name": "OrganoClick AB (publ)"
+  },
+  {
+    "ticker": "STW",
+    "name": "SeaTwirl AB (publ)"
+  },
+  {
+    "ticker": "DIST",
+    "name": "DistIT AB (publ)"
+  },
+  {
+    "ticker": "MINEST",
+    "name": "Minesto AB (publ)"
+  },
+  {
+    "ticker": "DRIL",
+    "name": "Drillcon AB (publ)"
+  },
+  {
+    "ticker": "SODER",
+    "name": "Söder Sportfiske AB"
+  },
+  {
+    "ticker": "HAV.B",
+    "name": "Havsfrun Investment AB (publ)"
+  },
+  {
+    "ticker": "ACROUD",
+    "name": "Acroud AB (publ)"
+  },
+  {
+    "ticker": "OODA",
+    "name": "oodash Group AB (publ)"
+  },
+  {
+    "ticker": "SENZA",
+    "name": "SenzaGen AB"
+  },
+  {
+    "ticker": "PREC",
+    "name": "Precise Biometrics AB (publ)"
+  },
+  {
+    "ticker": "ALPCOT.B",
+    "name": "Alpcot Holding AB (publ)"
+  },
+  {
+    "ticker": "SFTR",
+    "name": "Safeture AB (publ)"
+  },
+  {
+    "ticker": "IZAFE.B",
+    "name": "iZafe Group AB (publ)"
+  },
+  {
+    "ticker": "FLEXM",
+    "name": "Flexion Mobile Plc"
+  },
+  {
+    "ticker": "IRLAB.A",
+    "name": "IRLAB Therapeutics AB (publ)"
+  },
+  {
+    "ticker": "GCOR",
+    "name": "Gaming Corps AB (publ)"
+  },
+  {
+    "ticker": "STAR.A",
+    "name": "Starbreeze AB (publ)"
+  },
+  {
+    "ticker": "STAR.B",
+    "name": "Starbreeze AB (publ)"
+  },
+  {
+    "ticker": "SPRINT",
+    "name": "Sprint Bioscience AB (publ)"
+  },
+  {
+    "ticker": "STWK",
+    "name": "Stockwik Förvaltning AB (publ)"
+  },
+  {
+    "ticker": "IMPC",
+    "name": "Impact Coatings AB (publ)"
+  },
+  {
+    "ticker": "OPTI",
+    "name": "OptiCept Technologies AB (publ)"
+  },
+  {
+    "ticker": "CLIME.B",
+    "name": "Climeon AB (publ)"
+  },
+  {
+    "ticker": "TERRNT.B",
+    "name": "Terranet AB"
+  },
+  {
+    "ticker": "BRAIN",
+    "name": "BrainCool AB (publ)"
+  },
+  {
+    "ticker": "WPAY",
+    "name": "Westpay AB"
+  },
+  {
+    "ticker": "SERT",
+    "name": "Serstech AB"
+  },
+  {
+    "ticker": "MOMENT",
+    "name": "Moment Group AB"
+  },
+  {
+    "ticker": "VO2",
+    "name": "Vo2 Cap Holding AB (publ)"
+  },
+  {
+    "ticker": "KLIMAT",
+    "name": "Klimator AB (publ)"
+  },
+  {
+    "ticker": "FING.B",
+    "name": "Fingerprint Cards AB (publ)"
+  },
+  {
+    "ticker": "DEVP.B",
+    "name": "DevPort AB (publ)"
+  },
+  {
+    "ticker": "FLEXQ",
+    "name": "FlexQube AB (publ)"
+  },
+  {
+    "ticker": "GIGA",
+    "name": "Gigasun AB (publ)"
+  },
+  {
+    "ticker": "BONG",
+    "name": "Bong AB (publ)"
+  },
+  {
+    "ticker": "HERNO.B",
+    "name": "Hernö Gin AB (publ)"
+  },
+  {
+    "ticker": "IMMNOV",
+    "name": "Immunovia AB (publ)"
+  },
+  {
+    "ticker": "NOSA",
+    "name": "Nosa Plugs AB"
+  },
+  {
+    "ticker": "SCIB",
+    "name": "SciBase Holding AB (publ)"
+  },
+  {
+    "ticker": "CLEM",
+    "name": "Clemondo Group AB (publ)"
+  },
+  {
+    "ticker": "ALBERT",
+    "name": "eEducation Albert AB (publ)"
+  },
+  {
+    "ticker": "ERMA",
+    "name": "Enorama Pharma AB (publ)"
+  },
+  {
+    "ticker": "CTM",
+    "name": "Catena Media plc"
+  },
+  {
+    "ticker": "CHECK",
+    "name": "Checkin.Com Group AB (publ)"
+  },
+  {
+    "ticker": "ANNX",
+    "name": "Annexin Pharmaceuticals AB (publ)"
+  },
+  {
+    "ticker": "NNH",
+    "name": "New Nordic Healthbrands AB (publ)"
+  },
+  {
+    "ticker": "NEPA",
+    "name": "Nepa AB (publ)"
+  },
+  {
+    "ticker": "AXIC.A",
+    "name": "aXichem AB"
+  },
+  {
+    "ticker": "BIOVIC.B",
+    "name": "Biovica International AB (publ)"
+  },
+  {
+    "ticker": "THUNDR",
+    "name": "Thunderful Group AB"
+  },
+  {
+    "ticker": "INCOAX",
+    "name": "InCoax Networks AB (publ)"
+  },
+  {
+    "ticker": "TALK",
+    "name": "TalkPool AG"
+  },
+  {
+    "ticker": "LEVEL",
+    "name": "Nordic LEVEL Group AB (publ.)"
+  },
+  {
+    "ticker": "ACTI",
+    "name": "Active Biotech AB (publ)"
+  },
+  {
+    "ticker": "TSEC",
+    "name": "Tempest Security AB (publ)"
+  },
+  {
+    "ticker": "ORTI.A",
+    "name": "Ortivus AB (publ)"
+  },
+  {
+    "ticker": "ARCOMA",
+    "name": "Arcoma AB"
+  },
+  {
+    "ticker": "ORTI.B",
+    "name": "Ortivus AB (publ)"
+  },
+  {
+    "ticker": "GGEO",
+    "name": "Guideline Geo AB (publ)"
+  },
+  {
+    "ticker": "ESGR.B",
+    "name": "ES Energy Save Holding AB (publ)"
+  },
+  {
+    "ticker": "YIELD",
+    "name": "SaveLend Group AB (publ)"
+  },
+  {
+    "ticker": "USWE",
+    "name": "Uswe Sports AB (publ)"
+  },
+  {
+    "ticker": "REALFI",
+    "name": "Realfiction Holding AB (publ)"
+  },
+  {
+    "ticker": "BUSER",
+    "name": "Bambuser AB (publ)"
+  },
+  {
+    "ticker": "TELLUS",
+    "name": "Tellusgruppen AB (publ)"
+  },
+  {
+    "ticker": "IS",
+    "name": "Image Systems AB"
+  },
+  {
+    "ticker": "NXTCL",
+    "name": "NextCell Pharma AB"
+  },
+  {
+    "ticker": "AXOLOT",
+    "name": "Axolot Solutions Holding AB (publ)"
+  },
+  {
+    "ticker": "CMOTEC.B",
+    "name": "Scandinavian ChemoTech AB (publ)"
+  },
+  {
+    "ticker": "WISE",
+    "name": "Wise Group AB (publ)"
+  },
+  {
+    "ticker": "BIOSGN",
+    "name": "Biosergen AB (publ)"
+  },
+  {
+    "ticker": "NEO.B",
+    "name": "Neovici Holding AB (publ)"
+  },
+  {
+    "ticker": "RAKE",
+    "name": "Raketech Group Holding PLC"
+  },
+  {
+    "ticker": "PILA",
+    "name": "Pila Pharma AB (publ)"
+  },
+  {
+    "ticker": "BAWAT",
+    "name": "Bawat Water Technologies AB"
+  },
+  {
+    "ticker": "VIMAB",
+    "name": "Vimab Group AB (publ)"
+  },
+  {
+    "ticker": "KENH",
+    "name": "Kentima Holding AB (publ)"
+  },
+  {
+    "ticker": "NEOLA",
+    "name": "Neola Medical AB (publ)"
+  },
+  {
+    "ticker": "KDEV",
+    "name": "Karolinska Development AB (publ)"
+  },
+  {
+    "ticker": "BBROOM",
+    "name": "New Bubbleroom Sweden AB (publ)"
+  },
+  {
+    "ticker": "IDLDX",
+    "name": "IDL Diagnostics AB (publ)"
+  },
+  {
+    "ticker": "SPAGO",
+    "name": "Spago Nanomedical AB (publ)"
+  },
+  {
+    "ticker": "SFL",
+    "name": "Safello Group AB (publ)"
+  },
+  {
+    "ticker": "WRV",
+    "name": "Webrock Ventures AB"
+  },
+  {
+    "ticker": "ALZ",
+    "name": "Alzinova AB (publ)"
+  },
+  {
+    "ticker": "BIOEX",
+    "name": "Bioextrax AB (publ)"
+  },
+  {
+    "ticker": "SAXG",
+    "name": "Saxlund Group AB (publ)"
+  },
+  {
+    "ticker": "PROGEN",
+    "name": "Prostatype Genomics AB (publ)"
+  },
+  {
+    "ticker": "ONCOZ",
+    "name": "OncoZenge AB (publ)"
+  },
+  {
+    "ticker": "FRAG",
+    "name": "Fragbite Group AB (publ)"
+  },
+  {
+    "ticker": "FIRST.B",
+    "name": "First Venture Sweden AB (publ)"
+  },
+  {
+    "ticker": "HEART",
+    "name": "Scandinavian Real Heart AB (Publ)"
+  },
+  {
+    "ticker": "BOMILL",
+    "name": "BoMill AB (publ)"
+  },
+  {
+    "ticker": "CI",
+    "name": "Cell Impact AB (publ)"
+  },
+  {
+    "ticker": "SONE",
+    "name": "Sonetel AB (publ)"
+  },
+  {
+    "ticker": "GPX",
+    "name": "Gasporox AB (publ)"
+  },
+  {
+    "ticker": "SDOS",
+    "name": "ScandiDos AB (publ)"
+  },
+  {
+    "ticker": "SPEONE",
+    "name": "SpectrumOne AB (publ)"
+  },
+  {
+    "ticker": "ICO",
+    "name": "Iconovo AB (publ)"
+  },
+  {
+    "ticker": "BRAVE",
+    "name": "Kinda Brave Entertainment Group Ab (Publ)"
+  },
+  {
+    "ticker": "BRILL",
+    "name": "Brilliant Future AB (publ)"
+  },
+  {
+    "ticker": "JLT",
+    "name": "JLT Mobile Computers AB (publ)"
+  },
+  {
+    "ticker": "ORTIN",
+    "name": "Ortelius International AB"
+  },
+  {
+    "ticker": "RO",
+    "name": "Rolling Optics Holding AB (publ)"
+  },
+  {
+    "ticker": "CHARGE",
+    "name": "ChargePanel AB (publ)"
+  },
+  {
+    "ticker": "ACOU",
+    "name": "AcouSort AB (publ)"
+  },
+  {
+    "ticker": "IRIS",
+    "name": "Irisity AB (publ)"
+  },
+  {
+    "ticker": "LXB",
+    "name": "Luxbright AB (publ)"
+  },
+  {
+    "ticker": "NICA",
+    "name": "Nanologica AB (publ)"
+  },
+  {
+    "ticker": "BUY",
+    "name": "Sweden Buyersclub AB"
+  },
+  {
+    "ticker": "XPC",
+    "name": "XP Chemistries AB (publ)"
+  },
+  {
+    "ticker": "VIVE",
+    "name": "Vivesto AB"
+  },
+  {
+    "ticker": "EFFH",
+    "name": "Effnetplattformen Holding AB (publ)"
+  },
+  {
+    "ticker": "EXPRS2",
+    "name": "ExpreS2ion Biotech Holding AB (publ)"
+  },
+  {
+    "ticker": "FLOWS",
+    "name": "Flowscape Technology AB (publ)"
+  },
+  {
+    "ticker": "EPIS.B",
+    "name": "Episurf Medical AB (publ)"
+  },
+  {
+    "ticker": "FASTAT",
+    "name": "Aktiebolaget Fastator (publ)"
+  },
+  {
+    "ticker": "GBK",
+    "name": "Goodbye Kansas Group AB (publ)"
+  },
+  {
+    "ticker": "ANOT",
+    "name": "Anoto Group AB (publ)"
+  },
+  {
+    "ticker": "RPLAN",
+    "name": "Ranplan Group AB"
+  },
+  {
+    "ticker": "2CUREX",
+    "name": "2cureX AB (publ)"
+  },
+  {
+    "ticker": "LARK",
+    "name": "Lärkberget AB (publ)"
+  },
+  {
+    "ticker": "HEXI",
+    "name": "Hexicon AB (publ)"
+  },
+  {
+    "ticker": "DLAB",
+    "name": "Dlaboratory Sweden AB (publ)"
+  },
+  {
+    "ticker": "SPEC",
+    "name": "SpectraCure AB (publ)"
+  },
+  {
+    "ticker": "GUARD",
+    "name": "Guard Therapeutics International AB (publ)"
+  },
+  {
+    "ticker": "PADEL",
+    "name": "Acenta Group AB"
+  },
+  {
+    "ticker": "DIVIO.B",
+    "name": "Divio Technologies AB (publ)"
+  },
+  {
+    "ticker": "QLIFE",
+    "name": "Qlife Holding AB (publ)"
+  },
+  {
+    "ticker": "AERO",
+    "name": "Svenska Aerogel Holding AB (publ)"
+  },
+  {
+    "ticker": "TOURN",
+    "name": "Tourn International AB (publ)"
+  },
+  {
+    "ticker": "NEWBRY",
+    "name": "Newbury Pharmaceuticals AB (publ)"
+  },
+  {
+    "ticker": "AINO",
+    "name": "Aino Health AB (publ)"
+  },
+  {
+    "ticker": "CIRCHE",
+    "name": "CirChem AB (publ)"
+  },
+  {
+    "ticker": "MODTX",
+    "name": "Modus Therapeutics Holding AB (publ)"
+  },
+  {
+    "ticker": "SIMRIS.B",
+    "name": "Simris Group AB (PUBL)"
+  },
+  {
+    "ticker": "NITRO",
+    "name": "Nitro Games Oyj"
+  },
+  {
+    "ticker": "SCOUT",
+    "name": "Scout Gaming Group AB (publ)"
+  },
+  {
+    "ticker": "VH",
+    "name": "Västra Hamnen Corporate Finance AB (publ)"
+  },
+  {
+    "ticker": "TRIBO.B",
+    "name": "Tribox Group AB (publ)"
+  },
+  {
+    "ticker": "ZAPLOX",
+    "name": "Zaplox AB"
+  },
+  {
+    "ticker": "LOYAL",
+    "name": "Loyal Solutions A/S"
+  },
+  {
+    "ticker": "KAKEL",
+    "name": "Kakel Max AB (publ)"
+  },
+  {
+    "ticker": "COMPDM",
+    "name": "Compodium International AB (publ)"
+  },
+  {
+    "ticker": "NFGAB",
+    "name": "Nordic Flanges Group AB (publ)"
+  },
+  {
+    "ticker": "NICO",
+    "name": "Nicoccino Holding AB (publ)"
+  },
+  {
+    "ticker": "PCOM.B",
+    "name": "Precomp Solutions AB (publ)"
+  },
+  {
+    "ticker": "HELIO",
+    "name": "Heliospectra AB (publ)"
+  },
+  {
+    "ticker": "CYB1",
+    "name": "Cyber Security 1 AB (publ)"
+  },
+  {
+    "ticker": "REFINE",
+    "name": "Refine Group AB (publ)"
+  },
+  {
+    "ticker": "HEGR",
+    "name": "Hedera Group AB (publ)"
+  },
+  {
+    "ticker": "PERP.B",
+    "name": "Perpetua Medical AB (publ)"
+  },
+  {
+    "ticker": "LCLEAN",
+    "name": "LifeClean International AB (publ)"
+  },
+  {
+    "ticker": "NANECH",
+    "name": "NanoEcho AB (publ)"
+  },
+  {
+    "ticker": "NANOC.B",
+    "name": "NanoCap Group AB (publ)"
+  },
+  {
+    "ticker": "FRAM.B",
+    "name": "Fram Skandinavien AB (publ)"
+  },
+  {
+    "ticker": "QCORE",
+    "name": "Qlucore AB (publ)"
+  },
+  {
+    "ticker": "QIIWI",
+    "name": "Qiiwi Games AB (publ)"
+  },
+  {
+    "ticker": "CLEMO",
+    "name": "Clean Motion AB (publ)"
+  },
+  {
+    "ticker": "CINIS",
+    "name": "Cinis Fertilizer AB (publ)"
+  },
+  {
+    "ticker": "NOVKAN",
+    "name": "Novakand Pharma AB (publ)"
+  },
+  {
+    "ticker": "MASHUP",
+    "name": "Mashup Ireland AB"
+  },
+  {
+    "ticker": "BRIGHT",
+    "name": "BrightBid Group AB (publ)"
+  },
+  {
+    "ticker": "STABL",
+    "name": "Stayble Therapeutics AB (publ)"
+  },
+  {
+    "ticker": "FLUI",
+    "name": "Fluicell AB (publ)"
+  },
+  {
+    "ticker": "MANTEX",
+    "name": "Mantex AB (publ)"
+  },
+  {
+    "ticker": "ARCTIC",
+    "name": "Arctic Blue Beverages AB (publ)"
+  },
+  {
+    "ticker": "LIFEO",
+    "name": "Lifecare ASA"
+  },
+  {
+    "ticker": "MAXENT.B",
+    "name": "Maximum Entertainment AB"
+  },
+  {
+    "ticker": "SPOTR",
+    "name": "Spotr Group AB"
+  },
+  {
+    "ticker": "GABA",
+    "name": "Gabather AB (publ)"
+  },
+  {
+    "ticker": "ENERS",
+    "name": "Enersize Oyj"
+  },
+  {
+    "ticker": "MTI",
+    "name": "MTI Investment AB (publ)"
+  },
+  {
+    "ticker": "INSP",
+    "name": "Insplorion AB (publ)"
+  },
+  {
+    "ticker": "XMR",
+    "name": "XMReality AB (publ)"
+  },
+  {
+    "ticker": "SILEON",
+    "name": "Sileon AB (publ)"
+  },
+  {
+    "ticker": "LNFI",
+    "name": "LN Future Invest AB (publ)"
+  },
+  {
+    "ticker": "LPGO",
+    "name": "Lipigon Pharmaceuticals AB (publ)"
+  },
+  {
+    "ticker": "ATORX",
+    "name": "Alligator Bioscience AB (publ)"
+  },
+  {
+    "ticker": "S2M",
+    "name": "S2Medical AB (publ)"
+  },
+  {
+    "ticker": "WYLD",
+    "name": "Wyld Networks AB (publ)"
+  },
+  {
+    "ticker": "FSPORT",
+    "name": "FSport AB (publ)"
+  },
+  {
+    "ticker": "HOTEL",
+    "name": "Hotel Fast SSE AB (publ)"
+  },
+  {
+    "ticker": "MOBA",
+    "name": "M.O.B.A. Network AB"
+  },
+  {
+    "ticker": "MAV",
+    "name": "Mavshack AB (publ)"
+  },
+  {
+    "ticker": "CMH",
+    "name": "Chordate Medical Holding AB (publ)"
+  },
+  {
+    "ticker": "CMH.PREF",
+    "name": "Chordate Medical Holding AB (publ)"
+  },
+  {
+    "ticker": "LIDDS",
+    "name": "LIDDS AB (publ)"
+  },
+  {
+    "ticker": "ALVO.SDB",
+    "name": "Alvotech SDB"
+  },
+  {
+    "ticker": "ARFA",
+    "name": "Arctic Falls"
+  },
+  {
+    "ticker": "CAVO",
+    "name": "Cavotec Group"
+  },
+  {
+    "ticker": "GSKR.SDB",
+    "name": "Goldsky Resources"
+  },
+  {
+    "ticker": "QBIM",
+    "name": "QBIM"
+  },
+  {
+    "ticker": "SUMMAS",
+    "name": "Summa Defence"
+  }
+]
