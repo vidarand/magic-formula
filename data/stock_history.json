@@ -3001,7 +3001,7 @@
       "price": 2.28,
       "market_cap": 139156528,
       "ebit": -52147000.0,
-      "enterprise_value": 161241216,
+      "enterprise_value": 154527536,
       "total_assets": 359165000.0,
       "current_liabilities": 106352000.0,
       "current_assets": 64014000.0,
@@ -7857,13 +7857,13 @@
     "2026-01-17": {
       "date": "2026-01-17",
       "price": 282.6,
-      "market_cap": 298025476423.68,
+      "market_cap": 326782320640,
       "ebit": "N/A",
       "enterprise_value": "N/A",
-      "total_assets": 3296082000000.0,
+      "total_assets": 3614125000000.0,
       "current_liabilities": "N/A",
       "current_assets": "N/A",
-      "net_fixed_assets": 19158384000.0,
+      "net_fixed_assets": 21007000000.0,
       "magic_formula_score": "N/A"
     }
   },
@@ -7871,13 +7871,13 @@
     "2026-01-17": {
       "date": "2026-01-17",
       "price": 332.5,
-      "market_cap": 886418039635.968,
-      "ebit": 6450576000.0,
+      "market_cap": 971949604864,
+      "ebit": 7073000000.0,
       "enterprise_value": "N/A",
-      "total_assets": 63305568000.0,
-      "current_liabilities": 39850752000.0,
-      "current_assets": 44846688000.0,
-      "net_fixed_assets": 7989120000.0,
+      "total_assets": 69414000000.0,
+      "current_liabilities": 43696000000.0,
+      "current_assets": 49174000000.0,
+      "net_fixed_assets": 8760000000.0,
       "magic_formula_score": "N/A"
     }
   },
@@ -7955,9 +7955,9 @@
     "2026-01-17": {
       "date": "2026-01-17",
       "price": 14.94,
-      "market_cap": 165301383519.05792,
+      "market_cap": 15449463808,
       "ebit": "N/A",
-      "enterprise_value": 214140667944.75522,
+      "enterprise_value": 20014100480,
       "total_assets": "N/A",
       "current_liabilities": "N/A",
       "current_assets": "N/A",
@@ -8110,12 +8110,12 @@
       "date": "2026-01-17",
       "price": 268.0,
       "market_cap": "N/A",
-      "ebit": 734687136.0,
+      "ebit": 805578000.0,
       "enterprise_value": "N/A",
-      "total_assets": 5673375984.0,
-      "current_liabilities": 543235536.0,
-      "current_assets": 753323856.0,
-      "net_fixed_assets": 4786296384.0,
+      "total_assets": 6220807000.0,
+      "current_liabilities": 595653000.0,
+      "current_assets": 826013000.0,
+      "net_fixed_assets": 5248132000.0,
       "magic_formula_score": "N/A"
     }
   },
@@ -8445,13 +8445,13 @@
     "2026-01-17": {
       "date": "2026-01-17",
       "price": 101.0,
-      "market_cap": 20970499866.624,
-      "ebit": 556939248.0,
+      "market_cap": 22993969152,
+      "ebit": 610679000.0,
       "enterprise_value": "N/A",
-      "total_assets": 1920347328.0,
-      "current_liabilities": 189182544.0,
-      "current_assets": 320754960.0,
-      "net_fixed_assets": 1588602768.0,
+      "total_assets": 2105644000.0,
+      "current_liabilities": 207437000.0,
+      "current_assets": 351705000.0,
+      "net_fixed_assets": 1741889000.0,
       "magic_formula_score": "N/A"
     }
   },
@@ -8739,13 +8739,13 @@
     "2026-01-17": {
       "date": "2026-01-17",
       "price": 45.65,
-      "market_cap": 7919736324.096001,
-      "ebit": 266395200.0,
+      "market_cap": 8683921408,
+      "ebit": 292100000.0,
       "enterprise_value": "N/A",
-      "total_assets": 1796822400.0,
-      "current_liabilities": 306158400.0,
-      "current_assets": 319200000.0,
-      "net_fixed_assets": 1313097600.0,
+      "total_assets": 1970200000.0,
+      "current_liabilities": 335700000.0,
+      "current_assets": 350000000.0,
+      "net_fixed_assets": 1439800000.0,
       "magic_formula_score": "N/A"
     }
   },
@@ -9453,13 +9453,13 @@
     "2026-01-17": {
       "date": "2026-01-17",
       "price": 0.0,
-      "market_cap": 24316634.62759,
-      "ebit": -33649896.050000004,
-      "enterprise_value": 83656006.16759,
-      "total_assets": 247051224.10000002,
-      "current_liabilities": 210565963.20000002,
-      "current_assets": 175396739.57000002,
-      "net_fixed_assets": 4718475.090000001,
+      "market_cap": 2272691,
+      "ebit": -3145000.0,
+      "enterprise_value": 7818691,
+      "total_assets": 23090000.0,
+      "current_liabilities": 19680000.0,
+      "current_assets": 16393000.0,
+      "net_fixed_assets": 441000.0,
       "magic_formula_score": "N/A"
     }
   },
@@ -9957,13 +9957,13 @@
     "2026-01-17": {
       "date": "2026-01-17",
       "price": 84.1,
-      "market_cap": 5774955601.92,
-      "ebit": 89985216.0,
+      "market_cap": 6332188160,
+      "ebit": 98668000.0,
       "enterprise_value": "N/A",
-      "total_assets": 558340992.0,
-      "current_liabilities": 44364240.0,
-      "current_assets": 86793216.0,
-      "net_fixed_assets": 449926992.0,
+      "total_assets": 612216000.0,
+      "current_liabilities": 48645000.0,
+      "current_assets": 95168000.0,
+      "net_fixed_assets": 493341000.0,
       "magic_formula_score": "N/A"
     }
   },
@@ -10027,13 +10027,13 @@
     "2026-01-17": {
       "date": "2026-01-17",
       "price": 242.0,
-      "market_cap": 2845540859.9040003,
-      "ebit": 119540400.0,
+      "market_cap": 3120110592,
+      "ebit": 131075000.0,
       "enterprise_value": "N/A",
-      "total_assets": 524370816.0,
-      "current_liabilities": 97918704.0,
-      "current_assets": 391367472.0,
-      "net_fixed_assets": 65300112.0,
+      "total_assets": 574968000.0,
+      "current_liabilities": 107367000.0,
+      "current_assets": 429131000.0,
+      "net_fixed_assets": 71601000.0,
       "magic_formula_score": "N/A"
     }
   },
@@ -10545,13 +10545,13 @@
     "2026-01-17": {
       "date": "2026-01-17",
       "price": 5.71,
-      "market_cap": 338677675222.569,
-      "ebit": 25871366820.000004,
-      "enterprise_value": 314470327325.737,
-      "total_assets": 418874334010.00006,
-      "current_liabilities": 121909989060.00002,
-      "current_assets": 192451726630.0,
-      "net_fixed_assets": 22682918800.0,
+      "market_cap": 31653627904,
+      "ebit": 2418000000.0,
+      "enterprise_value": 29391151104,
+      "total_assets": 39149000000.0,
+      "current_liabilities": 11394000000.0,
+      "current_assets": 17987000000.0,
+      "net_fixed_assets": 2120000000.0,
       "magic_formula_score": "N/A"
     }
   }

@@ -67,7 +67,17 @@ class StockSchema:
     )
 
     # Calculated Magic Formula score (lower is better, "N/A" if cannot be calculated)
-    magic_formula_score: StockValue  # Combined rank score (int/float) or "N/A"
+    magic_formula_score: StockValue  # Combined rank score (int/float) or "N/A" - default (excludes financial/investment companies)
+    magic_formula_score_all: StockValue  # All eligible stocks (no exclusions except errors)
+    magic_formula_score_100m: StockValue  # Market cap >= 100M SEK
+    magic_formula_score_500m: StockValue  # Market cap >= 500M SEK
+    magic_formula_score_1b: StockValue  # Market cap >= 1B SEK
+    magic_formula_score_5b: StockValue  # Market cap >= 5B SEK
+    magic_formula_reason: str  # Always present: "Beräknad" if valid, or reason why N/A
+    exclusion_reason: Optional[
+        str
+    ]  # Reason for exclusion from ranking (financial/investment companies), None if not excluded
+    default_excluded: bool  # Boolean flag: True if excluded by default (financial/investment/real estate), False otherwise
 
 
 # Schema definition as a dictionary for validation
@@ -104,6 +114,14 @@ STOCK_SCHEMA = {
     "current_liabilities": (int, float, str),
     "net_fixed_assets": (int, float, str),
     "magic_formula_score": (int, float, str),
+    "magic_formula_score_all": (int, float, str),
+    "magic_formula_score_100m": (int, float, str),
+    "magic_formula_score_500m": (int, float, str),
+    "magic_formula_score_1b": (int, float, str),
+    "magic_formula_score_5b": (int, float, str),
+    "magic_formula_reason": str,
+    "exclusion_reason": (str, type(None)),
+    "default_excluded": bool,
 }
 
 
@@ -144,6 +162,14 @@ def create_empty_stock(ticker: str, name: str, yfinance_ticker: str) -> dict:
         "current_liabilities": "N/A",
         "net_fixed_assets": "N/A",
         "magic_formula_score": "N/A",
+        "magic_formula_score_all": "N/A",
+        "magic_formula_score_100m": "N/A",
+        "magic_formula_score_500m": "N/A",
+        "magic_formula_score_1b": "N/A",
+        "magic_formula_score_5b": "N/A",
+        "magic_formula_reason": "Ej beräknad",
+        "exclusion_reason": None,
+        "default_excluded": False,
     }
 
 
@@ -223,6 +249,12 @@ FIELD_CATEGORIES = {
         "current_liabilities",
         "net_fixed_assets",
         "magic_formula_score",
+        "magic_formula_score_all",
+        "magic_formula_score_100m",
+        "magic_formula_score_500m",
+        "magic_formula_score_1b",
+        "magic_formula_score_5b",
+        "magic_formula_reason",
     ],
 }
 

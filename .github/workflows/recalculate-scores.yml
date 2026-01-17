@@ -1,18 +1,17 @@
-name: Daily Stock Update
+name: Recalculate Magic Formula Scores
 
 on:
   schedule:
-    # Run daily at 2:00 AM UTC (3:00 AM CET, 4:00 AM CEST)
-    - cron: '0 2 * * *'
+    # Run twice daily at 8:00 AM and 8:00 PM UTC (9:00 AM/PM CET, 10:00 AM/PM CEST)
+    - cron: '0 8,20 * * *'
   workflow_dispatch: # Allow manual triggering
 
 permissions:
   contents: write # Required to push commits
 
 jobs:
-  update-stocks:
+  recalculate-scores:
     runs-on: ubuntu-latest
-    timeout-minutes: 330  # 5.5 hours - safety margin before 6 hour hard limit (GitHub's hard cap is 6 hours)
     
     steps:
       - name: Checkout repository
@@ -36,12 +35,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Fetch stock data (all stocks)
+      - name: Recalculate Magic Formula scores
         run: |
-          echo "Starting stock data fetch..."
-          echo "Note: This may take several hours depending on number of stocks to update"
-          echo "GitHub Actions has a 6-hour job limit - this workflow will timeout at 5.5 hours"
-          python3 fetch_stocks.py
+          python3 calculate_magic_formula.py
 
       - name: Generate HTML
         run: |
@@ -51,6 +47,6 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add data/current_stocks.json data/stock_history.json stocks.html history.html index.html faq.html
-          git diff --staged --quiet || git commit -m "Daily stock update: $(date +'%Y-%m-%d %H:%M:%S UTC')"
+          git add data/current_stocks.json stocks.html
+          git diff --staged --quiet || git commit -m "Recalculate Magic Formula scores: $(date +'%Y-%m-%d %H:%M:%S UTC')"
           git push

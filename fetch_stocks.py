@@ -137,20 +137,68 @@ def calculate_magic_formula_scores(stocks):
     Calculate Magic Formula scores for all stocks.
     Returns stocks with magic_formula_score added.
     Also adds magic_formula_reason to explain why score is N/A if applicable.
+    Adds exclusion_reason for stocks that should be excluded from ranking (financial/investment companies).
     """
     # Filter out stocks with errors or missing data
     valid_stocks = []
     for stock in stocks:
+        # Ensure reason field exists (for old data that might not have it)
+        if (
+            "magic_formula_reason" not in stock
+            or stock.get("magic_formula_reason") is None
+        ):
+            stock["magic_formula_reason"] = "Ej beräknad"
+
+        # Initialize exclusion_reason and default_excluded (separate from magic_formula_reason)
+        # exclusion_reason is for companies that should be excluded from ranking
+        # but may still have valid Magic Formula scores
+        if "exclusion_reason" not in stock:
+            stock["exclusion_reason"] = None
+        if "default_excluded" not in stock:
+            stock["default_excluded"] = False
+
         if stock.get("error"):
             stock["magic_formula_score"] = "N/A"
             stock["magic_formula_reason"] = "Error fetching data"
             continue
 
+        # Check if company should be excluded from ranking (financial/investment companies)
+        # But still calculate the score
+        sector = (stock.get("sector", "") or "").lower()
+        industry = (stock.get("industry", "") or "").lower()
+        name = (stock.get("name", "") or "").lower()
+
+        exclusion_reason = None
+        # Check for financial services sector first
+        if "financial" in sector or "financial services" in sector:
+            exclusion_reason = "Finansiella tjänster"
+        # Check for real estate
+        elif "real estate" in sector or "real estate" in industry:
+            exclusion_reason = "Fastigheter"
+        # Check for investment companies by name keywords (like Bure Equity, Investor, etc.)
+        # This should catch companies even if sector is not set correctly
+        elif any(
+            keyword in name
+            for keyword in ["investment", "investor", "holding", "equity"]
+        ):
+            exclusion_reason = "Investeringsbolag"
+        # Also check industry for investment-related terms
+        elif "investment" in industry or "asset management" in industry.lower():
+            exclusion_reason = "Investeringsbolag"
+
+        if exclusion_reason:
+            stock["exclusion_reason"] = exclusion_reason
+            stock["default_excluded"] = True
+        else:
+            stock["default_excluded"] = False
+
         # Only calculate Magic Formula for stocks in SEK
         currency = stock.get("currency", "N/A")
         if currency != "SEK" and currency != "N/A":
             stock["magic_formula_score"] = "N/A"
-            stock["magic_formula_reason"] = f"Currency is {currency}, only SEK stocks are calculated"
+            stock["magic_formula_reason"] = (
+                f"Currency is {currency}, only SEK stocks are calculated"
+            )
             continue
 
         ebit = stock.get("ebit", "N/A")
@@ -227,82 +275,9 @@ def calculate_magic_formula_scores(stocks):
     for item in valid_stocks:
         magic_score = item["ey_rank"] + item["roc_rank"]
         item["stock"]["magic_formula_score"] = magic_score
-        item["stock"]["magic_formula_reason"] = None  # Clear reason for valid scores
+        item["stock"]["magic_formula_reason"] = "Beräknad"  # Always set a reason
 
     return stocks
-
-
-def get_exchange_rate_to_sek(currency: str) -> float:
-    """
-    Get exchange rate from given currency to SEK.
-    Returns 1.0 if currency is SEK or if conversion fails.
-    Caches rates to avoid repeated API calls.
-    """
-    if currency == "SEK" or currency == "N/A" or not currency:
-        return 1.0
-
-    # Check cache first
-    cache_key = f"{currency}_SEK"
-    if cache_key in _exchange_rate_cache:
-        return _exchange_rate_cache[cache_key]
-
-    try:
-        # Try to get exchange rate from yfinance
-        # Format: EURSEK=X, USDSEK=X, NOKSEK=X, etc.
-        if currency == "EUR":
-            ticker = yf.Ticker("EURSEK=X")
-        elif currency == "USD":
-            ticker = yf.Ticker("USDSEK=X")
-        elif currency == "NOK":
-            ticker = yf.Ticker("NOKSEK=X")
-        elif currency == "DKK":
-            ticker = yf.Ticker("DKKSEK=X")
-        elif currency == "GBP":
-            ticker = yf.Ticker("GBPSEK=X")
-        elif currency == "CHF":
-            ticker = yf.Ticker("CHFSEK=X")
-        else:
-            # Unknown currency, default to 1.0
-            print(f"Warning: Unknown currency {currency}, assuming 1.0 SEK")
-            _exchange_rate_cache[cache_key] = 1.0
-            return 1.0
-
-        info = ticker.info
-        if info and "regularMarketPrice" in info:
-            rate = float(info["regularMarketPrice"])
-            _exchange_rate_cache[cache_key] = rate
-            return rate
-        else:
-            # Try getting from history
-            hist = ticker.history(period="1d")
-            if not hist.empty:
-                rate = float(hist["Close"].iloc[-1])
-                _exchange_rate_cache[cache_key] = rate
-                return rate
-    except Exception as e:
-        print(f"Warning: Could not get exchange rate for {currency}: {e}")
-
-    # Default to 1.0 if conversion fails
-    _exchange_rate_cache[cache_key] = 1.0
-    return 1.0
-
-
-def convert_to_sek(value: StockValue, currency: str) -> StockValue:
-    """
-    Convert a financial value to SEK.
-    Returns the value unchanged if it's "N/A" or not a number.
-    """
-    if value == "N/A" or value is None:
-        return value
-
-    if not isinstance(value, (int, float)):
-        return value
-
-    if currency == "SEK" or currency == "N/A" or not currency:
-        return value
-
-    rate = get_exchange_rate_to_sek(currency)
-    return float(value) * rate
 
 
 def get_market_cap_category(market_cap: StockValue) -> str:
@@ -476,6 +451,14 @@ def add_to_history(ticker: str, stock_data: Dict, history: Dict):
         "current_assets": stock_data.get("current_assets"),
         "net_fixed_assets": stock_data.get("net_fixed_assets"),
         "magic_formula_score": stock_data.get("magic_formula_score"),
+        "magic_formula_score_all": stock_data.get("magic_formula_score_all"),
+        "magic_formula_score_100m": stock_data.get("magic_formula_score_100m"),
+        "magic_formula_score_500m": stock_data.get("magic_formula_score_500m"),
+        "magic_formula_score_1b": stock_data.get("magic_formula_score_1b"),
+        "magic_formula_score_5b": stock_data.get("magic_formula_score_5b"),
+        "sector": stock_data.get("sector"),  # Needed for exclusion logic
+        "industry": stock_data.get("industry"),  # Needed for exclusion logic
+        "exclusion_reason": stock_data.get("exclusion_reason"),  # Needed for filtering
     }
 
     # Store by date (overwrites if same day)
@@ -759,7 +742,11 @@ def fetch_stock_data_from_ticker(
                 "description": info.get(
                     "longBusinessSummary", info.get("description", "N/A")
                 ),
-                "market_cap_category": get_market_cap_category(market_cap) if isinstance(market_cap, (int, float)) else "N/A",
+                "market_cap_category": (
+                    get_market_cap_category(market_cap)
+                    if isinstance(market_cap, (int, float))
+                    else "N/A"
+                ),
                 "market": info.get("market", "N/A"),
                 # Interesting metrics
                 "pe_ratio": info.get("trailingPE", info.get("forwardPE", "N/A")),
@@ -773,6 +760,9 @@ def fetch_stock_data_from_ticker(
                 "net_fixed_assets": net_fixed_assets_value,
                 "last_updated": datetime.now().isoformat(),
                 "error": None,
+                # Magic Formula fields (will be calculated later)
+                "magic_formula_score": "N/A",
+                "magic_formula_reason": "Ej beräknad",
             }
         )
 
@@ -832,10 +822,16 @@ def fetch_batch_stock_data(batch_stocks: list) -> Dict[str, Dict]:
 
         try:
             stock = tickers.tickers[normalized_ticker]
+            # Quick check - if ticker doesn't exist in the batch, try fallback
+            if normalized_ticker not in tickers.tickers:
+                stock_data = fetch_single_stock_with_fallback(original_ticker, name)
+                result[original_ticker] = stock_data
+                continue
+
             info = stock.info
 
-            # Check if we got valid data
-            if not info or len(info) < 5:
+            # Check if we got valid data (reduced threshold from 5 to 3 for faster processing)
+            if not info or len(info) < 3:
                 # Try fallback alternatives
                 stock_data = fetch_single_stock_with_fallback(original_ticker, name)
                 result[original_ticker] = stock_data
@@ -947,8 +943,9 @@ def main():
             f"  Will process {len(to_update)} stocks (skipping {original_count - len(to_update)} others)"
         )
 
-    # Process in batches of 5
-    batch_size = 5
+    # Process in batches of 10 (increased from 5 for better performance)
+    # yfinance can handle 10-15 tickers per batch without issues
+    batch_size = 10
     total_batches = (len(to_update) + batch_size - 1) // batch_size
 
     updated_count = 0
@@ -965,7 +962,8 @@ def main():
         print(f"\nFetching batch of {len(batch)} tickers...")
         batch_results = fetch_batch_stock_data(batch)
 
-        # Process results
+        # Process results and collect fetched stocks for Magic Formula calculation
+        fetched_stocks_for_calculation = []
         for i, stock_info in enumerate(batch, 1):
             ticker = stock_info["ticker"]
             stock_data = batch_results.get(ticker)
@@ -983,11 +981,15 @@ def main():
             # This preserves old data if the new fetch fails
             if not stock_data.get("error"):
                 current_data[ticker] = stock_data
+                # Add to list for Magic Formula calculation
+                fetched_stocks_for_calculation.append(stock_data)
             else:
                 # If there's an error, only update if we don't have old data
                 # or if the old data also had an error (to track retry attempts)
                 if ticker not in current_data or current_data[ticker].get("error"):
                     current_data[ticker] = stock_data
+                    # Still calculate for error stocks (they'll get "Error fetching data" reason)
+                    fetched_stocks_for_calculation.append(stock_data)
 
             # Add to history if successful
             if not stock_data.get("error"):
@@ -1011,9 +1013,28 @@ def main():
             else:
                 print(f"✗ Error: {stock_data['error'][:50]}")
 
-        # Rate limiting between batches
+        # Rate limiting between batches (reduced from 0.5s to 0.2s for better performance)
+        # 0.2s is usually sufficient to avoid rate limits with batch size of 10
         if batch_num < total_batches - 1:
-            time.sleep(0.5)
+            time.sleep(0.2)
+
+        # Calculate Magic Formula scores for the stocks just fetched in this batch
+        # This ensures reasons are always set even if script is interrupted
+        print(
+            f"\nCalculating Magic Formula scores for batch {batch_num + 1} ({len(fetched_stocks_for_calculation)} stocks)..."
+        )
+        if fetched_stocks_for_calculation:
+            batch_stocks_with_scores = calculate_magic_formula_scores(
+                fetched_stocks_for_calculation
+            )
+            # Update current_data with calculated scores
+            for stock in batch_stocks_with_scores:
+                ticker = stock.get("ticker")
+                if ticker:
+                    current_data[ticker] = stock
+            print(
+                f"✓ Calculated scores for {len(batch_stocks_with_scores)} stocks in this batch"
+            )
 
         # Save after each batch to preserve progress
         print(f"\nSaving progress after batch {batch_num + 1}...")
@@ -1021,17 +1042,26 @@ def main():
         save_history(history)
         print(f"✓ Saved progress ({updated_count} stocks updated so far)")
 
-    # Calculate and save Magic Formula scores
+    # Recalculate Magic Formula scores for ALL stocks (in case any were missed or need recalculation)
     print("\n" + "=" * 60)
-    print("Calculating Magic Formula scores...")
+    print("Recalculating Magic Formula scores for all stocks...")
     stocks_list = list(current_data.values())
     stocks_with_scores = calculate_magic_formula_scores(stocks_list)
-    # Convert back to dict
+    # Convert back to dict - ensure ALL stocks have reasons
     for stock in stocks_with_scores:
         ticker = stock.get("ticker")
         if ticker:
+            # Ensure reason is always set
+            if (
+                "magic_formula_reason" not in stock
+                or stock.get("magic_formula_reason") is None
+            ):
+                if stock.get("magic_formula_score") == "N/A":
+                    stock["magic_formula_reason"] = "Ej beräknad"
+                else:
+                    stock["magic_formula_reason"] = "Beräknad"
             current_data[ticker] = stock
-    print(f"✓ Calculated Magic Formula scores")
+    print(f"✓ Recalculated Magic Formula scores for all {len(current_data)} stocks")
 
     # Save data
     print("\n" + "=" * 60)
@@ -1050,6 +1080,18 @@ def main():
 
     print(f"\n✓ Updated {updated_count} stocks")
     print(f"✓ Total stocks in database: {len(current_data)}")
+    
+    # Recalculate all Magic Formula score variants
+    print("\n" + "=" * 60)
+    print("Recalculating all Magic Formula score variants...")
+    print("=" * 60)
+    try:
+        from calculate_magic_formula import recalculate_all_scores
+        recalculate_all_scores()
+    except Exception as e:
+        print(f"⚠️  Warning: Failed to recalculate score variants: {e}")
+        print("  Continuing with basic Magic Formula scores only...")
+    
     print("\nDone! Run 'python3 generate_html.py' to update stocks.html")
 
 
