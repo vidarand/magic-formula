@@ -26,7 +26,7 @@ HISTORY_DATA = Path("data/stock_history.json")
 
 
 def load_tickers() -> list:
-    """Load ticker list from JSON file."""
+    """Load ticker list from JSON file, filtering out B shares."""
     if not STOCKS_JSON.exists():
         print(f"Error: {STOCKS_JSON} not found!")
         return []
@@ -34,7 +34,21 @@ def load_tickers() -> list:
     with open(STOCKS_JSON, "r", encoding="utf-8") as f:
         data = json.load(f)
 
-    return data
+    # Filter out B shares - only keep A shares or shares without class suffix
+    filtered_data = []
+    b_shares_removed = 0
+    for stock_info in data:
+        ticker = stock_info.get("ticker", "")
+        # Skip B shares
+        if ".B" in ticker.upper():
+            b_shares_removed += 1
+            continue
+        filtered_data.append(stock_info)
+
+    if b_shares_removed > 0:
+        print(f"  Filtered out {b_shares_removed} B shares from ticker list")
+
+    return filtered_data
 
 
 def load_current_data() -> Dict:
@@ -132,152 +146,29 @@ def save_history(history: Dict):
         json.dump(history, f, indent=2, ensure_ascii=False)
 
 
-def calculate_magic_formula_scores(stocks):
+def remove_b_shares(current_data: Dict) -> Dict:
     """
-    Calculate Magic Formula scores for all stocks.
-    Returns stocks with magic_formula_score added.
-    Also adds magic_formula_reason to explain why score is N/A if applicable.
-    Adds exclusion_reason for stocks that should be excluded from ranking (financial/investment companies).
+    Remove all B shares from database.
     """
-    # Filter out stocks with errors or missing data
-    valid_stocks = []
-    for stock in stocks:
-        # Ensure reason field exists (for old data that might not have it)
-        if (
-            "magic_formula_reason" not in stock
-            or stock.get("magic_formula_reason") is None
-        ):
-            stock["magic_formula_reason"] = "Ej beräknad"
+    # Find and remove all B shares
+    b_shares_to_remove = []
+    for ticker in current_data.keys():
+        if ".B" in ticker.upper():
+            b_shares_to_remove.append(ticker)
 
-        # Initialize exclusion_reason and default_excluded (separate from magic_formula_reason)
-        # exclusion_reason is for companies that should be excluded from ranking
-        # but may still have valid Magic Formula scores
-        if "exclusion_reason" not in stock:
-            stock["exclusion_reason"] = None
-        if "default_excluded" not in stock:
-            stock["default_excluded"] = False
+    # Remove B shares
+    removed_count = 0
+    for ticker in b_shares_to_remove:
+        if ticker in current_data:
+            del current_data[ticker]
+            removed_count += 1
+        # Also remove from history if it exists
+        # (history cleanup will be done separately)
 
-        if stock.get("error"):
-            stock["magic_formula_score"] = "N/A"
-            stock["magic_formula_reason"] = "Error fetching data"
-            continue
+    if removed_count > 0:
+        print(f"  Removed {removed_count} B shares from database")
 
-        # Check if company should be excluded from ranking (financial/investment companies)
-        # But still calculate the score
-        sector = (stock.get("sector", "") or "").lower()
-        industry = (stock.get("industry", "") or "").lower()
-        name = (stock.get("name", "") or "").lower()
-
-        exclusion_reason = None
-        # Check for financial services sector first
-        if "financial" in sector or "financial services" in sector:
-            exclusion_reason = "Finansiella tjänster"
-        # Check for real estate
-        elif "real estate" in sector or "real estate" in industry:
-            exclusion_reason = "Fastigheter"
-        # Check for investment companies by name keywords (like Bure Equity, Investor, etc.)
-        # This should catch companies even if sector is not set correctly
-        elif any(
-            keyword in name
-            for keyword in ["investment", "investor", "holding", "equity"]
-        ):
-            exclusion_reason = "Investeringsbolag"
-        # Also check industry for investment-related terms
-        elif "investment" in industry or "asset management" in industry.lower():
-            exclusion_reason = "Investeringsbolag"
-
-        if exclusion_reason:
-            stock["exclusion_reason"] = exclusion_reason
-            stock["default_excluded"] = True
-        else:
-            stock["default_excluded"] = False
-
-        # Only calculate Magic Formula for stocks in SEK
-        currency = stock.get("currency", "N/A")
-        if currency != "SEK" and currency != "N/A":
-            stock["magic_formula_score"] = "N/A"
-            stock["magic_formula_reason"] = (
-                f"Currency is {currency}, only SEK stocks are calculated"
-            )
-            continue
-
-        ebit = stock.get("ebit", "N/A")
-        ev = stock.get("enterprise_value", "N/A")
-        net_fixed_assets = stock.get("net_fixed_assets", "N/A")
-        current_assets = stock.get("current_assets", "N/A")
-        current_liabilities = stock.get("current_liabilities", "N/A")
-
-        # Skip if required fields are missing
-        if ebit == "N/A" or ebit is None:
-            stock["magic_formula_score"] = "N/A"
-            stock["magic_formula_reason"] = "Missing EBIT"
-            continue
-        if ev == "N/A" or ev is None:
-            stock["magic_formula_score"] = "N/A"
-            stock["magic_formula_reason"] = "Missing Enterprise Value"
-            continue
-        if net_fixed_assets == "N/A" or net_fixed_assets is None:
-            stock["magic_formula_score"] = "N/A"
-            stock["magic_formula_reason"] = "Missing Net Fixed Assets"
-            continue
-        if current_assets == "N/A" or current_assets is None:
-            stock["magic_formula_score"] = "N/A"
-            stock["magic_formula_reason"] = "Missing Current Assets"
-            continue
-        if current_liabilities == "N/A" or current_liabilities is None:
-            stock["magic_formula_score"] = "N/A"
-            stock["magic_formula_reason"] = "Missing Current Liabilities"
-            continue
-
-        try:
-            ebit_val = float(ebit)
-            ev_val = float(ev)
-            net_fixed_assets_val = float(net_fixed_assets)
-            current_assets_val = float(current_assets)
-            liab_val = float(current_liabilities)
-
-            # Calculate Earnings Yield
-            ey = ebit_val / ev_val if ev_val > 0 else 0
-
-            # Calculate Return on Capital using: EBIT / (Net Fixed Assets + Net Working Capital)
-            # where Net Working Capital = Current Assets - Current Liabilities
-            net_working_capital = current_assets_val - liab_val
-            invested_capital = net_fixed_assets_val + net_working_capital
-            roc = ebit_val / invested_capital if invested_capital > 0 else 0
-
-            if ey > 0 and roc > 0:
-                valid_stocks.append({"stock": stock, "ey": ey, "roc": roc})
-            else:
-                stock["magic_formula_score"] = "N/A"
-                if ebit_val < 0:
-                    stock["magic_formula_reason"] = "Negative EBIT (losses)"
-                elif ey <= 0:
-                    stock["magic_formula_reason"] = "Negative/zero Earnings Yield"
-                elif roc <= 0:
-                    stock["magic_formula_reason"] = "Negative/zero Return on Capital"
-                else:
-                    stock["magic_formula_reason"] = "Cannot calculate"
-        except (ValueError, ZeroDivisionError) as e:
-            stock["magic_formula_score"] = "N/A"
-            stock["magic_formula_reason"] = f"Calculation error: {str(e)[:30]}"
-
-    # Rank by Earnings Yield (higher is better, so rank 1 is best)
-    valid_stocks.sort(key=lambda x: x["ey"], reverse=True)
-    for idx, item in enumerate(valid_stocks):
-        item["ey_rank"] = idx + 1
-
-    # Rank by Return on Capital (higher is better, so rank 1 is best)
-    valid_stocks.sort(key=lambda x: x["roc"], reverse=True)
-    for idx, item in enumerate(valid_stocks):
-        item["roc_rank"] = idx + 1
-
-    # Calculate combined score (lower is better)
-    for item in valid_stocks:
-        magic_score = item["ey_rank"] + item["roc_rank"]
-        item["stock"]["magic_formula_score"] = magic_score
-        item["stock"]["magic_formula_reason"] = "Beräknad"  # Always set a reason
-
-    return stocks
+    return current_data
 
 
 def get_market_cap_category(market_cap: StockValue) -> str:
@@ -451,11 +342,20 @@ def add_to_history(ticker: str, stock_data: Dict, history: Dict):
         "current_assets": stock_data.get("current_assets"),
         "net_fixed_assets": stock_data.get("net_fixed_assets"),
         "magic_formula_score": stock_data.get("magic_formula_score"),
-        "magic_formula_score_all": stock_data.get("magic_formula_score_all"),
         "magic_formula_score_100m": stock_data.get("magic_formula_score_100m"),
         "magic_formula_score_500m": stock_data.get("magic_formula_score_500m"),
         "magic_formula_score_1b": stock_data.get("magic_formula_score_1b"),
         "magic_formula_score_5b": stock_data.get("magic_formula_score_5b"),
+        "ey_rank": stock_data.get("ey_rank"),
+        "roc_rank": stock_data.get("roc_rank"),
+        "ey_rank_100m": stock_data.get("ey_rank_100m"),
+        "roc_rank_100m": stock_data.get("roc_rank_100m"),
+        "ey_rank_500m": stock_data.get("ey_rank_500m"),
+        "roc_rank_500m": stock_data.get("roc_rank_500m"),
+        "ey_rank_1b": stock_data.get("ey_rank_1b"),
+        "roc_rank_1b": stock_data.get("roc_rank_1b"),
+        "ey_rank_5b": stock_data.get("ey_rank_5b"),
+        "roc_rank_5b": stock_data.get("roc_rank_5b"),
         "sector": stock_data.get("sector"),  # Needed for exclusion logic
         "industry": stock_data.get("industry"),  # Needed for exclusion logic
         "exclusion_reason": stock_data.get("exclusion_reason"),  # Needed for filtering
@@ -800,38 +700,65 @@ def fetch_batch_stock_data(batch_stocks: list) -> Dict[str, Dict]:
         normalized_tickers.append(normalized)
 
     # Fetch all tickers at once
+    # Note: yf.Tickers() is lazy - it doesn't fetch until you access .info
+    # This can hang if there are network issues, so we'll add progress output
+    tickers = None
     try:
-        tickers = yf.Tickers(" ".join(normalized_tickers))
+        ticker_string = " ".join(normalized_tickers)
+        print(
+            f"    Creating Tickers object for: {', '.join(normalized_tickers[:3])}{'...' if len(normalized_tickers) > 3 else ''}"
+        )
+        tickers = yf.Tickers(ticker_string)
+        # Access one ticker to trigger initial fetch and check if it works
+        if normalized_tickers:
+            test_ticker_key = normalized_tickers[0]
+            print(f"    Testing fetch with {test_ticker_key}...")
+            test_ticker = tickers.tickers.get(test_ticker_key)
+            if test_ticker:
+                # Try to access info with a quick check
+                try:
+                    _ = test_ticker.info
+                    print(f"    ✓ Batch fetch initialized successfully")
+                except Exception as e:
+                    print(f"    ⚠️  Initial fetch test failed: {str(e)[:100]}")
+                    # Continue anyway - might work for other tickers
     except Exception as e:
-        # If batch fetch fails, return errors for all
+        # If batch fetch fails, fall back to individual fetches
+        print(f"  ⚠️  Batch fetch initialization failed: {str(e)[:100]}")
+        print(f"  Falling back to individual fetches...")
         result = {}
         for stock_info in batch_stocks:
             ticker = stock_info["ticker"]
             name = stock_info["name"]
-            normalized = normalize_ticker(ticker)
-            stock_data = create_empty_stock(ticker, name, normalized)
-            stock_data["error"] = f"Batch fetch failed: {str(e)}"
+            stock_data = fetch_single_stock_with_fallback(ticker, name)
             result[ticker] = stock_data
         return result
 
     # Process each ticker from the batch
     result = {}
-    for normalized_ticker in normalized_tickers:
+    for i, normalized_ticker in enumerate(normalized_tickers, 1):
         original_ticker, name = ticker_map[normalized_ticker]
+        print(
+            f"    Processing {i}/{len(normalized_tickers)}: {original_ticker}...",
+            end=" ",
+        )
         stock_data = create_empty_stock(original_ticker, name, normalized_ticker)
 
         try:
-            stock = tickers.tickers[normalized_ticker]
+            stock = tickers.tickers.get(normalized_ticker)
             # Quick check - if ticker doesn't exist in the batch, try fallback
-            if normalized_ticker not in tickers.tickers:
+            if not stock:
+                print("(not in batch, using fallback)")
                 stock_data = fetch_single_stock_with_fallback(original_ticker, name)
                 result[original_ticker] = stock_data
                 continue
 
+            # Access info - this is where it might hang
             info = stock.info
 
             # Check if we got valid data (reduced threshold from 5 to 3 for faster processing)
             if not info or len(info) < 3:
+                print("(invalid data, using fallback)")
                 # Try fallback alternatives
                 stock_data = fetch_single_stock_with_fallback(original_ticker, name)
                 result[original_ticker] = stock_data
@@ -841,14 +768,16 @@ def fetch_batch_stock_data(batch_stocks: list) -> Dict[str, Dict]:
             stock_data = fetch_stock_data_from_ticker(
                 original_ticker, name, normalized_ticker, stock
             )
+            print("✓")
 
         except Exception as e:
+            print(f"✗ ({str(e)[:50]})")
             # If batch fetch failed, try fallback alternatives
             stock_data = fetch_single_stock_with_fallback(original_ticker, name)
             if stock_data.get("error"):
                 # All alternatives failed, use the error from fallback
                 stock_data["error"] = (
-                    f"Batch fetch error: {str(e)}. {stock_data.get('error', '')}"
+                    f"Batch fetch error: {str(e)[:100]}. {stock_data.get('error', '')}"
                 )
 
         result[original_ticker] = stock_data
@@ -1018,23 +947,8 @@ def main():
         if batch_num < total_batches - 1:
             time.sleep(0.2)
 
-        # Calculate Magic Formula scores for the stocks just fetched in this batch
-        # This ensures reasons are always set even if script is interrupted
-        print(
-            f"\nCalculating Magic Formula scores for batch {batch_num + 1} ({len(fetched_stocks_for_calculation)} stocks)..."
-        )
-        if fetched_stocks_for_calculation:
-            batch_stocks_with_scores = calculate_magic_formula_scores(
-                fetched_stocks_for_calculation
-            )
-            # Update current_data with calculated scores
-            for stock in batch_stocks_with_scores:
-                ticker = stock.get("ticker")
-                if ticker:
-                    current_data[ticker] = stock
-            print(
-                f"✓ Calculated scores for {len(batch_stocks_with_scores)} stocks in this batch"
-            )
+        # Note: Magic Formula calculation is done in calculate_magic_formula.py
+        # We just save the raw data here
 
         # Save after each batch to preserve progress
         print(f"\nSaving progress after batch {batch_num + 1}...")
@@ -1042,26 +956,19 @@ def main():
         save_history(history)
         print(f"✓ Saved progress ({updated_count} stocks updated so far)")
 
-    # Recalculate Magic Formula scores for ALL stocks (in case any were missed or need recalculation)
+    # Remove all B shares from database
     print("\n" + "=" * 60)
-    print("Recalculating Magic Formula scores for all stocks...")
-    stocks_list = list(current_data.values())
-    stocks_with_scores = calculate_magic_formula_scores(stocks_list)
-    # Convert back to dict - ensure ALL stocks have reasons
-    for stock in stocks_with_scores:
-        ticker = stock.get("ticker")
-        if ticker:
-            # Ensure reason is always set
-            if (
-                "magic_formula_reason" not in stock
-                or stock.get("magic_formula_reason") is None
-            ):
-                if stock.get("magic_formula_score") == "N/A":
-                    stock["magic_formula_reason"] = "Ej beräknad"
-                else:
-                    stock["magic_formula_reason"] = "Beräknad"
-            current_data[ticker] = stock
-    print(f"✓ Recalculated Magic Formula scores for all {len(current_data)} stocks")
+    print("Removing B shares from database...")
+    print("=" * 60)
+    current_data = remove_b_shares(current_data)
+    print(f"✓ Current data after removing B shares: {len(current_data)} stocks")
+
+    # Also remove B shares from history
+    b_tickers_in_history = [t for t in history.keys() if ".B" in t.upper()]
+    for ticker in b_tickers_in_history:
+        del history[ticker]
+    if b_tickers_in_history:
+        print(f"  Removed {len(b_tickers_in_history)} B shares from history")
 
     # Save data
     print("\n" + "=" * 60)
@@ -1080,18 +987,19 @@ def main():
 
     print(f"\n✓ Updated {updated_count} stocks")
     print(f"✓ Total stocks in database: {len(current_data)}")
-    
+
     # Recalculate all Magic Formula score variants
     print("\n" + "=" * 60)
     print("Recalculating all Magic Formula score variants...")
     print("=" * 60)
     try:
         from calculate_magic_formula import recalculate_all_scores
+
         recalculate_all_scores()
     except Exception as e:
         print(f"⚠️  Warning: Failed to recalculate score variants: {e}")
         print("  Continuing with basic Magic Formula scores only...")
-    
+
     print("\nDone! Run 'python3 generate_html.py' to update stocks.html")
 
 

@@ -600,7 +600,6 @@ def generate_html(stocks):
                 </label>
                 <select id="magicFormulaScoreSelect" style="padding: 10px 15px; font-size: 14px; border: 2px solid #ddd; border-radius: 6px; background: white; cursor: pointer; font-weight: 600; width: 100%; max-width: 500px;">
                     <option value="magic_formula_score">Standard (exkluderar finansiella bolag)</option>
-                    <option value="magic_formula_score_all">Alla aktier (inga exkluderingar)</option>
                     <option value="magic_formula_score_100m">≥ 100M SEK börsvärde</option>
                     <option value="magic_formula_score_500m">≥ 500M SEK börsvärde</option>
                     <option value="magic_formula_score_1b">≥ 1B SEK börsvärde</option>
@@ -622,6 +621,8 @@ def generate_html(stocks):
                     <th data-sort="ticker">Ticker</th>
                     <th data-sort="name">Namn</th>
                     <th data-sort="magic_formula_score">Magic Score</th>
+                    <th data-sort="ey_rank">EY Rank</th>
+                    <th data-sort="roc_rank">RoC Rank</th>
                     <th data-sort="price">Pris</th>
                     <th data-sort="change">Förändring</th>
                     <th data-sort="change_percent">Förändring %</th>
@@ -679,7 +680,7 @@ def generate_html(stocks):
                         <td class="rank">#${{index + 1}}</td>
                         <td><strong>${{stock.ticker || 'N/A'}}</strong></td>
                         <td>${{stock.name || 'N/A'}}</td>
-                        <td colspan="18" style="color: #856404; font-weight: 600;">
+                        <td colspan="20" style="color: #856404; font-weight: 600;">
                             ${{hasError}}
                         </td>
                     </tr>`;
@@ -790,6 +791,26 @@ def generate_html(stocks):
                     ? `<br><small style="color: #666;">${{stock.magic_formula_reason}}</small>`
                     : '';
                 
+                // Get EY and RoC ranks based on selected score variant
+                const getRankField = (baseField) => {{
+                    if (currentScoreField === 'magic_formula_score') return baseField;
+                    if (currentScoreField === 'magic_formula_score_100m') return baseField + '_100m';
+                    if (currentScoreField === 'magic_formula_score_500m') return baseField + '_500m';
+                    if (currentScoreField === 'magic_formula_score_1b') return baseField + '_1b';
+                    if (currentScoreField === 'magic_formula_score_5b') return baseField + '_5b';
+                    return baseField;
+                }};
+                const eyRankField = getRankField('ey_rank');
+                const rocRankField = getRankField('roc_rank');
+                const eyRank = stock[eyRankField];
+                const rocRank = stock[rocRankField];
+                const eyRankDisplay = eyRank !== undefined && eyRank !== null && eyRank !== 'N/A' && typeof eyRank === 'number'
+                    ? `<strong style="color: #212529;">${{eyRank}}</strong>`
+                    : '<span style="color: #6c757d;">N/A</span>';
+                const rocRankDisplay = rocRank !== undefined && rocRank !== null && rocRank !== 'N/A' && typeof rocRank === 'number'
+                    ? `<strong style="color: #212529;">${{rocRank}}</strong>`
+                    : '<span style="color: #6c757d;">N/A</span>';
+                
                         // Check if this stock is excluded (use default_excluded flag if available)
                         const isExcluded = stock.default_excluded || stock.exclusion_reason;
                         const rowStyle = isExcluded ? 'background-color: #fff3cd; opacity: 0.8;' : '';
@@ -801,6 +822,8 @@ def generate_html(stocks):
                             <td><strong>${{stock.ticker || 'N/A'}}</strong></td>
                             <td>${{stock.name || 'N/A'}} ${{excludedLabel}}</td>
                             <td>${{magicScoreDisplay}}${{magicReasonDisplay}}</td>
+                            <td>${{eyRankDisplay}}</td>
+                            <td>${{rocRankDisplay}}</td>
                     <td>${{priceStr}} ${{stock.currency || 'SEK'}}</td>
                     <td class="${{changeClass}}">${{changeStr}}</td>
                     <td class="${{changeClass}}">${{changePctStr}}</td>
@@ -837,7 +860,12 @@ def generate_html(stocks):
         function applyScoreFilter() {{
             // Filter stocks to only show those with valid scores for the selected variant
             // The score variants already have market cap filters built in, so we just filter by valid scores
+            // Filter: only show non-excluded stocks with valid scores by default
             const filtered = originalSort.filter(s => {{
+                // Exclude default_excluded companies (financial/investment companies)
+                const isExcluded = !!(s.default_excluded || s.exclusion_reason);
+                if (isExcluded) return false; // Don't include excluded companies in ranking
+                
                 const score = s[currentScoreField];
                 // Show stocks with valid scores (not N/A, not null, not undefined, and is a number)
                 return score !== 'N/A' && score !== null && score !== undefined && typeof score === 'number';
@@ -962,16 +990,36 @@ def generate_html(stocks):
             
             // Sort the stocks
             currentStocks.sort((a, b) => {{
+                // Excluded stocks always go to the end
+                const aExcluded = !!(a.default_excluded || a.exclusion_reason);
+                const bExcluded = !!(b.default_excluded || b.exclusion_reason);
+                if (aExcluded && !bExcluded) return 1;
+                if (!aExcluded && bExcluded) return -1;
+                
                 let aVal = a[column];
                 let bVal = b[column];
                 
-                // Handle N/A values
-                if (aVal === 'N/A' || aVal === null || aVal === undefined) aVal = isAsc ? -Infinity : Infinity;
-                if (bVal === 'N/A' || bVal === null || bVal === undefined) bVal = isAsc ? -Infinity : Infinity;
+                // Handle N/A values - put them at the end
+                const aIsNA = aVal === 'N/A' || aVal === null || aVal === undefined;
+                const bIsNA = bVal === 'N/A' || bVal === null || bVal === undefined;
+                if (aIsNA && bIsNA) return 0;
+                if (aIsNA) return 1; // N/A goes to end
+                if (bIsNA) return -1; // N/A goes to end
                 
                 // Handle numbers
                 if (typeof aVal === 'number' && typeof bVal === 'number') {{
-                    return isAsc ? bVal - aVal : aVal - bVal;
+                    // For Magic Formula score: lower is better (asc = ascending = lower first)
+                    // For rank fields (ey_rank, roc_rank): lower is better (rank 1 is best)
+                    // For other columns: normal sorting
+                    if (column === 'magic_formula_score' || column.startsWith('magic_formula_score') ||
+                        column === 'ey_rank' || column.startsWith('ey_rank') ||
+                        column === 'roc_rank' || column.startsWith('roc_rank')) {{
+                        // Lower is better, so ascending means lower first
+                        return isAsc ? aVal - bVal : bVal - aVal;
+                    }} else {{
+                        // Normal sorting for other columns
+                        return isAsc ? aVal - bVal : bVal - aVal;
+                    }}
                 }}
                 
                 // Handle strings
@@ -1280,7 +1328,6 @@ def generate_history_html():
             </label>
             <select id="magicFormulaScoreSelectHistory" style="padding: 10px 15px; font-size: 14px; border: 2px solid #ddd; border-radius: 6px; background: white; cursor: pointer; font-weight: 600; width: 100%; max-width: 500px;">
                 <option value="magic_formula_score">Standard (exkluderar finansiella bolag)</option>
-                <option value="magic_formula_score_all">Alla aktier (inga exkluderingar)</option>
                 <option value="magic_formula_score_100m">≥ 100M SEK börsvärde</option>
                 <option value="magic_formula_score_500m">≥ 500M SEK börsvärde</option>
                 <option value="magic_formula_score_1b">≥ 1B SEK börsvärde</option>

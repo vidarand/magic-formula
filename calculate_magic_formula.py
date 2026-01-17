@@ -41,15 +41,19 @@ def calculate_magic_formula_for_stocks(
 ) -> List[Dict]:
     """
     Calculate Magic Formula scores for a list of stocks.
+    Excluded companies (financial/investment) are NOT included in the ranking calculation.
 
     Args:
         stocks: List of stock dictionaries
         exclude_filter: Optional function that returns True if a stock should be excluded from ranking
 
     Returns:
-        List of stocks with magic_formula_score and magic_formula_reason added
+        List of stocks with magic_formula_score and magic_formula_reason added.
+        Excluded stocks will have "N/A" scores and are not part of the ranking pool.
     """
-    valid_stocks = []
+    # First, separate excluded stocks from eligible stocks
+    eligible_stocks = []
+    excluded_stocks = []
 
     for stock in stocks:
         # Ensure reason field exists
@@ -59,11 +63,31 @@ def calculate_magic_formula_for_stocks(
         ):
             stock["magic_formula_reason"] = "Ej beräknad"
 
-        # Apply exclusion filter if provided
+        # Check if stock should be excluded
+        is_excluded = False
         if exclude_filter and exclude_filter(stock):
-            # Stock is excluded from ranking, but we still calculate the score
-            # The exclusion will be handled by the caller
-            pass
+            is_excluded = True
+        elif is_financial_company(stock):
+            is_excluded = True
+
+        if is_excluded:
+            # Set score to N/A and skip calculation - these are NOT in ranking pool
+            stock["magic_formula_score"] = "N/A"
+            stock["magic_formula_reason"] = "Exkluderad från ranking"
+            excluded_stocks.append(stock)
+        else:
+            eligible_stocks.append(stock)
+
+    # Only calculate Magic Formula scores for eligible stocks (excluded ones are NOT in ranking)
+    valid_stocks = []
+
+    for stock in eligible_stocks:
+        # Ensure reason field exists
+        if (
+            "magic_formula_reason" not in stock
+            or stock.get("magic_formula_reason") is None
+        ):
+            stock["magic_formula_reason"] = "Ej beräknad"
 
         if stock.get("error"):
             stock["magic_formula_score"] = "N/A"
@@ -149,13 +173,16 @@ def calculate_magic_formula_for_stocks(
     for idx, item in enumerate(valid_stocks):
         item["roc_rank"] = idx + 1
 
-    # Calculate combined score (lower is better)
+    # Calculate combined score (lower is better) and save ranks
     for item in valid_stocks:
         magic_score = item["ey_rank"] + item["roc_rank"]
         item["stock"]["magic_formula_score"] = magic_score
+        item["stock"]["ey_rank"] = item["ey_rank"]
+        item["stock"]["roc_rank"] = item["roc_rank"]
         item["stock"]["magic_formula_reason"] = "Beräknad"
 
-    return stocks
+    # Return all stocks (eligible with scores + excluded with N/A)
+    return eligible_stocks + excluded_stocks
 
 
 def is_financial_company(stock: Dict) -> bool:
@@ -166,14 +193,25 @@ def is_financial_company(stock: Dict) -> bool:
     sector = (stock.get("sector", "") or "").lower()
     industry = (stock.get("industry", "") or "").lower()
     name = (stock.get("name", "") or "").lower()
+    ticker = (stock.get("ticker", "") or "").lower()
 
     if "financial" in sector or "financial services" in sector:
         return True
     if "real estate" in sector or "real estate" in industry:
         return True
     if any(
-        keyword in name for keyword in ["investment", "investor", "holding", "equity"]
+        keyword in name
+        for keyword in [
+            "investment",
+            "investor",
+            "holding",
+            "equity",
+            "ratos",
+            "lundberg",
+        ]
     ):
+        return True
+    if "ratos" in ticker or "lund" in ticker:
         return True
     if "investment" in industry or "asset management" in industry.lower():
         return True
@@ -197,82 +235,115 @@ def calculate_all_score_variants(stocks: List[Dict]) -> List[Dict]:
 
     Adds the following score fields:
     - magic_formula_score: Default (excludes financial/investment companies)
-    - magic_formula_score_all: All eligible stocks (no exclusions except errors)
     - magic_formula_score_100m: Market cap >= 100M SEK
     - magic_formula_score_500m: Market cap >= 500M SEK
     - magic_formula_score_1b: Market cap >= 1B SEK
     - magic_formula_score_5b: Market cap >= 5B SEK
 
     Returns:
-        List of stocks with all score variants added
+        List of stocks with score variants added.
+        B shares are already filtered out at the source.
     """
     # Convert to list if dict
     if isinstance(stocks, dict):
         stocks = list(stocks.values())
 
-    # Initialize all score fields to "N/A"
-    for stock in stocks:
+    # B shares are already filtered out at the source (in fetch_stocks.py)
+    # So we can use all stocks directly for calculation
+    original_stocks = stocks
+    # Create ticker map for updating scores back to original stocks
+    original_ticker_map = {
+        s.get("ticker"): s for s in original_stocks if s.get("ticker")
+    }
+
+    # Initialize all score fields to "N/A" for ALL stocks
+    for stock in original_stocks:
         stock["magic_formula_score"] = "N/A"
-        stock["magic_formula_score_all"] = "N/A"
         stock["magic_formula_score_100m"] = "N/A"
         stock["magic_formula_score_500m"] = "N/A"
         stock["magic_formula_score_1b"] = "N/A"
         stock["magic_formula_score_5b"] = "N/A"
+        # Initialize rank fields
+        stock["ey_rank"] = "N/A"
+        stock["roc_rank"] = "N/A"
+        stock["ey_rank_100m"] = "N/A"
+        stock["roc_rank_100m"] = "N/A"
+        stock["ey_rank_500m"] = "N/A"
+        stock["roc_rank_500m"] = "N/A"
+        stock["ey_rank_1b"] = "N/A"
+        stock["roc_rank_1b"] = "N/A"
+        stock["ey_rank_5b"] = "N/A"
+        stock["roc_rank_5b"] = "N/A"
 
-    # Create a mapping of ticker -> stock for quick lookup
-    ticker_map = {s.get("ticker"): s for s in stocks if s.get("ticker")}
-
-    # 1. Calculate for ALL eligible stocks (no exclusions except errors)
-    print("  Calculating magic_formula_score_all (all eligible stocks)...")
-    stocks_all = calculate_magic_formula_for_stocks([s.copy() for s in stocks])
-    # Copy scores to magic_formula_score_all
-    for stock in stocks_all:
-        ticker = stock.get("ticker")
-        if ticker and ticker in ticker_map:
-            ticker_map[ticker]["magic_formula_score_all"] = stock.get(
-                "magic_formula_score", "N/A"
-            )
-
-    # 2. Calculate default score (excludes financial/investment companies)
+    # 1. Calculate default score (excludes financial/investment companies)
     print(
         "  Calculating magic_formula_score (excludes financial/investment companies)..."
     )
     stocks_default = [s.copy() for s in stocks if not is_financial_company(s)]
     stocks_default = calculate_magic_formula_for_stocks(stocks_default)
-    # Copy scores to magic_formula_score
+    # Copy scores and ranks to magic_formula_score in original stocks
     for stock in stocks_default:
         ticker = stock.get("ticker")
-        if ticker and ticker in ticker_map:
-            ticker_map[ticker]["magic_formula_score"] = stock.get(
+        if ticker and ticker in original_ticker_map:
+            original_ticker_map[ticker]["magic_formula_score"] = stock.get(
                 "magic_formula_score", "N/A"
             )
+            original_ticker_map[ticker]["ey_rank"] = stock.get("ey_rank", "N/A")
+            original_ticker_map[ticker]["roc_rank"] = stock.get("roc_rank", "N/A")
 
-    # 3. Calculate for different market cap thresholds
+    # 2. Calculate for different market cap thresholds
     market_cap_thresholds = [
-        (100_000_000, "magic_formula_score_100m", "100M SEK"),
-        (500_000_000, "magic_formula_score_500m", "500M SEK"),
-        (1_000_000_000, "magic_formula_score_1b", "1B SEK"),
-        (5_000_000_000, "magic_formula_score_5b", "5B SEK"),
+        (
+            100_000_000,
+            "magic_formula_score_100m",
+            "ey_rank_100m",
+            "roc_rank_100m",
+            "100M SEK",
+        ),
+        (
+            500_000_000,
+            "magic_formula_score_500m",
+            "ey_rank_500m",
+            "roc_rank_500m",
+            "500M SEK",
+        ),
+        (
+            1_000_000_000,
+            "magic_formula_score_1b",
+            "ey_rank_1b",
+            "roc_rank_1b",
+            "1B SEK",
+        ),
+        (
+            5_000_000_000,
+            "magic_formula_score_5b",
+            "ey_rank_5b",
+            "roc_rank_5b",
+            "5B SEK",
+        ),
     ]
 
-    for min_cap, score_field, label in market_cap_thresholds:
+    for min_cap, score_field, ey_field, roc_field, label in market_cap_thresholds:
         print(f"  Calculating {score_field} (market cap >= {label})...")
         # Filter: exclude financial companies AND meet market cap threshold
-        filtered_stocks = [
+        variant_filtered = [
             s.copy()
             for s in stocks
             if not is_financial_company(s) and meets_market_cap_threshold(s, min_cap)
         ]
-        filtered_stocks = calculate_magic_formula_for_stocks(filtered_stocks)
-        # Copy scores
-        for stock in filtered_stocks:
+        variant_filtered = calculate_magic_formula_for_stocks(variant_filtered)
+        # Copy scores and ranks to original stocks
+        for stock in variant_filtered:
             ticker = stock.get("ticker")
-            if ticker and ticker in ticker_map:
-                ticker_map[ticker][score_field] = stock.get(
+            if ticker and ticker in original_ticker_map:
+                original_ticker_map[ticker][score_field] = stock.get(
                     "magic_formula_score", "N/A"
                 )
+                original_ticker_map[ticker][ey_field] = stock.get("ey_rank", "N/A")
+                original_ticker_map[ticker][roc_field] = stock.get("roc_rank", "N/A")
 
-    return stocks
+    # Return original stocks list (with all A/B shares, but only selected ones have scores)
+    return original_stocks
 
 
 def recalculate_all_scores():
@@ -296,19 +367,17 @@ def recalculate_all_scores():
     # Convert to list
     stocks_list = list(current_data.values())
 
-    # Calculate all score variants
+    # Calculate all score variants (this filters duplicates for calculation but returns all stocks)
     print("\nCalculating Magic Formula score variants...")
     stocks_with_scores = calculate_all_score_variants(stocks_list)
 
-    # Update current_data dict
+    # Update current_data dict with all stocks (including duplicates, but only selected ones have scores)
     for stock in stocks_with_scores:
         ticker = stock.get("ticker")
         if ticker:
             # Ensure all score fields exist
             if "magic_formula_score" not in stock:
                 stock["magic_formula_score"] = "N/A"
-            if "magic_formula_score_all" not in stock:
-                stock["magic_formula_score_all"] = "N/A"
             if "magic_formula_score_100m" not in stock:
                 stock["magic_formula_score_100m"] = "N/A"
             if "magic_formula_score_500m" not in stock:
@@ -342,7 +411,6 @@ def recalculate_all_scores():
 
     score_fields = [
         "magic_formula_score",
-        "magic_formula_score_all",
         "magic_formula_score_100m",
         "magic_formula_score_500m",
         "magic_formula_score_1b",

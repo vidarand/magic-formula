@@ -68,11 +68,21 @@ class StockSchema:
 
     # Calculated Magic Formula score (lower is better, "N/A" if cannot be calculated)
     magic_formula_score: StockValue  # Combined rank score (int/float) or "N/A" - default (excludes financial/investment companies)
-    magic_formula_score_all: StockValue  # All eligible stocks (no exclusions except errors)
     magic_formula_score_100m: StockValue  # Market cap >= 100M SEK
     magic_formula_score_500m: StockValue  # Market cap >= 500M SEK
     magic_formula_score_1b: StockValue  # Market cap >= 1B SEK
     magic_formula_score_5b: StockValue  # Market cap >= 5B SEK
+    # Earnings Yield and Return on Capital ranks for each score variant
+    ey_rank: StockValue  # Earnings Yield rank (1 = best) for default score
+    roc_rank: StockValue  # Return on Capital rank (1 = best) for default score
+    ey_rank_100m: StockValue  # Earnings Yield rank for score_100m variant
+    roc_rank_100m: StockValue  # Return on Capital rank for score_100m variant
+    ey_rank_500m: StockValue  # Earnings Yield rank for score_500m variant
+    roc_rank_500m: StockValue  # Return on Capital rank for score_500m variant
+    ey_rank_1b: StockValue  # Earnings Yield rank for score_1b variant
+    roc_rank_1b: StockValue  # Return on Capital rank for score_1b variant
+    ey_rank_5b: StockValue  # Earnings Yield rank for score_5b variant
+    roc_rank_5b: StockValue  # Return on Capital rank for score_5b variant
     magic_formula_reason: str  # Always present: "Beräknad" if valid, or reason why N/A
     exclusion_reason: Optional[
         str
@@ -114,11 +124,20 @@ STOCK_SCHEMA = {
     "current_liabilities": (int, float, str),
     "net_fixed_assets": (int, float, str),
     "magic_formula_score": (int, float, str),
-    "magic_formula_score_all": (int, float, str),
     "magic_formula_score_100m": (int, float, str),
     "magic_formula_score_500m": (int, float, str),
     "magic_formula_score_1b": (int, float, str),
     "magic_formula_score_5b": (int, float, str),
+    "ey_rank": (int, float, str),
+    "roc_rank": (int, float, str),
+    "ey_rank_100m": (int, float, str),
+    "roc_rank_100m": (int, float, str),
+    "ey_rank_500m": (int, float, str),
+    "roc_rank_500m": (int, float, str),
+    "ey_rank_1b": (int, float, str),
+    "roc_rank_1b": (int, float, str),
+    "ey_rank_5b": (int, float, str),
+    "roc_rank_5b": (int, float, str),
     "magic_formula_reason": str,
     "exclusion_reason": (str, type(None)),
     "default_excluded": bool,
@@ -162,11 +181,20 @@ def create_empty_stock(ticker: str, name: str, yfinance_ticker: str) -> dict:
         "current_liabilities": "N/A",
         "net_fixed_assets": "N/A",
         "magic_formula_score": "N/A",
-        "magic_formula_score_all": "N/A",
         "magic_formula_score_100m": "N/A",
         "magic_formula_score_500m": "N/A",
         "magic_formula_score_1b": "N/A",
         "magic_formula_score_5b": "N/A",
+        "ey_rank": "N/A",
+        "roc_rank": "N/A",
+        "ey_rank_100m": "N/A",
+        "roc_rank_100m": "N/A",
+        "ey_rank_500m": "N/A",
+        "roc_rank_500m": "N/A",
+        "ey_rank_1b": "N/A",
+        "roc_rank_1b": "N/A",
+        "ey_rank_5b": "N/A",
+        "roc_rank_5b": "N/A",
         "magic_formula_reason": "Ej beräknad",
         "exclusion_reason": None,
         "default_excluded": False,
@@ -249,11 +277,20 @@ FIELD_CATEGORIES = {
         "current_liabilities",
         "net_fixed_assets",
         "magic_formula_score",
-        "magic_formula_score_all",
         "magic_formula_score_100m",
         "magic_formula_score_500m",
         "magic_formula_score_1b",
         "magic_formula_score_5b",
+        "ey_rank",
+        "roc_rank",
+        "ey_rank_100m",
+        "roc_rank_100m",
+        "ey_rank_500m",
+        "roc_rank_500m",
+        "ey_rank_1b",
+        "roc_rank_1b",
+        "ey_rank_5b",
+        "roc_rank_5b",
         "magic_formula_reason",
     ],
 }
