@@ -734,13 +734,14 @@ def fetch_batch_stock_data(batch_stocks: list) -> Dict[str, Dict]:
             result[ticker] = stock_data
         return result
 
-    # Process each ticker from the batch
+    # Process each ticker from the batch with timeout protection
     result = {}
     for i, normalized_ticker in enumerate(normalized_tickers, 1):
         original_ticker, name = ticker_map[normalized_ticker]
         print(
-            f"    Processing {i}/{len(normalized_tickers)}: {original_ticker}...",
+            f"    [{i}/{len(normalized_tickers)}] {original_ticker}...",
             end=" ",
+            flush=True,
         )
         stock_data = create_empty_stock(original_ticker, name, normalized_ticker)
 
@@ -748,18 +749,42 @@ def fetch_batch_stock_data(batch_stocks: list) -> Dict[str, Dict]:
             stock = tickers.tickers.get(normalized_ticker)
             # Quick check - if ticker doesn't exist in the batch, try fallback
             if not stock:
-                print("(not in batch, using fallback)")
+                print("(fallback)", flush=True)
                 stock_data = fetch_single_stock_with_fallback(original_ticker, name)
                 result[original_ticker] = stock_data
                 continue
 
-            # Access info - this is where it might hang
-            info = stock.info
+            # Access info with timeout protection using threading
+            import threading
 
-            # Check if we got valid data (reduced threshold from 5 to 3 for faster processing)
+            info = None
+            info_error = None
+
+            def fetch_info():
+                nonlocal info, info_error
+                try:
+                    info = stock.info
+                except Exception as e:
+                    info_error = e
+
+            # Start fetch in a thread
+            fetch_thread = threading.Thread(target=fetch_info, daemon=True)
+            fetch_thread.start()
+            fetch_thread.join(timeout=13)  # 13 second timeout per ticker
+
+            if fetch_thread.is_alive():
+                # Timeout occurred
+                print("(timeout)", flush=True)
+                stock_data = fetch_single_stock_with_fallback(original_ticker, name)
+                result[original_ticker] = stock_data
+                continue
+
+            if info_error:
+                raise info_error
+
+            # Check if we got valid data
             if not info or len(info) < 3:
-                print("(invalid data, using fallback)")
-                # Try fallback alternatives
+                print("(invalid)", flush=True)
                 stock_data = fetch_single_stock_with_fallback(original_ticker, name)
                 result[original_ticker] = stock_data
                 continue
@@ -768,10 +793,10 @@ def fetch_batch_stock_data(batch_stocks: list) -> Dict[str, Dict]:
             stock_data = fetch_stock_data_from_ticker(
                 original_ticker, name, normalized_ticker, stock
             )
-            print("✓")
+            print("✓", flush=True)
 
         except Exception as e:
-            print(f"✗ ({str(e)[:50]})")
+            print(f"✗", flush=True)
             # If batch fetch failed, try fallback alternatives
             stock_data = fetch_single_stock_with_fallback(original_ticker, name)
             if stock_data.get("error"):
@@ -787,6 +812,20 @@ def fetch_batch_stock_data(batch_stocks: list) -> Dict[str, Dict]:
 
 def main():
     """Main function."""
+    import signal
+
+    # Global flag for graceful shutdown
+    shutdown_requested = False
+
+    def signal_handler(sig, frame):
+        nonlocal shutdown_requested
+        print("\n\n⚠️  Interrupt received. Saving progress and exiting...")
+        shutdown_requested = True
+
+    # Register signal handler for graceful shutdown
+    signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGTERM, signal_handler)
+
     parser = argparse.ArgumentParser(
         description="Fetch stock data and maintain history"
     )
@@ -811,6 +850,7 @@ def main():
     print("=" * 60)
     print("Stock Data Fetcher")
     print("=" * 60)
+    print("Press Ctrl+C to save progress and exit gracefully")
 
     # Load data
     print("\nLoading data...")
@@ -872,13 +912,18 @@ def main():
             f"  Will process {len(to_update)} stocks (skipping {original_count - len(to_update)} others)"
         )
 
-    # Process in batches of 10 (increased from 5 for better performance)
-    # yfinance can handle 10-15 tickers per batch without issues
-    batch_size = 10
+    # Process in smaller batches - yfinance is slow because it makes individual requests
+    # Smaller batches help identify problematic tickers faster
+    batch_size = 3
     total_batches = (len(to_update) + batch_size - 1) // batch_size
 
     updated_count = 0
     for batch_num in range(total_batches):
+        # Check for shutdown request
+        if shutdown_requested:
+            print("\n⚠️  Shutdown requested. Saving progress...")
+            break
+
         batch_start = batch_num * batch_size
         batch_end = min(batch_start + batch_size, len(to_update))
         batch = to_update[batch_start:batch_end]
@@ -889,7 +934,12 @@ def main():
 
         # Fetch all tickers in batch at once
         print(f"\nFetching batch of {len(batch)} tickers...")
-        batch_results = fetch_batch_stock_data(batch)
+        try:
+            batch_results = fetch_batch_stock_data(batch)
+        except KeyboardInterrupt:
+            print("\n⚠️  Interrupted during batch fetch. Saving progress...")
+            shutdown_requested = True
+            break
 
         # Process results and collect fetched stocks for Magic Formula calculation
         fetched_stocks_for_calculation = []
@@ -955,6 +1005,21 @@ def main():
         save_current_data(current_data)
         save_history(history)
         print(f"✓ Saved progress ({updated_count} stocks updated so far)")
+
+        # Check for shutdown after each batch
+        if shutdown_requested:
+            break
+
+    # Save final state if interrupted
+    if shutdown_requested:
+        print("\n" + "=" * 60)
+        print("Saving final state before exit...")
+        print("=" * 60)
+        save_current_data(current_data)
+        save_history(history)
+        print(f"✓ Saved {len(current_data)} stocks")
+        print(f"✓ Exiting gracefully")
+        return
 
     # Remove all B shares from database
     print("\n" + "=" * 60)
