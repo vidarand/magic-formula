@@ -632,6 +632,9 @@ def generate_html(stocks):
                     <th data-sort="magic_formula_score">Magic Score</th>
                     <th data-sort="ey_rank">EY Rank</th>
                     <th data-sort="roc_rank">RoC Rank</th>
+                    <th>EBIT Periods</th>
+                    <th>Balance Sheet Period</th>
+                    <th>TTM</th>
                     <th data-sort="price">Pris</th>
                     <th data-sort="change">Förändring</th>
                     <th data-sort="change_percent">Förändring %</th>
@@ -800,6 +803,31 @@ def generate_html(stocks):
                     ? `<br><small style="color: #666;">${{stock.magic_formula_reason}}</small>`
                     : '';
                 
+                // Format period information for separate columns
+                const ebitPeriods = stock.magic_formula_ebit_periods;
+                const balanceSheetPeriod = stock.magic_formula_balance_sheet_period;
+                const usesTTM = stock.magic_formula_uses_ttm;
+                
+                // Format EBIT periods display
+                let ebitPeriodsDisplay = '<span style="color: #6c757d;">N/A</span>';
+                if (magicScore !== 'N/A' && typeof magicScore === 'number' && ebitPeriods && ebitPeriods !== 'N/A') {{
+                    ebitPeriodsDisplay = `<span style="color: #495057; font-size: 12px;">${{ebitPeriods}}</span>`;
+                }}
+                
+                // Format Balance Sheet period display
+                let balanceSheetPeriodDisplay = '<span style="color: #6c757d;">N/A</span>';
+                if (magicScore !== 'N/A' && typeof magicScore === 'number' && balanceSheetPeriod && balanceSheetPeriod !== 'N/A') {{
+                    balanceSheetPeriodDisplay = `<span style="color: #495057; font-size: 12px;">${{balanceSheetPeriod}}</span>`;
+                }}
+                
+                // Format TTM indicator
+                let ttmDisplay = '<span style="color: #6c757d;">-</span>';
+                if (magicScore !== 'N/A' && typeof magicScore === 'number' && usesTTM) {{
+                    ttmDisplay = '<span style="color: #28a745; font-weight: 600;">✓</span>';
+                }} else if (magicScore !== 'N/A' && typeof magicScore === 'number') {{
+                    ttmDisplay = '<span style="color: #6c757d;">Annual</span>';
+                }}
+                
                 // Get EY and RoC ranks based on selected score variant
                 const getRankField = (baseField) => {{
                     if (currentScoreField === 'magic_formula_score') return baseField;
@@ -833,6 +861,9 @@ def generate_html(stocks):
                             <td>${{magicScoreDisplay}}${{magicReasonDisplay}}</td>
                             <td>${{eyRankDisplay}}</td>
                             <td>${{rocRankDisplay}}</td>
+                            <td>${{ebitPeriodsDisplay}}</td>
+                            <td>${{balanceSheetPeriodDisplay}}</td>
+                            <td>${{ttmDisplay}}</td>
                     <td>${{priceStr}} ${{stock.currency || 'SEK'}}</td>
                     <td class="${{changeClass}}">${{changeStr}}</td>
                     <td class="${{changeClass}}">${{changePctStr}}</td>

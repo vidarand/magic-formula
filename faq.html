@@ -492,26 +492,68 @@
                 Detta är den korrekta formeln enligt boken.
             </div>
 
+            <h2>Hur vi beräknar Magic Formula</h2>
+            <div class="note" style="background-color: #e7f3ff; border-left: 4px solid #2196F3; padding: 20px; margin: 20px 0;">
+                <strong>Trailing Twelve Months (TTM) - Kvartalsdata</strong>
+                <p style="margin-top: 10px;">
+                    För att ge dig den mest aktuella bilden använder vi <strong>Trailing Twelve Months (TTM)</strong> 
+                    baserat på kvartalsdata istället för årsdata. Detta innebär:
+                </p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>EBIT TTM:</strong> Vi summerar de senaste 4 kvartalen av EBIT för att få en rullande 12-månadersperiod</li>
+                    <li><strong>Balansräkning:</strong> Vi använder den senaste tillgängliga kvartalsbalansräkningen</li>
+                    <li><strong>Krav:</strong> Ett bolag måste ha minst 4 kvartal av EBIT-data och kvartalsbalansräkning för att beräknas</li>
+                    <li><strong>Ingen årsdata:</strong> Vi använder inte årsdata som fallback - endast bolag med komplett kvartalsdata beräknas</li>
+                </ul>
+                <p style="margin-top: 15px;">
+                    I tabellen kan du se vilka perioder som används för varje beräkning:
+                </p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>EBIT Periods:</strong> Visar vilka kvartal som summerats (t.ex. "2024-12-31 to 2024-03-31")</li>
+                    <li><strong>Balance Sheet Period:</strong> Visar vilket kvartal som används för balansräkningen (t.ex. "2025-06-30")</li>
+                    <li><strong>TTM:</strong> Visar ✓ om TTM används, eller "Annual" om årsdata används (vilket inte sker längre)</li>
+                </ul>
+                <p style="margin-top: 15px; font-weight: 600;">
+                    Detta ger dig en mer aktuell bild än om vi bara använde årsdata, eftersom kvartalsdata uppdateras oftare.
+                </p>
+            </div>
+
+            <h2>Varför vissa bolag inte har Magic Formula Score</h2>
+            <div class="note" style="background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 20px; margin: 20px 0;">
+                <p>
+                    Om ett bolag har "N/A" som Magic Formula Score finns det en specifik anledning. Här är de vanligaste:
+                </p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>Exkluderad: Finansiellt bolag</strong> - Finansbolag, investeringsbolag och fastighetsbolag exkluderas</li>
+                    <li><strong>Saknar kvartalsdata för EBIT (behöver 4 kvartal)</strong> - Bolaget saknar tillräckligt med kvartalsdata</li>
+                    <li><strong>Saknar kvartalsdata för balansräkning</strong> - Balansräkningsdata saknas</li>
+                    <li><strong>Negativ EBIT (förluster)</strong> - Bolaget har förluster istället för vinst</li>
+                    <li><strong>Negativ/noll Earnings Yield</strong> - EBIT är negativ eller noll i förhållande till Enterprise Value</li>
+                    <li><strong>Negativ/noll Return on Capital</strong> - Bolaget har negativ eller noll avkastning på kapital</li>
+                    <li><strong>Saknar Enterprise Value</strong> - Enterprise Value saknas i datan</li>
+                    <li><strong>Valuta är [currency], endast SEK-aktier beräknas</strong> - Endast svenska kronor (SEK) stöds</li>
+                </ul>
+                <p style="margin-top: 15px;">
+                    Varje bolag har en <strong>magic_formula_reason</strong> som förklarar exakt varför det inte har en score.
+                </p>
+            </div>
+
+            <h2>Historik</h2>
+            <div class="note" style="background-color: #d4edda; border-left: 4px solid #28a745; padding: 20px; margin: 20px 0;">
+                <p>
+                    <strong>Endast bolag med giltig Magic Formula Score sparas i historiken.</strong>
+                </p>
+                <p style="margin-top: 10px;">
+                    Detta innebär att historiken endast innehåller bolag som faktiskt är rankade enligt Magic Formula, 
+                    vilket gör det enklare att följa utvecklingen över tid för de bolag som är relevanta för strategin.
+                </p>
+            </div>
+
             <h2>Lästips!</h2>
             <p>
                 Vill du lära dig mer om Magic Formula rekommenderar jag
                 <strong>"The Little Book That Beats The Market"</strong> av Joel Greenblatt.
             </p>
-
-            <div class="reference">
-                <p>
-                    <strong>Källa och referens:</strong><br>
-                    Denna guide är baserad på innehåll från
-                    <a href="https://rimligtpris.se/magic-formula/" target="_blank" rel="noopener noreferrer">
-                        Rimligtpris.se - Magic Formula Sverige
-                    </a>
-                </p>
-                <p style="margin-top: 10px;">
-                    Innehållet har anpassats för att matcha vår implementation av Magic Formula, som använder
-                    <code>EBIT / (Net Fixed Assets + Net Working Capital)</code> för Return on Capital-beräkningen,
-                    där Net Working Capital = Current Assets - Current Liabilities.
-                </p>
-            </div>
         </div>
         <div class="footer"
             style="text-align: center; margin-top: 40px; padding: 20px; color: white; font-size: 0.9em;">

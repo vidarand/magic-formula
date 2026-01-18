@@ -57,6 +57,7 @@ class StockSchema:
     # Magic Formula required fields
     enterprise_value: StockValue  # Enterprise value (int/float) or "N/A"
     ebit: StockValue  # Earnings Before Interest and Taxes (int/float) or "N/A"
+    ebit_period: StockValue  # Fiscal period for EBIT data (YYYY-MM-DD or fiscal year) or "N/A"
     total_assets: (
         StockValue  # Total Assets (for Magic Formula calculation) (int/float) or "N/A"
     )
@@ -65,6 +66,8 @@ class StockSchema:
     net_fixed_assets: (
         StockValue  # Net Fixed Assets / PP&E (for ROC calculation) (int/float) or "N/A"
     )
+    balance_sheet_period: StockValue  # Fiscal period for balance sheet data (YYYY-MM-DD or fiscal year) or "N/A"
+    quarterly_balance_sheet: StockValue  # Last 4 quarters of balance sheet data: list of {period, current_assets, current_liabilities, net_fixed_assets} dicts or "N/A"
 
     # Calculated Magic Formula score (lower is better, "N/A" if cannot be calculated)
     magic_formula_score: StockValue  # Combined rank score (int/float) or "N/A" - default (excludes financial/investment companies)
@@ -84,6 +87,9 @@ class StockSchema:
     ey_rank_5b: StockValue  # Earnings Yield rank for score_5b variant
     roc_rank_5b: StockValue  # Return on Capital rank for score_5b variant
     magic_formula_reason: str  # Always present: "Beräknad" if valid, or reason why N/A
+    magic_formula_ebit_periods: StockValue  # Periods used for EBIT calculation (e.g., "2024-Q1 to 2024-Q4" for TTM, or annual period)
+    magic_formula_balance_sheet_period: StockValue  # Period used for balance sheet data (quarterly date or annual period)
+    magic_formula_uses_ttm: bool  # Whether TTM (Trailing Twelve Months) was used for calculation
     exclusion_reason: Optional[
         str
     ]  # Reason for exclusion from ranking (financial/investment companies), None if not excluded
@@ -119,10 +125,13 @@ STOCK_SCHEMA = {
     # Magic Formula required fields
     "enterprise_value": (int, float, str),
     "ebit": (int, float, str),
+    "ebit_period": (int, float, str),  # Fiscal period for EBIT (YYYY-MM-DD or fiscal year)
     "total_assets": (int, float, str),
     "current_assets": (int, float, str),
     "current_liabilities": (int, float, str),
     "net_fixed_assets": (int, float, str),
+    "balance_sheet_period": (int, float, str),  # Fiscal period for balance sheet (YYYY-MM-DD or fiscal year)
+    "quarterly_balance_sheet": (int, float, str),  # Last 4 quarters of balance sheet data
     "magic_formula_score": (int, float, str),
     "magic_formula_score_100m": (int, float, str),
     "magic_formula_score_500m": (int, float, str),
@@ -176,10 +185,14 @@ def create_empty_stock(ticker: str, name: str, yfinance_ticker: str) -> dict:
         # Magic Formula required fields
         "enterprise_value": "N/A",
         "ebit": "N/A",
+        "ebit_period": "N/A",  # Fiscal period for EBIT data (YYYY-MM-DD or fiscal year)
+        "quarterly_ebit": "N/A",  # Last 4 quarters of EBIT data: list of {period: date, ebit: value} or "N/A"
         "total_assets": "N/A",
         "current_assets": "N/A",
         "current_liabilities": "N/A",
         "net_fixed_assets": "N/A",
+        "balance_sheet_period": "N/A",  # Fiscal period for balance sheet data (YYYY-MM-DD or fiscal year)
+        "quarterly_balance_sheet": "N/A",  # Last 4 quarters: list of {period, current_assets, current_liabilities, net_fixed_assets} or "N/A"
         "magic_formula_score": "N/A",
         "magic_formula_score_100m": "N/A",
         "magic_formula_score_500m": "N/A",
@@ -196,6 +209,9 @@ def create_empty_stock(ticker: str, name: str, yfinance_ticker: str) -> dict:
         "ey_rank_5b": "N/A",
         "roc_rank_5b": "N/A",
         "magic_formula_reason": "Ej beräknad",
+        "magic_formula_ebit_periods": "N/A",  # Periods used for EBIT calculation
+        "magic_formula_balance_sheet_period": "N/A",  # Period used for balance sheet
+        "magic_formula_uses_ttm": False,  # Whether TTM was used
         "exclusion_reason": None,
         "default_excluded": False,
     }

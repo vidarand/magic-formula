@@ -2294,5 +2294,65 @@
   {
     "ticker": "SUMMAS",
     "name": "Summa Defence"
+  },
+  {
+    "ticker": "BETS.B",
+    "name": "Betsson AB (publ)"
+  },
+  {
+    "ticker": "HM.B",
+    "name": "H & M Hennes & Mauritz AB"
+  },
+  {
+    "ticker": "HMB",
+    "name": "Holmen AB (publ)"
+  },
+  {
+    "ticker": "SCA.B",
+    "name": "Svenska Cellulosa AB (publ)"
+  },
+  {
+    "ticker": "SKF.B",
+    "name": "AB SKF (publ)"
+  },
+  {
+    "ticker": "BALD.B",
+    "name": "Fastighets AB Balder (publ)"
+  },
+  {
+    "ticker": "LIFCO.B",
+    "name": "Lifco AB (publ)"
+  },
+  {
+    "ticker": "GETI.B",
+    "name": "Getinge AB (publ)"
+  },
+  {
+    "ticker": "BEIJ.B",
+    "name": "Beijer Ref AB (publ)"
+  },
+  {
+    "ticker": "ANOD.B",
+    "name": "Addnode Group AB (publ)"
+  },
+  {
+    "ticker": "HEXA.B",
+    "name": "Hexagon AB (publ)"
+  },
+  {
+    "ticker": "NIBE.B",
+    "name": "Nibe Industrier AB (publ)"
+  },
+  {
+    "ticker": "LATO.B",
+    "name": "Investment AB Latour (publ)"
+  },
+  {
+    "ticker": "VIT.B",
+    "name": "Vitrolife AB (publ)"
+  },
+  {
+    "ticker": "WALL.B",
+    "name": "Wallenstam AB (publ)"
   }
 ]

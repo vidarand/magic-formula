@@ -35,6 +35,47 @@ def save_current_data(data: Dict):
         json.dump(data, f, indent=2, ensure_ascii=False)
 
 
+def calculate_ttm_from_quarterly(quarterly_data: List[Dict], field_name: str) -> tuple[float, str]:
+    """
+    Calculate Trailing Twelve Months (TTM) from quarterly data.
+    
+    Args:
+        quarterly_data: List of quarterly data dicts with 'period' and field values
+        field_name: Name of the field to sum (e.g., 'ebit', 'current_assets')
+    
+    Returns:
+        Tuple of (TTM value, periods_used string) or (0, "N/A") if insufficient data
+    """
+    if not quarterly_data or quarterly_data == "N/A" or not isinstance(quarterly_data, list):
+        return 0, "N/A"
+    
+    # Get up to 4 most recent quarters
+    quarters_to_use = quarterly_data[:4] if len(quarterly_data) >= 4 else quarterly_data
+    
+    if len(quarters_to_use) < 4:
+        return 0, "N/A"  # Need 4 quarters for TTM
+    
+    ttm_value = 0.0
+    periods = []
+    
+    for quarter in quarters_to_use:
+        if not isinstance(quarter, dict):
+            continue
+        value = quarter.get(field_name)
+        if value is not None and isinstance(value, (int, float)):
+            ttm_value += float(value)
+            period = quarter.get("period", "Unknown")
+            periods.append(period)
+    
+    if ttm_value == 0 or len(periods) < 4:
+        return 0, "N/A"
+    
+    # Create periods string: "2024-Q1 to 2024-Q4" or similar
+    periods_str = f"{periods[-1]} to {periods[0]}" if len(periods) == 4 else ", ".join(periods)
+    
+    return ttm_value, periods_str
+
+
 def calculate_magic_formula_for_stocks(
     stocks: List[Dict],
     exclude_filter: Optional[Callable[[Dict], bool]] = None,
@@ -73,7 +114,29 @@ def calculate_magic_formula_for_stocks(
         if is_excluded:
             # Set score to N/A and skip calculation - these are NOT in ranking pool
             stock["magic_formula_score"] = "N/A"
-            stock["magic_formula_reason"] = "Exkluderad från ranking"
+            # Set more specific reason based on why it's excluded
+            if stock.get("default_excluded") or stock.get("exclusion_reason"):
+                exclusion_reason = stock.get("exclusion_reason", "")
+                if "financial" in exclusion_reason.lower() or "investment" in exclusion_reason.lower():
+                    stock["magic_formula_reason"] = "Exkluderad: Finansiellt bolag"
+                elif "real estate" in exclusion_reason.lower():
+                    stock["magic_formula_reason"] = "Exkluderad: Fastighetsbolag"
+                else:
+                    stock["magic_formula_reason"] = f"Exkluderad: {exclusion_reason}" if exclusion_reason else "Exkluderad från ranking"
+            elif is_financial_company(stock):
+                # Check sector/industry to give specific reason
+                sector = (stock.get("sector", "") or "").lower()
+                industry = (stock.get("industry", "") or "").lower()
+                if "financial" in sector or "financial services" in sector:
+                    stock["magic_formula_reason"] = "Exkluderad: Finansiellt bolag"
+                elif "real estate" in sector or "real estate" in industry:
+                    stock["magic_formula_reason"] = "Exkluderad: Fastighetsbolag"
+                elif "investment" in industry or "asset management" in industry:
+                    stock["magic_formula_reason"] = "Exkluderad: Investeringsbolag"
+                else:
+                    stock["magic_formula_reason"] = "Exkluderad: Finansiellt/investeringsbolag"
+            else:
+                stock["magic_formula_reason"] = "Exkluderad från ranking"
             excluded_stocks.append(stock)
         else:
             eligible_stocks.append(stock)
@@ -91,52 +154,93 @@ def calculate_magic_formula_for_stocks(
 
         if stock.get("error"):
             stock["magic_formula_score"] = "N/A"
-            stock["magic_formula_reason"] = "Error fetching data"
+            stock["magic_formula_reason"] = "Fel vid hämtning av data"
             continue
 
         # Only calculate Magic Formula for stocks in SEK
         currency = stock.get("currency", "N/A")
         if currency != "SEK" and currency != "N/A":
             stock["magic_formula_score"] = "N/A"
-            stock["magic_formula_reason"] = (
-                f"Currency is {currency}, only SEK stocks are calculated"
-            )
+            stock["magic_formula_reason"] = f"Valuta är {currency}, endast SEK-aktier beräknas"
             continue
 
-        ebit = stock.get("ebit", "N/A")
         ev = stock.get("enterprise_value", "N/A")
-        net_fixed_assets = stock.get("net_fixed_assets", "N/A")
-        current_assets = stock.get("current_assets", "N/A")
-        current_liabilities = stock.get("current_liabilities", "N/A")
-
-        # Skip if required fields are missing
-        if ebit == "N/A" or ebit is None:
-            stock["magic_formula_score"] = "N/A"
-            stock["magic_formula_reason"] = "Missing EBIT"
-            continue
+        
+        # Skip if Enterprise Value is missing (required for both TTM and annual)
         if ev == "N/A" or ev is None:
             stock["magic_formula_score"] = "N/A"
-            stock["magic_formula_reason"] = "Missing Enterprise Value"
-            continue
-        if net_fixed_assets == "N/A" or net_fixed_assets is None:
-            stock["magic_formula_score"] = "N/A"
-            stock["magic_formula_reason"] = "Missing Net Fixed Assets"
-            continue
-        if current_assets == "N/A" or current_assets is None:
-            stock["magic_formula_score"] = "N/A"
-            stock["magic_formula_reason"] = "Missing Current Assets"
-            continue
-        if current_liabilities == "N/A" or current_liabilities is None:
-            stock["magic_formula_score"] = "N/A"
-            stock["magic_formula_reason"] = "Missing Current Liabilities"
+            stock["magic_formula_reason"] = "Saknar Enterprise Value"
             continue
 
+        # ONLY use TTM (Trailing Twelve Months) from quarterly data
+        # We require complete quarterly data - no fallback to annual data
+        quarterly_ebit = stock.get("quarterly_ebit", "N/A")
+        quarterly_balance_sheet = stock.get("quarterly_balance_sheet", "N/A")
+        
+        # Check if we have quarterly EBIT data (need at least 4 quarters)
+        if quarterly_ebit == "N/A" or not isinstance(quarterly_ebit, list) or len(quarterly_ebit) < 4:
+            stock["magic_formula_score"] = "N/A"
+            stock["magic_formula_reason"] = "Saknar kvartalsdata för EBIT (behöver 4 kvartal)"
+            continue
+        
+        # Calculate EBIT TTM
+        ebit_ttm, ebit_periods = calculate_ttm_from_quarterly(quarterly_ebit, "ebit")
+        
+        if ebit_ttm <= 0 or ebit_periods == "N/A":
+            stock["magic_formula_score"] = "N/A"
+            stock["magic_formula_reason"] = "Kunde inte beräkna EBIT TTM från kvartalsdata"
+            continue
+        
+        # Check if we have quarterly balance sheet data
+        if quarterly_balance_sheet == "N/A" or not isinstance(quarterly_balance_sheet, list) or len(quarterly_balance_sheet) == 0:
+            stock["magic_formula_score"] = "N/A"
+            stock["magic_formula_reason"] = "Saknar kvartalsdata för balansräkning"
+            continue
+        
+        # Get balance sheet data from most recent quarter
+        most_recent_q = quarterly_balance_sheet[0]  # First item is most recent
+        if not isinstance(most_recent_q, dict):
+            stock["magic_formula_score"] = "N/A"
+            stock["magic_formula_reason"] = "Ogiltig kvartalsdata för balansräkning"
+            continue
+        
+        net_fixed_assets_q = most_recent_q.get("net_fixed_assets")
+        current_assets_q = most_recent_q.get("current_assets")
+        current_liabilities_q = most_recent_q.get("current_liabilities")
+        balance_sheet_period_used = most_recent_q.get("period", "N/A")
+        
+        # Check if we have all required balance sheet data
+        if net_fixed_assets_q is None or current_assets_q is None or current_liabilities_q is None:
+            stock["magic_formula_score"] = "N/A"
+            stock["magic_formula_reason"] = "Saknar komplett kvartalsdata för balansräkning"
+            continue
+        
+        # Convert to float values
         try:
-            ebit_val = float(ebit)
+            net_fixed_assets_val = float(net_fixed_assets_q) if isinstance(net_fixed_assets_q, (int, float)) else 0
+            current_assets_val = float(current_assets_q) if isinstance(current_assets_q, (int, float)) else 0
+            liab_val = float(current_liabilities_q) if isinstance(current_liabilities_q, (int, float)) else 0
+        except (ValueError, TypeError):
+            stock["magic_formula_score"] = "N/A"
+            stock["magic_formula_reason"] = "Ogiltiga värden i kvartalsdata för balansräkning"
+            continue
+        
+        # Check that invested capital calculation will work
+        net_working_capital = current_assets_val - liab_val
+        invested_capital = net_fixed_assets_val + net_working_capital
+        
+        if invested_capital <= 0:
+            stock["magic_formula_score"] = "N/A"
+            stock["magic_formula_reason"] = "Negativt eller noll investerat kapital"
+            continue
+        
+        # Use TTM values
+        ebit_val = ebit_ttm
+        ebit_periods_used = ebit_periods
+        use_ttm = True
+
+        try:
             ev_val = float(ev)
-            net_fixed_assets_val = float(net_fixed_assets)
-            current_assets_val = float(current_assets)
-            liab_val = float(current_liabilities)
 
             # Calculate Earnings Yield
             ey = ebit_val / ev_val if ev_val > 0 else 0
@@ -148,20 +252,27 @@ def calculate_magic_formula_for_stocks(
             roc = ebit_val / invested_capital if invested_capital > 0 else 0
 
             if ey > 0 and roc > 0:
-                valid_stocks.append({"stock": stock, "ey": ey, "roc": roc})
+                valid_stocks.append({
+                    "stock": stock, 
+                    "ey": ey, 
+                    "roc": roc,
+                    "ebit_periods_used": ebit_periods_used,
+                    "balance_sheet_period_used": balance_sheet_period_used,
+                    "uses_ttm": True  # Always True now since we only use TTM
+                })
             else:
                 stock["magic_formula_score"] = "N/A"
                 if ebit_val < 0:
-                    stock["magic_formula_reason"] = "Negative EBIT (losses)"
+                    stock["magic_formula_reason"] = "Negativ EBIT (förluster)"
                 elif ey <= 0:
-                    stock["magic_formula_reason"] = "Negative/zero Earnings Yield"
+                    stock["magic_formula_reason"] = "Negativ/noll Earnings Yield"
                 elif roc <= 0:
-                    stock["magic_formula_reason"] = "Negative/zero Return on Capital"
+                    stock["magic_formula_reason"] = "Negativ/noll Return on Capital"
                 else:
-                    stock["magic_formula_reason"] = "Cannot calculate"
+                    stock["magic_formula_reason"] = "Kan inte beräkna"
         except (ValueError, ZeroDivisionError) as e:
             stock["magic_formula_score"] = "N/A"
-            stock["magic_formula_reason"] = f"Calculation error: {str(e)[:30]}"
+            stock["magic_formula_reason"] = f"Beräkningsfel: {str(e)[:30]}"
 
     # Rank by Earnings Yield (higher is better, so rank 1 is best)
     valid_stocks.sort(key=lambda x: x["ey"], reverse=True)
@@ -180,7 +291,19 @@ def calculate_magic_formula_for_stocks(
         item["stock"]["ey_rank"] = item["ey_rank"]
         item["stock"]["roc_rank"] = item["roc_rank"]
         item["stock"]["magic_formula_reason"] = "Beräknad"
+        # Store which periods were used for the calculation
+        item["stock"]["magic_formula_ebit_periods"] = item.get("ebit_periods_used", "N/A")
+        item["stock"]["magic_formula_balance_sheet_period"] = item.get("balance_sheet_period_used", "N/A")
+        item["stock"]["magic_formula_uses_ttm"] = item.get("uses_ttm", False)
 
+    # Ensure all stocks have a reason set
+    for stock in eligible_stocks + excluded_stocks:
+        if "magic_formula_reason" not in stock or stock.get("magic_formula_reason") is None or stock.get("magic_formula_reason") == "":
+            if stock.get("magic_formula_score") == "N/A":
+                stock["magic_formula_reason"] = "Ej beräknad"
+            else:
+                stock["magic_formula_reason"] = "Beräknad"
+    
     # Return all stocks (eligible with scores + excluded with N/A)
     return eligible_stocks + excluded_stocks
 
@@ -290,6 +413,13 @@ def calculate_all_score_variants(stocks: List[Dict]) -> List[Dict]:
             )
             original_ticker_map[ticker]["ey_rank"] = stock.get("ey_rank", "N/A")
             original_ticker_map[ticker]["roc_rank"] = stock.get("roc_rank", "N/A")
+            # Copy the reason if it was set during calculation (overwrites default "Ej beräknad")
+            if "magic_formula_reason" in stock:
+                original_ticker_map[ticker]["magic_formula_reason"] = stock.get("magic_formula_reason")
+            # Copy period information
+            original_ticker_map[ticker]["magic_formula_ebit_periods"] = stock.get("magic_formula_ebit_periods", "N/A")
+            original_ticker_map[ticker]["magic_formula_balance_sheet_period"] = stock.get("magic_formula_balance_sheet_period", "N/A")
+            original_ticker_map[ticker]["magic_formula_uses_ttm"] = stock.get("magic_formula_uses_ttm", False)
 
     # 2. Calculate for different market cap thresholds
     market_cap_thresholds = [
@@ -341,6 +471,7 @@ def calculate_all_score_variants(stocks: List[Dict]) -> List[Dict]:
                 )
                 original_ticker_map[ticker][ey_field] = stock.get("ey_rank", "N/A")
                 original_ticker_map[ticker][roc_field] = stock.get("roc_rank", "N/A")
+                # Note: reason is only copied for default score, not variants
 
     # Return original stocks list (with all A/B shares, but only selected ones have scores)
     return original_stocks
