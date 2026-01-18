@@ -346,8 +346,8 @@
             </p>
 
             <div class="formula-box">
-                <strong>ROC:</strong> <code>EBIT / (Net Fixed Assets + Net Working Capital)</code><br>
-                <small>Net Working Capital = Current Assets - Current Liabilities</small><br><br>
+                <strong>ROC:</strong> <code>EBIT / Invested Capital</code><br>
+                <small>Invested Capital = Total Assets - Cash - Current Liabilities + Short-term Debt</small><br><br>
                 <strong>EY:</strong> <code>EBIT / Enterprise Value</code>
             </div>
 
@@ -373,6 +373,55 @@
                 </p>
             </div>
 
+            <h2>Datafält och källor</h2>
+            <div class="note"
+                style="background-color: #f0f8ff; border-left: 4px solid #0066cc; padding: 15px; margin: 20px 0;">
+                <p style="margin-bottom: 15px;"><strong>All data kommer från yfinance API (Yahoo Finance).</strong></p>
+
+                <h3 style="margin-top: 15px; margin-bottom: 10px; font-size: 1.1em;">Earnings Yield (EY) = EBIT_TTM /
+                    Enterprise Value</h3>
+                <ul style="margin-left: 20px; margin-bottom: 15px;">
+                    <li><strong>EBIT_TTM:</strong> Summa av senaste 4 kvartalen från
+                        <code>quarterly_financials['EBIT']</code></li>
+                    <li><strong>Enterprise Value:</strong> Beräknas som Börsvärde + Total Skuld - Kassa
+                        <ul style="margin-left: 20px; margin-top: 5px;">
+                            <li>Börsvärde: <code>info['marketCap']</code> (aktuellt/real-time)</li>
+                            <li>Total Skuld: <code>quarterly_balance_sheet['Total Debt']</code> (senaste kvartalet)</li>
+                            <li>Kassa: <code>quarterly_balance_sheet['Cash And Cash Equivalents']</code> (senaste
+                                kvartalet)</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3 style="margin-top: 15px; margin-bottom: 10px; font-size: 1.1em;">Return on Capital (ROC) = EBIT_TTM
+                    / Investerat Kapital</h3>
+                <p style="margin-bottom: 10px;"><strong>Investerat Kapital = Totala Tillgångar - Kassa - Kortfristiga Skulder + Kortfristig Skuld</strong></p>
+                <p style="margin-bottom: 10px; font-size: 0.9em; color: #666;">
+                    <em>Börsdata's definition - inkluderar immateriella tillgångar (viktigt för bolag som Ericsson)</em>
+                </p>
+                <ul style="margin-left: 20px; margin-bottom: 15px;">
+                    <li><strong>Totala Tillgångar:</strong>
+                        <code>quarterly_balance_sheet['Total Assets']</code> (senaste kvartalet)
+                        <br><small style="color: #666;">Inkluderar alla tillgångar, inklusive immateriella tillgångar</small>
+                    </li>
+                    <li><strong>Kassa:</strong>
+                        <code>quarterly_balance_sheet['Cash And Cash Equivalents']</code> (subtraheras från Totala Tillgångar)
+                    </li>
+                    <li><strong>Kortfristiga Skulder:</strong>
+                        <code>quarterly_balance_sheet['Total Current Liabilities']</code> (subtraheras från Totala Tillgångar)
+                    </li>
+                    <li><strong>Kortfristig Skuld (Räntebärande):</strong>
+                        <code>quarterly_balance_sheet['Current Debt And Capital Lease Obligation']</code>
+                        (läggs tillbaka eftersom den redan ingår i Kortfristiga Skulder)
+                    </li>
+                </ul>
+
+                <p style="margin-top: 15px; margin-bottom: 0; font-weight: 600; color: #d32f2f;">
+                    ⚠️ Ingen fallback - alla fält måste finnas i kvartalsdata, annars exkluderas bolaget från
+                    beräkningen.
+                </p>
+            </div>
+
             <h2>Varför vissa bolag inte har Magic Formula Score</h2>
             <div class="note"
                 style="background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin: 20px 0;">
@@ -383,6 +432,7 @@
                 <ul style="margin-left: 20px; margin-top: 5px; margin-bottom: 0;">
                     <li>Exkluderad: Finansiellt/fastighetsbolag</li>
                     <li>Saknar kvartalsdata (behöver 4 kvartal EBIT + balansräkning)</li>
+                    <li>Saknar Total Assets, Current Liabilities, Cash eller Short-term Debt i kvartalsdata</li>
                     <li>Negativ EBIT, Earnings Yield eller Return on Capital</li>
                     <li>Saknar Enterprise Value eller annan nödvändig data</li>
                     <li>Felaktig valuta (endast SEK stöds)</li>

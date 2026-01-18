@@ -26,7 +26,7 @@ HISTORY_DATA = Path("data/stock_history.json")
 
 
 def load_tickers() -> list:
-    """Load ticker list from JSON file, filtering out B shares that have corresponding A shares."""
+    """Load ticker list from JSON file. All stocks are included, including B shares."""
     if not STOCKS_JSON.exists():
         print(f"Error: {STOCKS_JSON} not found!")
         return []
@@ -34,46 +34,8 @@ def load_tickers() -> list:
     with open(STOCKS_JSON, "r", encoding="utf-8") as f:
         data = json.load(f)
 
-    # First pass: build a set of all A share tickers (without the .A suffix for comparison)
-    a_share_base_tickers = set()
-    for stock_info in data:
-        ticker = stock_info.get("ticker", "")
-        # Extract base ticker (e.g., "INVE" from "INVE.A")
-        if ".A" in ticker.upper():
-            base_ticker = ticker.upper().split(".A")[0]
-            a_share_base_tickers.add(base_ticker)
-    
-    # Second pass: filter B shares - only exclude B shares that have a corresponding A share
-    filtered_data = []
-    b_shares_removed = 0
-    b_shares_included = 0
-    
-    for stock_info in data:
-        ticker = stock_info.get("ticker", "")
-        
-        # Check if this is a B share
-        if ".B" in ticker.upper():
-            # Extract base ticker (e.g., "INVE" from "INVE.B")
-            base_ticker = ticker.upper().split(".B")[0]
-            
-            # If there's a corresponding A share, exclude this B share
-            if base_ticker in a_share_base_tickers:
-                b_shares_removed += 1
-                continue
-            else:
-                # No A share exists, include this B share
-                filtered_data.append(stock_info)
-                b_shares_included += 1
-        else:
-            # Not a B share, include it
-            filtered_data.append(stock_info)
-
-    if b_shares_removed > 0:
-        print(f"  Filtered out {b_shares_removed} B shares (have corresponding A shares)")
-    if b_shares_included > 0:
-        print(f"  Included {b_shares_included} B shares (no corresponding A shares)")
-
-    return filtered_data
+    # Return all stocks - no filtering of B shares
+    return data
 
 
 def load_current_data() -> Dict:
@@ -169,42 +131,6 @@ def save_history(history: Dict):
     HISTORY_DATA.parent.mkdir(exist_ok=True)
     with open(HISTORY_DATA, "w", encoding="utf-8") as f:
         json.dump(history, f, indent=2, ensure_ascii=False)
-
-
-def remove_b_shares(current_data: Dict) -> Dict:
-    """
-    Remove B shares from database that have corresponding A shares.
-    Keep B shares that don't have A shares (e.g., Betsson only has B shares).
-    """
-    # First, find all A share base tickers
-    a_share_base_tickers = set()
-    for ticker in current_data.keys():
-        if ".A" in ticker.upper():
-            base_ticker = ticker.upper().split(".A")[0]
-            a_share_base_tickers.add(base_ticker)
-    
-    # Find and remove B shares that have corresponding A shares
-    b_shares_to_remove = []
-    for ticker in current_data.keys():
-        if ".B" in ticker.upper():
-            base_ticker = ticker.upper().split(".B")[0]
-            # If there's a corresponding A share, remove this B share
-            if base_ticker in a_share_base_tickers:
-                b_shares_to_remove.append(ticker)
-
-    # Remove B shares
-    removed_count = 0
-    for ticker in b_shares_to_remove:
-        if ticker in current_data:
-            del current_data[ticker]
-            removed_count += 1
-        # Also remove from history if it exists
-        # (history cleanup will be done separately)
-
-    if removed_count > 0:
-        print(f"  Removed {removed_count} B shares from database")
-
-    return current_data
 
 
 def get_market_cap_category(market_cap: StockValue) -> str:
@@ -358,13 +284,13 @@ def add_to_history(ticker: str, stock_data: Dict, history: Dict):
     magic_score = stock_data.get("magic_formula_score", "N/A")
     if magic_score == "N/A" or magic_score is None:
         return  # Skip stocks without Magic Formula scores
-    
+
     # Check if it's a valid number (not "N/A" string)
     try:
         float(magic_score)
     except (ValueError, TypeError):
         return  # Skip if not a valid number
-    
+
     if ticker not in history:
         history[ticker] = {}
 
@@ -386,14 +312,20 @@ def add_to_history(ticker: str, stock_data: Dict, history: Dict):
         "market_cap": stock_data.get("market_cap"),
         "ebit": stock_data.get("ebit"),
         "ebit_period": stock_data.get("ebit_period", "N/A"),  # Fiscal period for EBIT
-        "quarterly_ebit": stock_data.get("quarterly_ebit", "N/A"),  # Last 4 quarters of EBIT
+        "quarterly_ebit": stock_data.get(
+            "quarterly_ebit", "N/A"
+        ),  # Last 4 quarters of EBIT
         "enterprise_value": stock_data.get("enterprise_value"),
         "total_assets": stock_data.get("total_assets"),
         "current_liabilities": stock_data.get("current_liabilities"),
         "current_assets": stock_data.get("current_assets"),
         "net_fixed_assets": stock_data.get("net_fixed_assets"),
-        "balance_sheet_period": stock_data.get("balance_sheet_period", "N/A"),  # Fiscal period for balance sheet
-        "quarterly_balance_sheet": stock_data.get("quarterly_balance_sheet", "N/A"),  # Last 4 quarters of balance sheet
+        "balance_sheet_period": stock_data.get(
+            "balance_sheet_period", "N/A"
+        ),  # Fiscal period for balance sheet
+        "quarterly_balance_sheet": stock_data.get(
+            "quarterly_balance_sheet", "N/A"
+        ),  # Last 4 quarters of balance sheet
         "magic_formula_score": stock_data.get("magic_formula_score"),
         "magic_formula_score_100m": stock_data.get("magic_formula_score_100m"),
         "magic_formula_score_500m": stock_data.get("magic_formula_score_500m"),
@@ -409,9 +341,15 @@ def add_to_history(ticker: str, stock_data: Dict, history: Dict):
         "roc_rank_1b": stock_data.get("roc_rank_1b"),
         "ey_rank_5b": stock_data.get("ey_rank_5b"),
         "roc_rank_5b": stock_data.get("roc_rank_5b"),
-        "magic_formula_ebit_periods": stock_data.get("magic_formula_ebit_periods", "N/A"),  # Periods used for EBIT calculation
-        "magic_formula_balance_sheet_period": stock_data.get("magic_formula_balance_sheet_period", "N/A"),  # Period used for balance sheet
-        "magic_formula_uses_ttm": stock_data.get("magic_formula_uses_ttm"),  # Whether TTM was used (None if not calculated)
+        "magic_formula_ebit_periods": stock_data.get(
+            "magic_formula_ebit_periods", "N/A"
+        ),  # Periods used for EBIT calculation
+        "magic_formula_balance_sheet_period": stock_data.get(
+            "magic_formula_balance_sheet_period", "N/A"
+        ),  # Period used for balance sheet
+        "magic_formula_uses_ttm": stock_data.get(
+            "magic_formula_uses_ttm"
+        ),  # Whether TTM was used (None if not calculated)
         "sector": stock_data.get("sector"),  # Needed for exclusion logic
         "industry": stock_data.get("industry"),  # Needed for filtering
         "exclusion_reason": stock_data.get("exclusion_reason"),  # Needed for filtering
@@ -428,7 +366,7 @@ def _normalize_dividend_yield(dividend_yield) -> Union[float, str]:
     """
     if dividend_yield == "N/A" or dividend_yield is None:
         return "N/A"
-    
+
     try:
         dy = float(dividend_yield)
         # If value is > 1, it's likely already in percentage form, so divide by 100
@@ -449,23 +387,23 @@ def update_history_with_calculated_scores(current_data: Dict, history: Dict):
     today = datetime.now().date().isoformat()
     updated_count = 0
     added_count = 0
-    
+
     for ticker, stock_data in current_data.items():
         # Only add/update stocks with valid Magic Formula scores
         magic_score = stock_data.get("magic_formula_score", "N/A")
         if magic_score == "N/A" or magic_score is None:
             continue  # Skip stocks without Magic Formula scores
-        
+
         # Check if it's a valid number (not "N/A" string)
         try:
             float(magic_score)
         except (ValueError, TypeError):
             continue  # Skip if not a valid number
-        
+
         # Initialize history entry for this ticker if needed
         if ticker not in history:
             history[ticker] = {}
-        
+
         # Add or update today's entry
         if today not in history[ticker]:
             # Create new history entry using add_to_history function
@@ -473,32 +411,62 @@ def update_history_with_calculated_scores(current_data: Dict, history: Dict):
             added_count += 1
         else:
             # Update existing entry with calculated scores
-            history[ticker][today]["name"] = stock_data.get("name", history[ticker][today].get("name", "N/A"))  # Update name if available
-            history[ticker][today]["magic_formula_score"] = stock_data.get("magic_formula_score", "N/A")
-            history[ticker][today]["magic_formula_score_100m"] = stock_data.get("magic_formula_score_100m", "N/A")
-            history[ticker][today]["magic_formula_score_500m"] = stock_data.get("magic_formula_score_500m", "N/A")
-            history[ticker][today]["magic_formula_score_1b"] = stock_data.get("magic_formula_score_1b", "N/A")
-            history[ticker][today]["magic_formula_score_5b"] = stock_data.get("magic_formula_score_5b", "N/A")
+            history[ticker][today]["name"] = stock_data.get(
+                "name", history[ticker][today].get("name", "N/A")
+            )  # Update name if available
+            history[ticker][today]["magic_formula_score"] = stock_data.get(
+                "magic_formula_score", "N/A"
+            )
+            history[ticker][today]["magic_formula_score_100m"] = stock_data.get(
+                "magic_formula_score_100m", "N/A"
+            )
+            history[ticker][today]["magic_formula_score_500m"] = stock_data.get(
+                "magic_formula_score_500m", "N/A"
+            )
+            history[ticker][today]["magic_formula_score_1b"] = stock_data.get(
+                "magic_formula_score_1b", "N/A"
+            )
+            history[ticker][today]["magic_formula_score_5b"] = stock_data.get(
+                "magic_formula_score_5b", "N/A"
+            )
             history[ticker][today]["ey_rank"] = stock_data.get("ey_rank", "N/A")
             history[ticker][today]["roc_rank"] = stock_data.get("roc_rank", "N/A")
-            history[ticker][today]["ey_rank_100m"] = stock_data.get("ey_rank_100m", "N/A")
-            history[ticker][today]["roc_rank_100m"] = stock_data.get("roc_rank_100m", "N/A")
-            history[ticker][today]["ey_rank_500m"] = stock_data.get("ey_rank_500m", "N/A")
-            history[ticker][today]["roc_rank_500m"] = stock_data.get("roc_rank_500m", "N/A")
+            history[ticker][today]["ey_rank_100m"] = stock_data.get(
+                "ey_rank_100m", "N/A"
+            )
+            history[ticker][today]["roc_rank_100m"] = stock_data.get(
+                "roc_rank_100m", "N/A"
+            )
+            history[ticker][today]["ey_rank_500m"] = stock_data.get(
+                "ey_rank_500m", "N/A"
+            )
+            history[ticker][today]["roc_rank_500m"] = stock_data.get(
+                "roc_rank_500m", "N/A"
+            )
             history[ticker][today]["ey_rank_1b"] = stock_data.get("ey_rank_1b", "N/A")
             history[ticker][today]["roc_rank_1b"] = stock_data.get("roc_rank_1b", "N/A")
             history[ticker][today]["ey_rank_5b"] = stock_data.get("ey_rank_5b", "N/A")
             history[ticker][today]["roc_rank_5b"] = stock_data.get("roc_rank_5b", "N/A")
-            history[ticker][today]["magic_formula_ebit_periods"] = stock_data.get("magic_formula_ebit_periods", "N/A")
-            history[ticker][today]["magic_formula_balance_sheet_period"] = stock_data.get("magic_formula_balance_sheet_period", "N/A")
-            history[ticker][today]["magic_formula_uses_ttm"] = stock_data.get("magic_formula_uses_ttm")  # None if not calculated
+            history[ticker][today]["magic_formula_ebit_periods"] = stock_data.get(
+                "magic_formula_ebit_periods", "N/A"
+            )
+            history[ticker][today]["magic_formula_balance_sheet_period"] = (
+                stock_data.get("magic_formula_balance_sheet_period", "N/A")
+            )
+            history[ticker][today]["magic_formula_uses_ttm"] = stock_data.get(
+                "magic_formula_uses_ttm"
+            )  # None if not calculated
             updated_count += 1
-    
+
     if added_count > 0:
-        print(f"  Added {added_count} new stocks to history (with valid Magic Formula scores)")
+        print(
+            f"  Added {added_count} new stocks to history (with valid Magic Formula scores)"
+        )
     if updated_count > 0:
-        print(f"  Updated {updated_count} existing history entries with calculated scores")
-    
+        print(
+            f"  Updated {updated_count} existing history entries with calculated scores"
+        )
+
     return updated_count + added_count
 
 
@@ -597,7 +565,7 @@ def fetch_stock_data_from_ticker(
         # This is typically the last completed fiscal year from the company's annual report (10-K equivalent)
         financials = stock.financials
         balance_sheet = stock.balance_sheet
-        
+
         # Also get quarterly data for the last 4 quarters
         quarterly_financials = stock.quarterly_financials
         quarterly_balance_sheet = stock.quarterly_balance_sheet
@@ -642,16 +610,24 @@ def fetch_stock_data_from_ticker(
             if ebit != "N/A" and isinstance(ebit, (int, float)):
                 ebit = float(ebit)
                 # Try to get period from info if available
-                ebit_period = info.get("mostRecentQuarter", info.get("fiscalYearEnd", "N/A"))
+                ebit_period = info.get(
+                    "mostRecentQuarter", info.get("fiscalYearEnd", "N/A")
+                )
                 if ebit_period != "N/A":
                     # Format the period if it's a date
                     try:
                         if isinstance(ebit_period, (int, float)):
                             # Might be a timestamp
-                            ebit_period = datetime.fromtimestamp(ebit_period).strftime("%Y-%m-%d")
+                            ebit_period = datetime.fromtimestamp(ebit_period).strftime(
+                                "%Y-%m-%d"
+                            )
                         elif isinstance(ebit_period, str) and len(ebit_period) > 4:
                             # Try to parse and format
-                            ebit_period = ebit_period[:10] if len(ebit_period) >= 10 else ebit_period
+                            ebit_period = (
+                                ebit_period[:10]
+                                if len(ebit_period) >= 10
+                                else ebit_period
+                            )
                     except:
                         pass
             else:
@@ -667,8 +643,10 @@ def fetch_stock_data_from_ticker(
                         for i in range(min(4, len(quarterly_financials.columns))):
                             period_col = quarterly_financials.columns[i]
                             ebit_val = quarterly_financials.loc[ebit_name].iloc[i]
-                            
-                            if pd.notna(ebit_val) and isinstance(ebit_val, (int, float)):
+
+                            if pd.notna(ebit_val) and isinstance(
+                                ebit_val, (int, float)
+                            ):
                                 # Format the period
                                 if isinstance(period_col, (pd.Timestamp, datetime)):
                                     period_str = period_col.strftime("%Y-%m-%d")
@@ -676,24 +654,25 @@ def fetch_stock_data_from_ticker(
                                     period_str = period_col
                                 else:
                                     period_str = str(period_col)
-                                
-                                quarterly_ebit_data.append({
-                                    "period": period_str,
-                                    "ebit": float(ebit_val)
-                                })
+
+                                quarterly_ebit_data.append(
+                                    {"period": period_str, "ebit": float(ebit_val)}
+                                )
                         break  # Found the EBIT field, no need to try other names
                     except:
                         continue
 
         # Extract quarterly balance sheet data (last 4 quarters) for Magic Formula
-        quarterly_balance_sheet_data = []  # List of {period, current_assets, current_liabilities, net_fixed_assets} dicts
+        quarterly_balance_sheet_data = (
+            []
+        )  # List of {period, current_assets, current_liabilities, net_fixed_assets} dicts
         if not quarterly_balance_sheet.empty:
             # Get up to 4 most recent quarters (columns are most recent first)
             # Note: yfinance may not always have the absolute latest quarter immediately after reporting
             num_quarters_to_get = min(4, len(quarterly_balance_sheet.columns))
             for i in range(num_quarters_to_get):
                 period_col = quarterly_balance_sheet.columns[i]
-                
+
                 # Format the period
                 if isinstance(period_col, (pd.Timestamp, datetime)):
                     period_str = period_col.strftime("%Y-%m-%d")
@@ -701,9 +680,9 @@ def fetch_stock_data_from_ticker(
                     period_str = period_col
                 else:
                     period_str = str(period_col)
-                
+
                 quarter_data = {"period": period_str}
-                
+
                 # Extract Current Assets
                 current_asset_names = [
                     "Total Current Assets",
@@ -721,7 +700,7 @@ def fetch_stock_data_from_ticker(
                                 break
                         except:
                             continue
-                
+
                 # Extract Current Liabilities
                 liability_names = [
                     "Total Current Liabilities",
@@ -733,24 +712,28 @@ def fetch_stock_data_from_ticker(
                     if liability_name in quarterly_balance_sheet.index:
                         try:
                             # Access by column name (period_col) instead of iloc for clarity
-                            val = quarterly_balance_sheet.loc[liability_name, period_col]
+                            val = quarterly_balance_sheet.loc[
+                                liability_name, period_col
+                            ]
                             if pd.notna(val) and isinstance(val, (int, float)):
                                 quarter_data["current_liabilities"] = float(val)
                                 break
                         except:
                             continue
-                
-                # Extract Net Fixed Assets / PP&E
+
+                # Extract Net Fixed Assets / PP&E (Greenblatt: Net PPE only, excludes Goodwill/Intangibles)
+                # IMPORTANT: Only use Net PPE fields - NO fallbacks to "Fixed Assets" or "Net Fixed Assets"
+                # as those may include Goodwill/Intangibles which would inflate the denominator
                 fixed_asset_names = [
                     "Property Plant Equipment Net",
                     "Net PPE",
                     "PPE Net",
                     "Property Plant And Equipment Net",
                     "Net Property Plant And Equipment",
-                    "Fixed Assets",
-                    "Net Fixed Assets",
                     "Property, Plant & Equipment",
                 ]
+                # DO NOT include: "Fixed Assets", "Net Fixed Assets", "Total Non-Current Assets"
+                # These may include Goodwill/Intangibles and would make ROC calculations incorrect
                 for fixed_name in fixed_asset_names:
                     if fixed_name in quarterly_balance_sheet.index:
                         try:
@@ -761,17 +744,141 @@ def fetch_stock_data_from_ticker(
                                 break
                         except:
                             continue
-                
+
+                # Extract Cash (to exclude from Current Assets for Greenblatt's NWC calculation)
+                cash_names = [
+                    "Cash And Cash Equivalents",
+                    "Cash Cash Equivalents And Short Term Investments",
+                    "Cash",
+                    "Cash And Equivalents",
+                ]
+                for cash_name in cash_names:
+                    if cash_name in quarterly_balance_sheet.index:
+                        try:
+                            val = quarterly_balance_sheet.loc[cash_name, period_col]
+                            if pd.notna(val) and isinstance(val, (int, float)):
+                                quarter_data["cash"] = float(val)
+                                break
+                        except:
+                            continue
+
+                # Extract Short-term Debt (to exclude from Current Liabilities for Greenblatt's NWC calculation)
+                short_term_debt_names = [
+                    "Current Debt And Capital Lease Obligation",
+                    "Current Debt",
+                    "Short Term Debt",
+                    "ShortTermDebt",
+                ]
+                for debt_name in short_term_debt_names:
+                    if debt_name in quarterly_balance_sheet.index:
+                        try:
+                            val = quarterly_balance_sheet.loc[debt_name, period_col]
+                            if pd.notna(val) and isinstance(val, (int, float)):
+                                quarter_data["short_term_debt"] = float(val)
+                                break
+                        except:
+                            continue
+
+                # Extract Total Assets (for Börsdata's Invested Capital definition)
+                total_asset_names = [
+                    "Total Assets",
+                    "TotalAssets",
+                ]
+                for asset_name in total_asset_names:
+                    if asset_name in quarterly_balance_sheet.index:
+                        try:
+                            val = quarterly_balance_sheet.loc[asset_name, period_col]
+                            if pd.notna(val) and isinstance(val, (int, float)):
+                                quarter_data["total_assets"] = float(val)
+                                break
+                        except:
+                            continue
+
                 # Only add if we got at least one value
                 if len(quarter_data) > 1:  # More than just "period"
                     quarterly_balance_sheet_data.append(quarter_data)
+
+        # Calculate Enterprise Value manually from latest quarterly balance sheet
+        # EV = Market Cap + Total Debt - Cash
+        enterprise_value = "N/A"
+        if not quarterly_balance_sheet.empty:
+            try:
+                # Get latest quarter (first column)
+                latest_quarter_col = quarterly_balance_sheet.columns[0]
+
+                # Get market cap (current/real-time)
+                market_cap_val = info.get("marketCap", 0)
+                if market_cap_val == "N/A" or not isinstance(
+                    market_cap_val, (int, float)
+                ):
+                    market_cap_val = 0
+
+                # Extract Total Debt from latest quarterly balance sheet
+                total_debt = 0
+                debt_names = [
+                    "Total Debt",
+                    "TotalDebt",
+                    "Long Term Debt And Capital Lease Obligation",
+                    "Long Term Debt",
+                ]
+                for debt_name in debt_names:
+                    if debt_name in quarterly_balance_sheet.index:
+                        try:
+                            debt_val = quarterly_balance_sheet.loc[
+                                debt_name, latest_quarter_col
+                            ]
+                            if pd.notna(debt_val) and isinstance(
+                                debt_val, (int, float)
+                            ):
+                                total_debt = float(debt_val)
+                                break
+                        except:
+                            continue
+
+                # Extract Cash from latest quarterly balance sheet
+                cash = 0
+                cash_names = [
+                    "Cash And Cash Equivalents",
+                    "Cash Cash Equivalents And Short Term Investments",
+                    "Cash",
+                    "Cash And Equivalents",
+                ]
+                for cash_name in cash_names:
+                    if cash_name in quarterly_balance_sheet.index:
+                        try:
+                            cash_val = quarterly_balance_sheet.loc[
+                                cash_name, latest_quarter_col
+                            ]
+                            if pd.notna(cash_val) and isinstance(
+                                cash_val, (int, float)
+                            ):
+                                cash = float(cash_val)
+                                break
+                        except:
+                            continue
+
+                # Calculate Enterprise Value: Market Cap + Total Debt - Cash
+                if market_cap_val > 0:
+                    enterprise_value = market_cap_val + total_debt - cash
+                    # Only set if we got a valid calculation
+                    if enterprise_value <= 0:
+                        enterprise_value = "N/A"
+            except Exception as e:
+                # If calculation fails, fall back to yfinance's value
+                enterprise_value = info.get("enterpriseValue", "N/A")
+
+        # Fallback to yfinance's pre-calculated value if manual calculation failed
+        if enterprise_value == "N/A":
+            enterprise_value = info.get("enterpriseValue", "N/A")
 
         # Get balance sheet data for Magic Formula - try multiple possible index names
         total_assets = "N/A"
         current_assets = "N/A"
         current_liabilities = "N/A"
         net_fixed_assets = "N/A"
-        balance_sheet_period = "N/A"  # Track which fiscal period balance sheet data is from
+        balance_sheet_period = (
+            "N/A"  # Track which fiscal period balance sheet data is from
+        )
 
         if not balance_sheet.empty:
             # Extract the period from the first column (most recent)
@@ -887,7 +994,7 @@ def fetch_stock_data_from_ticker(
 
         # Get values - store as-is, no conversion
         market_cap = info.get("marketCap", "N/A")
-        enterprise_value = info.get("enterpriseValue", "N/A")
+        # Enterprise value is already calculated above from latest quarterly balance sheet
         ebit_value = ebit if isinstance(ebit, (int, float)) else "N/A"
         total_assets_value = (
             total_assets if isinstance(total_assets, (int, float)) else "N/A"
@@ -940,18 +1047,26 @@ def fetch_stock_data_from_ticker(
                 "market": info.get("market", "N/A"),
                 # Interesting metrics
                 "pe_ratio": info.get("trailingPE", info.get("forwardPE", "N/A")),
-                "dividend_yield": _normalize_dividend_yield(info.get("dividendYield", "N/A")),
+                "dividend_yield": _normalize_dividend_yield(
+                    info.get("dividendYield", "N/A")
+                ),
                 # Magic Formula required fields (stored as-is, no conversion)
                 "enterprise_value": enterprise_value,
                 "ebit": ebit_value,
                 "ebit_period": ebit_period,  # Fiscal period for EBIT data (YYYY-MM-DD or fiscal year)
-                "quarterly_ebit": quarterly_ebit_data if quarterly_ebit_data else "N/A",  # Last 4 quarters of EBIT data
+                "quarterly_ebit": (
+                    quarterly_ebit_data if quarterly_ebit_data else "N/A"
+                ),  # Last 4 quarters of EBIT data
                 "total_assets": total_assets_value,
                 "current_assets": current_assets_value,
                 "current_liabilities": current_liabilities_value,
                 "net_fixed_assets": net_fixed_assets_value,
                 "balance_sheet_period": balance_sheet_period,  # Fiscal period for balance sheet data (YYYY-MM-DD or fiscal year)
-                "quarterly_balance_sheet": quarterly_balance_sheet_data if quarterly_balance_sheet_data else "N/A",  # Last 4 quarters of balance sheet data
+                "quarterly_balance_sheet": (
+                    quarterly_balance_sheet_data
+                    if quarterly_balance_sheet_data
+                    else "N/A"
+                ),  # Last 4 quarters of balance sheet data
                 "last_updated": datetime.now().isoformat(),
                 "error": None,
                 # Magic Formula fields (will be calculated later)
@@ -1256,7 +1371,7 @@ def main():
                 current_data[ticker] = stock_data
                 # Add to list for Magic Formula calculation
                 fetched_stocks_for_calculation.append(stock_data)
-                
+
                 # Note: History is added after Magic Formula calculation
                 # Only stocks with valid Magic Formula scores will be added to history
                 price_str = (
@@ -1313,19 +1428,8 @@ def main():
         print(f"✓ Exiting gracefully")
         return
 
-    # Remove all B shares from database
-    print("\n" + "=" * 60)
-    print("Removing B shares from database...")
-    print("=" * 60)
-    current_data = remove_b_shares(current_data)
-    print(f"✓ Current data after removing B shares: {len(current_data)} stocks")
-
-    # Also remove B shares from history
-    b_tickers_in_history = [t for t in history.keys() if ".B" in t.upper()]
-    for ticker in b_tickers_in_history:
-        del history[ticker]
-    if b_tickers_in_history:
-        print(f"  Removed {len(b_tickers_in_history)} B shares from history")
+    # B shares are now included - no filtering needed
+    print(f"✓ Current data: {len(current_data)} stocks (including B shares)")
 
     # Save data
     print("\n" + "=" * 60)
@@ -1353,14 +1457,16 @@ def main():
         from calculate_magic_formula import recalculate_all_scores
 
         recalculate_all_scores()
-        
+
         # Reload current_data to get the calculated scores
         from calculate_magic_formula import load_current_data as load_calculated_data
-        
+
         # Update history with calculated scores
         print("\nUpdating history with calculated scores...")
         current_data_with_scores = load_calculated_data()
-        updated_count = update_history_with_calculated_scores(current_data_with_scores, history)
+        updated_count = update_history_with_calculated_scores(
+            current_data_with_scores, history
+        )
         if updated_count > 0:
             save_history(history)
             print(f"✓ Updated {updated_count} history entries with calculated scores")

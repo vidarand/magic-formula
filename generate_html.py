@@ -129,23 +129,47 @@ def get_country_flag(country: str, market: str) -> str:
 
 
 def _generate_exclusion_stats(stocks):
-    """Generate exclusion statistics HTML."""
+    """Generate exclusion statistics HTML showing all exclusion reasons."""
     exclusion_counts = {}
+    magic_formula_reason_counts = {}
+    
     for stock in stocks:
-        # Use default_excluded flag if available, fallback to exclusion_reason for backwards compatibility
+        # Count exclusion_reason (for financial/investment companies excluded from ranking)
         if stock.get("default_excluded") or stock.get("exclusion_reason"):
             reason = stock.get("exclusion_reason") or "Exkluderad"
             exclusion_counts[reason] = exclusion_counts.get(reason, 0) + 1
-
-    if not exclusion_counts:
-        return "<div>Inga aktier exkluderade</div>"
-
+        
+        # Count magic_formula_reason (for stocks that couldn't be calculated)
+        magic_reason = stock.get("magic_formula_reason")
+        if magic_reason and magic_reason != "Beräknad" and magic_reason != "Ej beräknad":
+            # Only count specific reasons, not generic "Ej beräknad"
+            magic_formula_reason_counts[magic_reason] = magic_formula_reason_counts.get(magic_reason, 0) + 1
+    
     stats_html = []
-    for reason, count in sorted(exclusion_counts.items()):
-        stats_html.append(
-            f"<div style='margin: 5px 0;'><strong>{reason}:</strong> {count} aktier</div>"
-        )
-
+    
+    # Show exclusion reasons (financial/investment companies)
+    if exclusion_counts:
+        stats_html.append("<div style='margin-bottom: 15px;'>")
+        stats_html.append("<div style='font-weight: 600; color: #495057; margin-bottom: 8px;'>Exkluderade från ranking:</div>")
+        for reason, count in sorted(exclusion_counts.items(), key=lambda x: x[1], reverse=True):
+            stats_html.append(
+                f"<div style='margin: 4px 0; padding-left: 10px;'><strong>{reason}:</strong> {count} aktier</div>"
+            )
+        stats_html.append("</div>")
+    
+    # Show magic formula calculation reasons (stocks that couldn't be calculated)
+    if magic_formula_reason_counts:
+        stats_html.append("<div style='margin-top: 15px; padding-top: 15px; border-top: 1px solid #dee2e6;'>")
+        stats_html.append("<div style='font-weight: 600; color: #495057; margin-bottom: 8px;'>Kunde inte beräknas:</div>")
+        for reason, count in sorted(magic_formula_reason_counts.items(), key=lambda x: x[1], reverse=True):
+            stats_html.append(
+                f"<div style='margin: 4px 0; padding-left: 10px;'><strong>{reason}:</strong> {count} aktier</div>"
+            )
+        stats_html.append("</div>")
+    
+    if not exclusion_counts and not magic_formula_reason_counts:
+        return "<div style='color: #6c757d;'>Inga exkluderade eller icke-beräknade aktier</div>"
+    
     return "".join(stats_html)
 
 
@@ -585,12 +609,12 @@ def generate_html(stocks):
             <div style="margin-bottom: 15px;">
                 <h3 style="margin: 0 0 10px 0; color: #212529; font-size: 1.2em;">Inkluderade i ranking</h3>
                 <div style="font-size: 16px; color: #495057;">
-                    <strong id="includedCount">{len([s for s in stocks_sorted if not (s.get("default_excluded") or s.get("exclusion_reason"))])}</strong> aktier rankade efter Magic Formula
+                    <strong id="includedCount">{len([s for s in stocks_sorted if s.get("magic_formula_score") != "N/A" and not (s.get("default_excluded") or s.get("exclusion_reason"))])}</strong> aktier med beräknad Magic Formula score
                 </div>
             </div>
             <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #dee2e6;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <h3 style="margin: 0; color: #212529; font-size: 1.2em;">Exkluderade från ranking</h3>
+                    <h3 style="margin: 0; color: #212529; font-size: 1.2em;">Exkluderings- och beräkningsstatistik</h3>
                     <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 14px; color: #495057;">
                         <input type="checkbox" id="showExcludedToggle" style="width: 18px; height: 18px; cursor: pointer;">
                         <span>Visa exkluderade aktier</span>
@@ -631,6 +655,8 @@ def generate_html(stocks):
                     <th data-sort="magic_formula_score">Magic Score</th>
                     <th data-sort="ey_rank">EY Rank</th>
                     <th data-sort="roc_rank">RoC Rank</th>
+                    <th data-sort="earnings_yield">EY %</th>
+                    <th data-sort="return_on_capital">ROC %</th>
                     <th>EBIT Periods</th>
                     <th>Balance Sheet Period</th>
                     <th>TTM</th>
@@ -852,6 +878,17 @@ def generate_html(stocks):
                     ? `<strong style="color: #212529;">${{rocRank}}</strong>`
                     : '<span style="color: #6c757d;">N/A</span>';
                 
+                // Format Earnings Yield and Return on Capital percentages
+                const formatPercentage = (val) => {{
+                    if (val === 'N/A' || val === null || val === undefined) return '<span style="color: #6c757d;">N/A</span>';
+                    if (typeof val === 'number') {{
+                        return `<strong style="color: #212529;">${{val.toFixed(2)}}%</strong>`;
+                    }}
+                    return '<span style="color: #6c757d;">N/A</span>';
+                }};
+                const eyPercentDisplay = formatPercentage(stock.earnings_yield);
+                const rocPercentDisplay = formatPercentage(stock.return_on_capital);
+                
                         // Check if this stock is excluded (use default_excluded flag if available)
                         const isExcluded = stock.default_excluded || stock.exclusion_reason;
                         const rowStyle = isExcluded ? 'background-color: #fff3cd; opacity: 0.8;' : '';
@@ -865,6 +902,8 @@ def generate_html(stocks):
                             <td>${{magicScoreDisplay}}${{magicReasonDisplay}}</td>
                             <td>${{eyRankDisplay}}</td>
                             <td>${{rocRankDisplay}}</td>
+                            <td>${{eyPercentDisplay}}</td>
+                            <td>${{rocPercentDisplay}}</td>
                             <td>${{ebitPeriodsDisplay}}</td>
                             <td>${{balanceSheetPeriodDisplay}}</td>
                             <td>${{ttmDisplay}}</td>

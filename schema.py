@@ -57,7 +57,9 @@ class StockSchema:
     # Magic Formula required fields
     enterprise_value: StockValue  # Enterprise value (int/float) or "N/A"
     ebit: StockValue  # Earnings Before Interest and Taxes (int/float) or "N/A"
-    ebit_period: StockValue  # Fiscal period for EBIT data (YYYY-MM-DD or fiscal year) or "N/A"
+    ebit_period: (
+        StockValue  # Fiscal period for EBIT data (YYYY-MM-DD or fiscal year) or "N/A"
+    )
     total_assets: (
         StockValue  # Total Assets (for Magic Formula calculation) (int/float) or "N/A"
     )
@@ -78,6 +80,10 @@ class StockSchema:
     # Earnings Yield and Return on Capital ranks for each score variant
     ey_rank: StockValue  # Earnings Yield rank (1 = best) for default score
     roc_rank: StockValue  # Return on Capital rank (1 = best) for default score
+    earnings_yield: StockValue  # Earnings Yield as percentage (EBIT/EV * 100)
+    return_on_capital: (
+        StockValue  # Return on Capital as percentage (EBIT/Invested Capital * 100)
+    )
     ey_rank_100m: StockValue  # Earnings Yield rank for score_100m variant
     roc_rank_100m: StockValue  # Return on Capital rank for score_100m variant
     ey_rank_500m: StockValue  # Earnings Yield rank for score_500m variant
@@ -89,7 +95,9 @@ class StockSchema:
     magic_formula_reason: str  # Always present: "Beräknad" if valid, or reason why N/A
     magic_formula_ebit_periods: StockValue  # Periods used for EBIT calculation (e.g., "2024-Q1 to 2024-Q4" for TTM, or annual period)
     magic_formula_balance_sheet_period: StockValue  # Period used for balance sheet data (quarterly date or annual period)
-    magic_formula_uses_ttm: Optional[bool]  # Whether TTM (Trailing Twelve Months) was used for calculation (None if not calculated)
+    magic_formula_uses_ttm: Optional[
+        bool
+    ]  # Whether TTM (Trailing Twelve Months) was used for calculation (None if not calculated)
     exclusion_reason: Optional[
         str
     ]  # Reason for exclusion from ranking (financial/investment companies), None if not excluded
@@ -125,13 +133,25 @@ STOCK_SCHEMA = {
     # Magic Formula required fields
     "enterprise_value": (int, float, str),
     "ebit": (int, float, str),
-    "ebit_period": (int, float, str),  # Fiscal period for EBIT (YYYY-MM-DD or fiscal year)
+    "ebit_period": (
+        int,
+        float,
+        str,
+    ),  # Fiscal period for EBIT (YYYY-MM-DD or fiscal year)
     "total_assets": (int, float, str),
     "current_assets": (int, float, str),
     "current_liabilities": (int, float, str),
     "net_fixed_assets": (int, float, str),
-    "balance_sheet_period": (int, float, str),  # Fiscal period for balance sheet (YYYY-MM-DD or fiscal year)
-    "quarterly_balance_sheet": (int, float, str),  # Last 4 quarters of balance sheet data
+    "balance_sheet_period": (
+        int,
+        float,
+        str,
+    ),  # Fiscal period for balance sheet (YYYY-MM-DD or fiscal year)
+    "quarterly_balance_sheet": (
+        int,
+        float,
+        str,
+    ),  # Last 4 quarters of balance sheet data
     "magic_formula_score": (int, float, str),
     "magic_formula_score_100m": (int, float, str),
     "magic_formula_score_500m": (int, float, str),
@@ -139,6 +159,8 @@ STOCK_SCHEMA = {
     "magic_formula_score_5b": (int, float, str),
     "ey_rank": (int, float, str),
     "roc_rank": (int, float, str),
+    "earnings_yield": (int, float, str),
+    "return_on_capital": (int, float, str),
     "ey_rank_100m": (int, float, str),
     "roc_rank_100m": (int, float, str),
     "ey_rank_500m": (int, float, str),
@@ -200,6 +222,8 @@ def create_empty_stock(ticker: str, name: str, yfinance_ticker: str) -> dict:
         "magic_formula_score_5b": "N/A",
         "ey_rank": "N/A",
         "roc_rank": "N/A",
+        "earnings_yield": "N/A",
+        "return_on_capital": "N/A",
         "ey_rank_100m": "N/A",
         "roc_rank_100m": "N/A",
         "ey_rank_500m": "N/A",
@@ -299,6 +323,8 @@ FIELD_CATEGORIES = {
         "magic_formula_score_5b",
         "ey_rank",
         "roc_rank",
+        "earnings_yield",
+        "return_on_capital",
         "ey_rank_100m",
         "roc_rank_100m",
         "ey_rank_500m",

@@ -20,7 +20,7 @@
     "name": "AB Volvo (publ)"
   },
   {
-    "ticker": "NDA-HE",
+    "ticker": "NDA-SE.ST",
     "name": "Nordea Bank Abp"
   },
   {
@@ -180,7 +180,7 @@
     "name": "Castellum AB (publ)"
   },
   {
-    "ticker": "HOLM.A",
+    "ticker": "HOLM-B.ST",
     "name": "Holmen AB (publ)"
   },
   {
@@ -2272,7 +2272,7 @@
     "name": "LIDDS AB (publ)"
   },
   {
-    "ticker": "ALVO.SDB",
+    "ticker": "ALVO-SDB.ST",
     "name": "Alvotech SDB"
   },
   {
@@ -2280,7 +2280,7 @@
     "name": "Arctic Falls"
   },
   {
-    "ticker": "CAVO",
+    "ticker": "CCC.ST",
     "name": "Cavotec Group"
   },
   {
@@ -2304,7 +2304,7 @@
     "name": "H & M Hennes & Mauritz AB"
   },
   {
-    "ticker": "HMB",
+    "ticker": "HOLM-B.ST",
     "name": "Holmen AB (publ)"
   },
   {
@@ -2332,7 +2332,7 @@
     "name": "Beijer Ref AB (publ)"
   },
   {
-    "ticker": "ANOD.B",
+    "ticker": "ANOD-B.ST",
     "name": "Addnode Group AB (publ)"
   },
   {
@@ -2354,5 +2354,233 @@
   {
     "ticker": "WALL.B",
     "name": "Wallenstam AB (publ)"
+  },
+  {
+    "ticker": "TRUE-B.ST",
+    "name": "Truecaller AB (publ)"
+  },
+  {
+    "ticker": "ERIC-B.ST",
+    "name": "Telefonaktiebolaget LM Ericsson (publ)"
+  },
+  {
+    "ticker": "CS.ST",
+    "name": "CoinShares International Limited"
+  },
+  {
+    "ticker": "NTEK-B.ST",
+    "name": "Novotek AB (publ)"
+  },
+  {
+    "ticker": "EOLU-B.ST",
+    "name": "Eolus Vind AB (publ)"
+  },
+  {
+    "ticker": "NIL-B.ST",
+    "name": "Nilörngruppen AB (publ)"
+  },
+  {
+    "ticker": "EMBRAC-B.ST",
+    "name": "Embracer Group AB (publ)"
+  },
+  {
+    "ticker": "PROF-B.ST",
+    "name": "ProfilGruppen AB (publ)"
+  },
+  {
+    "ticker": "G2M.ST",
+    "name": "Gentoo Media Inc."
+  },
+  {
+    "ticker": "SOF-B.ST",
+    "name": "Softronic AB (publ)"
+  },
+  {
+    "ticker": "CLAS-B.ST",
+    "name": "Clas Ohlson AB (publ)"
+  },
+  {
+    "ticker": "HPOL-B.ST",
+    "name": "Hexpol AB (publ)"
+  },
+  {
+    "ticker": "CRAD-B.ST",
+    "name": "C-RAD AB (publ)"
+  },
+  {
+    "ticker": "VOLV-B.ST",
+    "name": "Volvo B"
+  },
+  {
+    "ticker": "BTS-B.ST",
+    "name": "BTS Group"
+  },
+  {
+    "ticker": "ESSITY-B.ST",
+    "name": "Essity B"
+  },
+  {
+    "ticker": "MSAB-B.ST",
+    "name": "Micro Systemation"
+  },
+  {
+    "ticker": "NCC-B.ST",
+    "name": "NCC B"
+  },
+  {
+    "ticker": "PEAB-B.ST",
+    "name": "Peab B"
+  },
+  {
+    "ticker": "SVED-B.ST",
+    "name": "Svedbergs"
+  },
+  {
+    "ticker": "BIOA-B.ST",
+    "name": "BioArctic"
+  },
+  {
+    "ticker": "CLA-B.ST",
+    "name": "Cloetta"
+  },
+  {
+    "ticker": "SSAB-B.ST",
+    "name": "SSAB B"
+  },
+  {
+    "ticker": "SECU-B.ST",
+    "name": "Securitas"
+  },
+  {
+    "ticker": "BIOG-B.ST",
+    "name": "BioGaia"
+  },
+  {
+    "ticker": "EPI-B.ST",
+    "name": "Epiroc B"
+  },
+  {
+    "ticker": "OEM-B.ST",
+    "name": "OEM International"
+  },
+  {
+    "ticker": "SWEC-B.ST",
+    "name": "Sweco B"
+  },
+  {
+    "ticker": "SKA-B.ST",
+    "name": "Skanska"
+  },
+  {
+    "ticker": "NOLA-B.ST",
+    "name": "Nolato"
+  },
+  {
+    "ticker": "XANO-B.ST",
+    "name": "XANO Industri"
+  },
+  {
+    "ticker": "BERNER-B.ST",
+    "name": "Berner Industrier"
+  },
+  {
+    "ticker": "NEWA-B.ST",
+    "name": "New Wave"
+  },
+  {
+    "ticker": "PRIC-B.ST",
+    "name": "Pricer"
+  },
+  {
+    "ticker": "RAY-B.ST",
+    "name": "RaySearch"
+  },
+  {
+    "ticker": "PREV-B.ST",
+    "name": "Prevas"
+  },
+  {
+    "ticker": "VBG-B.ST",
+    "name": "VBG Group"
+  },
+  {
+    "ticker": "SECT-B.ST",
+    "name": "Sectra"
+  },
+  {
+    "ticker": "ENGCON-B.ST",
+    "name": "Engcon B"
+  },
+  {
+    "ticker": "MYSAFE.ST",
+    "name": "mySafety"
+  },
+  {
+    "ticker": "TREL-B.ST",
+    "name": "Trelleborg"
+  },
+  {
+    "ticker": "REJL-B.ST",
+    "name": "Rejlers"
+  },
+  {
+    "ticker": "EPRO-B.ST",
+    "name": "Electrolux Prof."
+  },
+  {
+    "ticker": "ASSA-B.ST",
+    "name": "Assa Abloy"
+  },
+  {
+    "ticker": "ADDT-B.ST",
+    "name": "Addtech"
+  },
+  {
+    "ticker": "TEL2-B.ST",
+    "name": "Tele2 B"
+  },
+  {
+    "ticker": "BEIA-B.ST",
+    "name": "Beijer Alma"
+  },
+  {
+    "ticker": "FMM-B.ST",
+    "name": "FM Mattsson"
+  },
+  {
+    "ticker": "MMGR-B.ST",
+    "name": "Momentum Group"
+  },
+  {
+    "ticker": "LAGR-B.ST",
+    "name": "Lagercrantz"
+  },
+  {
+    "ticker": "ELUX-B.ST",
+    "name": "Electrolux B"
+  },
+  {
+    "ticker": "SKIS-B.ST",
+    "name": "SkiStar"
+  },
+  {
+    "ticker": "HUSQ-B.ST",
+    "name": "Husqvarna B"
+  },
+  {
+    "ticker": "INISS-B.ST",
+    "name": "Inission"
+  },
+  {
+    "ticker": "KARNEL.ST",
+    "name": "Karnell Group"
+  },
+  {
+    "ticker": "ARJO-B.ST",
+    "name": "Arjo"
+  },
+  {
+    "ticker": "KABE-B.ST",
+    "name": "Kabe Group"
   }
 ]

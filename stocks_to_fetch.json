@@ -1,0 +1,30 @@
+[
+  {
+    "ticker": "GOTL.A",
+    "name": "Rederiaktiebolaget Gotland (publ)",
+    "period": "2025-09-30",
+    "roc": 2.1641687893687185,
+    "ey": 1.7660044150110374
+  },
+  {
+    "ticker": "CLEM",
+    "name": "Clemondo Group AB (publ)",
+    "period": "2025-09-30",
+    "roc": 10.516065229676274,
+    "ey": 5.703319753510631
+  },
+  {
+    "ticker": "VOLV-B.ST",
+    "name": "Volvo B",
+    "period": "2025-09-30",
+    "roc": 24.042558188693423,
+    "ey": 6.170388746257803
+  },
+  {
+    "ticker": "TALK",
+    "name": "TalkPool AG",
+    "period": "2025-09-30",
+    "roc": 94.35649024550786,
+    "ey": 1.5303328390465125
+  }
+]

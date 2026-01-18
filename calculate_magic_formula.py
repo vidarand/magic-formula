@@ -142,7 +142,15 @@ def calculate_magic_formula_for_stocks(
                 # Check sector/industry to give specific reason
                 sector = (stock.get("sector", "") or "").lower()
                 industry = (stock.get("industry", "") or "").lower()
-                if "financial" in sector or "financial services" in sector:
+                name = (stock.get("name", "") or "").lower()
+                
+                # Check for banks first (most specific)
+                bank_keywords = ["bank", "banking", "banker"]
+                if any(keyword in sector for keyword in bank_keywords) or \
+                   any(keyword in industry for keyword in bank_keywords) or \
+                   any(keyword in name for keyword in bank_keywords):
+                    stock["magic_formula_reason"] = "Exkluderad: Bank"
+                elif "financial" in sector or "financial services" in sector:
                     stock["magic_formula_reason"] = "Exkluderad: Finansiellt bolag"
                 elif "real estate" in sector or "real estate" in industry:
                     stock["magic_formula_reason"] = "Exkluderad: Fastighetsbolag"
@@ -166,7 +174,7 @@ def calculate_magic_formula_for_stocks(
     # - Has quarterly EBIT data (at least 4 quarters)
     # - Can calculate positive EBIT TTM
     # - Has quarterly balance sheet data
-    # - Has all required balance sheet fields (net_fixed_assets, current_assets, current_liabilities)
+    # - Has all required balance sheet fields (total_assets, current_liabilities, cash, short_term_debt)
     # - Invested capital is positive
     # - Earnings Yield is positive
     # - Return on Capital is positive
@@ -247,38 +255,57 @@ def calculate_magic_formula_for_stocks(
             stock["magic_formula_reason"] = "Ogiltig kvartalsdata för balansräkning"
             continue
 
-        net_fixed_assets_q = most_recent_q.get("net_fixed_assets")
-        current_assets_q = most_recent_q.get("current_assets")
+        # Extract balance sheet components (Börsdata's Invested Capital definition)
+        # Invested Capital = Total Assets - Cash - Current Liabilities + Short-term Debt
+        total_assets_q = most_recent_q.get("total_assets")
         current_liabilities_q = most_recent_q.get("current_liabilities")
+        cash_q = most_recent_q.get("cash")  # Cash to subtract from Total Assets
+        short_term_debt_q = most_recent_q.get("short_term_debt")  # Short-term debt to add back
         balance_sheet_period_used = most_recent_q.get("period", "N/A")
 
         # Check if we have all required balance sheet data
+        # IMPORTANT: No fallbacks - we need Total Assets, Current Liabilities, Cash, and Short-term Debt
         if (
-            net_fixed_assets_q is None
-            or current_assets_q is None
+            total_assets_q is None
             or current_liabilities_q is None
+            or cash_q is None
+            or short_term_debt_q is None
         ):
             stock["magic_formula_score"] = "N/A"
-            stock["magic_formula_reason"] = (
-                "Saknar komplett kvartalsdata för balansräkning"
-            )
+            if total_assets_q is None:
+                stock["magic_formula_reason"] = (
+                    "Saknar Total Assets i kvartalsdata"
+                )
+            elif current_liabilities_q is None:
+                stock["magic_formula_reason"] = (
+                    "Saknar Current Liabilities i kvartalsdata"
+                )
+            elif cash_q is None:
+                stock["magic_formula_reason"] = (
+                    "Saknar Cash i kvartalsdata"
+                )
+            else:
+                stock["magic_formula_reason"] = (
+                    "Saknar Short-term Debt i kvartalsdata"
+                )
             continue
 
         # Convert to float values
         try:
-            net_fixed_assets_val = (
-                float(net_fixed_assets_q)
-                if isinstance(net_fixed_assets_q, (int, float))
+            total_assets_val = (
+                float(total_assets_q)
+                if isinstance(total_assets_q, (int, float))
                 else 0
             )
-            current_assets_val = (
-                float(current_assets_q)
-                if isinstance(current_assets_q, (int, float))
-                else 0
-            )
-            liab_val = (
+            current_liabilities_val = (
                 float(current_liabilities_q)
                 if isinstance(current_liabilities_q, (int, float))
+                else 0
+            )
+            cash_val = float(cash_q) if isinstance(cash_q, (int, float)) else 0
+            short_term_debt_val = (
+                float(short_term_debt_q)
+                if isinstance(short_term_debt_q, (int, float))
                 else 0
             )
         except (ValueError, TypeError):
@@ -288,9 +315,10 @@ def calculate_magic_formula_for_stocks(
             )
             continue
 
-        # Check that invested capital calculation will work
-        net_working_capital = current_assets_val - liab_val
-        invested_capital = net_fixed_assets_val + net_working_capital
+        # Calculate Invested Capital using Börsdata's definition:
+        # Invested Capital = Total Assets - Cash - Current Liabilities + Short-term Debt
+        # This includes intangible assets (important for companies like Ericsson)
+        invested_capital = total_assets_val - cash_val - current_liabilities_val + short_term_debt_val
 
         if invested_capital <= 0:
             stock["magic_formula_score"] = "N/A"
@@ -308,10 +336,21 @@ def calculate_magic_formula_for_stocks(
             # Calculate Earnings Yield
             ey = ebit_val / ev_val if ev_val > 0 else 0
 
-            # Calculate Return on Capital using: EBIT / (Net Fixed Assets + Net Working Capital)
-            # where Net Working Capital = Current Assets - Current Liabilities
-            net_working_capital = current_assets_val - liab_val
-            invested_capital = net_fixed_assets_val + net_working_capital
+            # Validate Invested Capital is reasonable relative to EBIT
+            # If Invested Capital is less than 5% of EBIT, the ROC calculation becomes unrealistic
+            # (e.g., if IC = 60M and EBIT = 1.9B, ROC would be 3167%, which is meaningless)
+            min_invested_capital_threshold = abs(ebit_val) * 0.05  # At least 5% of EBIT
+            if invested_capital < min_invested_capital_threshold:
+                stock["magic_formula_score"] = "N/A"
+                stock["magic_formula_reason"] = (
+                    f"Investerat kapital för litet för meningsfull beräkning "
+                    f"(IC: {invested_capital/1e6:.1f}M, EBIT: {ebit_val/1e6:.1f}M)"
+                )
+                continue
+
+            # Calculate Return on Capital using: EBIT / Invested Capital
+            # where Invested Capital = Total Assets - Cash - Current Liabilities + Short-term Debt
+            # (Börsdata's definition, includes intangible assets)
             roc = ebit_val / invested_capital if invested_capital > 0 else 0
 
             if ey > 0 and roc > 0:
@@ -355,6 +394,9 @@ def calculate_magic_formula_for_stocks(
         item["stock"]["magic_formula_score"] = magic_score
         item["stock"]["ey_rank"] = item["ey_rank"]
         item["stock"]["roc_rank"] = item["roc_rank"]
+        # Store percentage values (convert from decimal to percentage)
+        item["stock"]["earnings_yield"] = item["ey"] * 100  # Convert to percentage
+        item["stock"]["return_on_capital"] = item["roc"] * 100  # Convert to percentage
         item["stock"]["magic_formula_reason"] = "Beräknad"
         # Store which periods were used for the calculation
         item["stock"]["magic_formula_ebit_periods"] = item.get(
@@ -392,10 +434,50 @@ def is_financial_company(stock: Dict) -> bool:
     name = (stock.get("name", "") or "").lower()
     ticker = (stock.get("ticker", "") or "").lower()
 
+    # Check for financial sector/industry
     if "financial" in sector or "financial services" in sector:
         return True
     if "real estate" in sector or "real estate" in industry:
         return True
+    
+    # Check for banks specifically (banks have balance sheets that don't work with Magic Formula)
+    bank_keywords = ["bank", "banking", "banker"]
+    if any(keyword in sector for keyword in bank_keywords):
+        return True
+    if any(keyword in industry for keyword in bank_keywords):
+        return True
+    if any(keyword in name for keyword in bank_keywords):
+        return True
+    
+    # Specific bank names/tickers to exclude
+    bank_names = [
+        "tf bank",
+        "resurs",
+        "nordea",
+        "swedbank",
+        "seb",
+        "handelsbanken",
+        "shb",
+        "svenska handelsbanken",
+        "skandinaviska enskilda banken",
+    ]
+    if any(bank_name in name for bank_name in bank_names):
+        return True
+    
+    bank_tickers = [
+        "tfbank",
+        "tf-bank",
+        "resurs",
+        "nda",
+        "swed",
+        "seb",
+        "shb",
+        "handl",
+    ]
+    if any(bank_ticker in ticker for bank_ticker in bank_tickers):
+        return True
+    
+    # Check for investment companies
     if any(
         keyword in name
         for keyword in [
@@ -439,13 +521,13 @@ def calculate_all_score_variants(stocks: List[Dict]) -> List[Dict]:
 
     Returns:
         List of stocks with score variants added.
-        B shares are already filtered out at the source.
+        All stocks are included, including B shares.
     """
     # Convert to list if dict
     if isinstance(stocks, dict):
         stocks = list(stocks.values())
 
-    # B shares are already filtered out at the source (in fetch_stocks.py)
+    # All stocks are included, including B shares
     # So we can use all stocks directly for calculation
     original_stocks = stocks
     # Create ticker map for updating scores back to original stocks
@@ -463,6 +545,8 @@ def calculate_all_score_variants(stocks: List[Dict]) -> List[Dict]:
         # Initialize rank fields
         stock["ey_rank"] = "N/A"
         stock["roc_rank"] = "N/A"
+        stock["earnings_yield"] = "N/A"
+        stock["return_on_capital"] = "N/A"
         stock["ey_rank_100m"] = "N/A"
         stock["roc_rank_100m"] = "N/A"
         stock["ey_rank_500m"] = "N/A"
@@ -487,6 +571,12 @@ def calculate_all_score_variants(stocks: List[Dict]) -> List[Dict]:
             )
             original_ticker_map[ticker]["ey_rank"] = stock.get("ey_rank", "N/A")
             original_ticker_map[ticker]["roc_rank"] = stock.get("roc_rank", "N/A")
+            original_ticker_map[ticker]["earnings_yield"] = stock.get(
+                "earnings_yield", "N/A"
+            )
+            original_ticker_map[ticker]["return_on_capital"] = stock.get(
+                "return_on_capital", "N/A"
+            )
             # Copy the reason if it was set during calculation (overwrites default "Ej beräknad")
             if "magic_formula_reason" in stock:
                 original_ticker_map[ticker]["magic_formula_reason"] = stock.get(
