@@ -387,6 +387,26 @@ def recalculate_all_scores():
             if "magic_formula_score_5b" not in stock:
                 stock["magic_formula_score_5b"] = "N/A"
 
+            # Validate consistency: if ey_rank or roc_rank is N/A, score must also be N/A
+            # Check default score
+            ey_rank = stock.get("ey_rank", "N/A")
+            roc_rank = stock.get("roc_rank", "N/A")
+            if ey_rank == "N/A" or roc_rank == "N/A" or ey_rank is None or roc_rank is None:
+                stock["magic_formula_score"] = "N/A"
+            
+            # Check variant scores
+            score_variants = [
+                ("magic_formula_score_100m", "ey_rank_100m", "roc_rank_100m"),
+                ("magic_formula_score_500m", "ey_rank_500m", "roc_rank_500m"),
+                ("magic_formula_score_1b", "ey_rank_1b", "roc_rank_1b"),
+                ("magic_formula_score_5b", "ey_rank_5b", "roc_rank_5b"),
+            ]
+            for score_field, ey_field, roc_field in score_variants:
+                ey_val = stock.get(ey_field, "N/A")
+                roc_val = stock.get(roc_field, "N/A")
+                if ey_val == "N/A" or roc_val == "N/A" or ey_val is None or roc_val is None:
+                    stock[score_field] = "N/A"
+
             # Ensure reason is always set
             if (
                 "magic_formula_reason" not in stock

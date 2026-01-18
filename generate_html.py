@@ -231,7 +231,16 @@ def calculate_magic_formula_scores(stocks):
     for item in valid_stocks:
         magic_score = item["ey_rank"] + item["roc_rank"]
         item["stock"]["magic_formula_score"] = magic_score
+        item["stock"]["ey_rank"] = item["ey_rank"]
+        item["stock"]["roc_rank"] = item["roc_rank"]
         item["stock"]["magic_formula_reason"] = None  # Clear reason for valid scores
+
+    # Validate consistency: ensure any stock with N/A ranks also has N/A score
+    for stock in stocks:
+        ey_rank = stock.get("ey_rank", "N/A")
+        roc_rank = stock.get("roc_rank", "N/A")
+        if ey_rank == "N/A" or roc_rank == "N/A" or ey_rank is None or roc_rank is None:
+            stock["magic_formula_score"] = "N/A"
 
     return stocks
 
