@@ -249,30 +249,29 @@
 
         <div class="container">
 
+            <div class="note"
+                style="background-color: #f8d7da; border-left: 4px solid #dc3545; padding: 20px; margin-bottom: 30px;">
+                <h3 style="color: #721c24; margin-top: 0;">⚠️ Viktig varning om data</h3>
+                <p style="color: #721c24; font-weight: 600; margin-bottom: 10px;">
+                    Data hämtas från yfinance och kan innehålla felaktigheter, fördröjningar eller saknade värden.
+                    Alla beräkningar och rankingar ska verifieras innan investeringsbeslut tas.
+                </p>
+                <p style="color: #721c24; margin-bottom: 0;">
+                    <strong>Datakälla:</strong> yfinance (Yahoo Finance API) - Finansiell data kan vara ofullständig
+                    eller felaktig.
+                </p>
+            </div>
+
             <h2>Vad är Magic Formula?</h2>
             <p>
-                Magic Formula är en mekaniserad form av värdeinvestering som är inspirerad av värdeinvesteringens fader
-                <strong>Benjamin Graham</strong> som förespråkade billiga bolag, och hans mest kände lärjunge
-                <strong>Warren Buffett</strong> som förespråkar bolag av hög kvalitet.
+                Magic Formula är en mekaniserad värdeinvesteringsstrategi skapad av <strong>Joel Greenblatt</strong>
+                som kombinerar <strong>ROC</strong> (Return on Capital) och <strong>EY</strong> (Earnings Yield)
+                för att hitta undervärderade bolag av hög kvalitet.
             </p>
             <p>
-                För att hitta dessa bolag använder man de två enkla men kraftfulla nyckeltalen <strong>ROC</strong>
-                (Return on Capital)
-                och <strong>EY</strong> (Earnings Yield).
-            </p>
-            <p>
-                Formeln skapades av <strong>Joel Greenblatt</strong> och gjordes känd genom hans bok
-                <em>"The Little Book That Beats The Market"</em>.
-            </p>
-            <p>
-                Greenblatt, som kommer från USA, skapade och testade formeln på den amerikanska aktiemarknaden under 17
-                år.
-                Resultatet var milt sagt imponerande. Magic Formula avkastade årligen <strong>18 procentenheter
-                    mer</strong> än dess jämförelseindex.
-            </p>
-            <p>
-                Då det inte krävs några förkunskaper för att följa strategin är det inte konstigt att både formeln och
-                boken blev en succé!
+                Strategin testades på den amerikanska marknaden under 17 år med <strong>18 procentenheter högre
+                    avkastning</strong>
+                än jämförelseindex. Läs mer i Greenblatt's bok <em>"The Little Book That Beats The Market"</em>.
             </p>
 
             <h2>Hur man använder Magic Formula Sverige</h2>
@@ -280,278 +279,126 @@
             <div class="step">
                 <h3><span class="step-number">1</span> Kolla listan</h3>
                 <p>
-                    Använd listan på <a href="stocks.html">Aktier-sidan</a> och klicka på knappen
-                    <strong>"🎯 Rank by Magic Formula"</strong> för att se de bäst rankade bolagen.
+                    Gå till <a href="stocks.html">Aktier-sidan</a> där listan automatiskt är sorterad efter Magic
+                    Formula Score
+                    med de bäst rankade bolagen (lägst score) överst.
                 </p>
                 <p>
-                    Listan sorteras automatiskt med de bästa aktierna (lägst Magic Formula score) överst.
+                    Du kan välja mellan olika Magic Formula-varianter med hjälp av dropdown-menyn:
+                </p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>Standard:</strong> Exkluderar finansiella bolag (alla börsvärden)</li>
+                    <li><strong>≥ 100M SEK:</strong> Endast bolag med börsvärde ≥ 100 miljoner SEK</li>
+                    <li><strong>≥ 500M SEK:</strong> Endast bolag med börsvärde ≥ 500 miljoner SEK</li>
+                    <li><strong>≥ 1B SEK:</strong> Endast bolag med börsvärde ≥ 1 miljard SEK</li>
+                    <li><strong>≥ 5B SEK:</strong> Endast bolag med börsvärde ≥ 5 miljarder SEK</li>
+                </ul>
+                <p>
+                    Listan uppdateras automatiskt. Endast bolag med komplett kvartalsdata och giltig score visas.
+                    Övriga får "N/A" med förklaring.
                 </p>
             </div>
 
             <div class="step">
                 <h3><span class="step-number">2</span> Köp de högst rankade bolagen</h3>
                 <p>
-                    Köp de högst rankade bolagen, men <strong>inte fler än 1/4</strong> av det antal bolag du vill ha i
-                    portföljen.
+                    Köp högst rankade bolag, men <strong>max 1/4</strong> av portföljens antal bolag per köptillfälle.
+                    Ha <strong>minst 20-30 bolag</strong> totalt och använd max <strong>1/4 av din årliga kassa</strong>
+                    per gång.
                 </p>
                 <div class="example">
-                    <strong>Exempel:</strong> Vill du slutligen ha 20 bolag köper du inte fler än 5 bolag vid varje
-                    köptillfälle.
-                </div>
-                <p>
-                    Enligt skaparen av Magic Formula, Joel Greenblatt, bör man satsa på att ha <strong>minst 20-30
-                        bolag</strong>.
-                </p>
-                <p>
-                    Använd inte heller mer än <strong>1/4 av din kassa</strong> som ska investeras i Magic Formula under
-                    året.
-                </p>
-                <div class="example">
-                    <strong>Exempel:</strong> Ska du investera 100.000kr bör du köpa för högst 25.000kr per gång.
+                    <strong>Exempel:</strong> För 20 bolag köper du max 5 per gång. För 100.000kr investering max
+                    25.000kr per gång.
                 </div>
             </div>
 
             <div class="step">
-                <h3><span class="step-number">3</span> Vänta tre månader och upprepa steg 2 tills du spenderat hela
-                    kassan</h3>
+                <h3><span class="step-number">3</span> Vänta tre månader och upprepa</h3>
                 <p>
-                    Vänta tre månader och köp de högst rankade bolagen. Har du redan ett av de högst rankade bolagen
-                    struntar du i det och köper istället nästa på listan.
-                </p>
-                <p>
-                    Köp lika många bolag som första gången och för samma belopp.
-                </p>
-                <div class="example">
-                    <strong>Exempel:</strong> Om du i steg 2 köpte 5 bolag för 25.000kr bör du göra så även nu.
-                </div>
-                <p>
-                    Du ska alltså <strong>inte ha övervikt</strong> på någon specifik aktie, även om den är med på
-                    listan om och om igen.
-                    Att alla bolagen har samma vikt vid inköp är viktigt för att sänka risken för förlust.
-                </p>
-                <p>
-                    Upprepa tills det gått 9 månader och du köpt slut för kassan.
+                    Vänta tre månader, köp högst rankade bolag du inte redan äger. Köp samma antal och belopp som första
+                    gången.
+                    Upprepa tills du spenderat hela kassan (ca 9 månader). <strong>Undvik övervikt</strong> på enskilda
+                    aktier.
                 </p>
             </div>
 
             <div class="step">
-                <h3><span class="step-number">4</span> Vänta tre månader och byt ut de bolag du köpte först</h3>
+                <h3><span class="step-number">4</span> Rotera portföljen</h3>
                 <p>
-                    Tre månader efter att du spenderat hela kassan börjar det bli dags att rotera bolagen.
+                    <strong>Var tredje månad:</strong> Byt ut bolag du ägt i 12 månader mot högst rankade du inte har.
+                    Om ett bolag fortfarande är högt rankat behåll det och se över det om 12 månader igen.
                 </p>
-                <p>
-                    <strong>Var tredje månad</strong> ska du byta ut de bolagen du haft i ett år, mot de högst rankade
-                    du inte har.
-                    Om ett bolag som du ska byta ut redan är bland de högst rankade behöver du inte byta det,
-                    istället kan du räkna detta som ett köp och se över det specifika bolaget om 12 månader igen.
-                </p>
-                <p>
-                    Du använder alltså listan som hjälp för detta, precis på samma sätt som du gör tidigare.
-                </p>
-                <div class="example">
-                    <strong>Exempel:</strong><br>
-                    Du äger 20 aktier varav tre är Volvo AB, Evolution och H&M.<br>
-                    Du har ägt Volvo och Evolution i 12 månader.<br>
-                    När du kollar listan finns Evolution i topp 5. Du byter därför inte ut Evolution.<br>
-                    Volvo har plats nr 14 på listan. Du säljer Volvo till förmån för en aktie som platsar inom topp 5 på
-                    listan, av de aktier du inte redan äger.<br>
-                    Du har bara ägt H&M i 9 månader och ska alltså inte byta ut aktien. Men H&M står på listan.<br>
-                    Bortse från H&M och varken köp eller sälj. 3 månader senare är det dags att se över H&M eftersom 12
-                    månader då passerat sedan köp.
-                </div>
             </div>
 
             <div class="step">
-                <h3><span class="step-number">5</span> Upprepa steg 4 om och om igen</h3>
+                <h3><span class="step-number">5</span> Upprepa</h3>
                 <p>
-                    Upprepa steg 4 om och om igen.
+                    Upprepa steg 4. Formeln kan underprestera periodvis men <strong>följ strategin konsekvent</strong>
+                    för bästa resultat över tid. (Finansbolag exkluderas automatiskt.)
                 </p>
-                <p>
-                    Under vissa perioder kommer formeln underprestera, och under andra perioder kommer formeln att slå
-                    index.
-                    Joel Greenblatt anser att om man använder sig av formeln ska man <strong>blint lita på
-                        formeln</strong> och
-                    inte lägga in sina egna tankar och värderingar i analysen.
-                </p>
-                <p>
-                    Anledningen är att formeln ger förutsättningar att slå börsen över tid, men slutar man vid nedgång
-                    missar man
-                    med stor sannolikhet även uppgången.
-                </p>
-                <div class="note">
-                    <strong>Viktigt:</strong> Enda gången man uppmanas frångå formeln är när finansbolag eller
-                    fastighetsbolag
-                    smyger sig in i formeln. I de fallen kan man strunta i det bolaget och gå vidare på nästa i listan.
-                    (Vår implementation exkluderar redan dessa automatiskt.)
-                </div>
             </div>
 
             <h2>Såhär fungerar formeln</h2>
 
-            <h3>1. Formeln skapar två listor baserat på ROC och EY</h3>
             <p>
-                Först skapas två listor. Båda listorna innehåller samma bolag. Men ena listan visar bolagets kvalitativa
-                egenskaper.
-                Den andra listan syftar till att visa om bolaget är billigt eller inte.
+                Formeln rankar bolag baserat på två nyckeltal: <strong>ROC</strong> (Return on Capital) och
+                <strong>EY</strong> (Earnings Yield). Summera ranken från båda listorna - lägst total är bäst.
             </p>
 
-            <h4>Return on Capital (ROC)</h4>
-            <p>
-                ROC visar hur bra bolaget är på att använda sina pengar.
-            </p>
             <div class="formula-box">
-                <strong>Formeln för ROC:</strong><br>
-                <code>ROC = EBIT / (Net Fixed Assets + Net Working Capital)</code><br>
-                <small>där Net Working Capital = Current Assets - Current Liabilities</small>
-            </div>
-            <p>
-                I vår implementation använder vi <strong>Net Fixed Assets + Net Working Capital</strong> som investerat
-                kapital,
-                enligt Joel Greenblatt's ursprungliga definition. Detta ger en tydlig bild av hur effektivt bolaget
-                använder sitt kapital.
-            </p>
-
-            <h4>Earnings Yield (EY)</h4>
-            <p>
-                EY är en sorts inverterad P/E som visar bolagets intjäning i förhållande till aktiekurs och skulder.
-            </p>
-            <div class="formula-box">
-                <strong>Formeln för EY:</strong><br>
-                <code>EY = EBIT / Enterprise Value</code>
-            </div>
-            <p>
-                Enterprise Value är börsvärdet justerat för nettoskuldsättning, vilket ger en mer rättvis bild av
-                bolagets värdering.
-            </p>
-
-            <div class="note">
-                <strong>Exkluderingar:</strong><br>
-                • Finansbolag och fastighetsbolag exkluderas automatiskt (dessa exkluderas i vår implementation)<br>
-                • Bolag med marknadsvärde under 100 miljoner SEK exkluderas (vår implementation använder 100 miljoner
-                SEK som minimum)<br>
-                • Bolag med negativ EBIT eller negativt investerat kapital exkluderas
-            </div>
-
-            <h3>2. Bolagen på respektive lista rankas</h3>
-            <p>
-                Sortera listan för ROC och EY på storleksordning. Högst ROC och EY på respektive lista får rank 1.
-                Nästa bolag 2. Sedan 3. Osv.
-            </p>
-
-            <h3>3. Listorna slås ihop till gemensam ranking</h3>
-            <p>
-                Därefter slås de båda listorna ihop för att skapa en gemensam ranking. Det lättaste sättet,
-                och även det Joel Greenblatt brukar beskriva, är att utgå från rankingen bolagen har i respektive lista.
-                <strong>Summera rankingen</strong> bolagen har i ROC- och EY-listan. <strong>Lägst siffra är
-                    bäst.</strong>
-            </p>
-            <div class="example">
-                <strong>Exempel:</strong><br>
-                Listorna består av tre aktier.<br>
-                • Volvo: ROC rank 1, EY rank 2 → Total: 3 poäng<br>
-                • Evolution: ROC rank 2, EY rank 3 → Total: 5 poäng<br>
-                • H&M: ROC rank 3, EY rank 1 → Total: 4 poäng<br><br>
-                Efter sortering visar Magic Formula följande:<br>
-                1. Volvo (3 poäng)<br>
-                2. H&M (4 poäng)<br>
-                3. Evolution (5 poäng)
-            </div>
-            <p>
-                Om två bolag får samma rankning kan du enkelt kolla på ROC och EY och se vilket bolag som har högst
-                siffror.
-            </p>
-
-            <h3>4. De bäst rankade aktierna hamnar överst i listan</h3>
-            <p>
-                Sortera i storleksordning. I den här beskrivningen är de med lägst poäng de bästa och bör därför stå
-                överst.
-            </p>
-
-            <h2>Beskrivning från "The Little Book That Beats The Market"</h2>
-            <div class="formula-box">
-                <p>
-                    <em>"The magic formula hinges on two financial ratios: the earnings yield, which is defined as
-                        earnings
-                        before interest and taxes (EBIT) divided by enterprise value, and the return on capital, which
-                        is defined
-                        as EBIT divided by the sum of net fixed assets and net working capital. To select the top-ranked
-                        stocks,
-                        the magic formula ranks all stocks based on a combination of earnings yield and return on
-                        capital: Stocks
-                        with the highest earnings yield and return on capital receive a higher rank."</em>
-                </p>
-                <p style="margin-top: 10px;">
-                    — Joel Greenblatt, <em>The Little Book That Beats The Market</em>
-                </p>
+                <strong>ROC:</strong> <code>EBIT / (Net Fixed Assets + Net Working Capital)</code><br>
+                <small>Net Working Capital = Current Assets - Current Liabilities</small><br><br>
+                <strong>EY:</strong> <code>EBIT / Enterprise Value</code>
             </div>
 
             <div class="note">
-                <strong>Notera:</strong> I vår implementation använder vi
-                <code>EBIT / (Net Fixed Assets + Net Working Capital)</code>
-                för ROC, enligt Joel Greenblatt's ursprungliga definition i "The Little Book That Beats The Market".
-                Detta är den korrekta formeln enligt boken.
+                <strong>Exkluderingar:</strong> Finansbolag, fastighetsbolag, negativ EBIT/kapital, och bolag utan
+                komplett kvartalsdata.
             </div>
 
             <h2>Hur vi beräknar Magic Formula</h2>
-            <div class="note" style="background-color: #e7f3ff; border-left: 4px solid #2196F3; padding: 20px; margin: 20px 0;">
-                <strong>Trailing Twelve Months (TTM) - Kvartalsdata</strong>
-                <p style="margin-top: 10px;">
-                    För att ge dig den mest aktuella bilden använder vi <strong>Trailing Twelve Months (TTM)</strong> 
-                    baserat på kvartalsdata istället för årsdata. Detta innebär:
+            <div class="note"
+                style="background-color: #e7f3ff; border-left: 4px solid #2196F3; padding: 15px; margin: 20px 0;">
+                <strong>Trailing Twelve Months (TTM) från kvartalsdata</strong>
+                <p style="margin-top: 10px; margin-bottom: 10px;">
+                    Vi använder <strong>TTM (Trailing Twelve Months)</strong> baserat på kvartalsdata för att ge en
+                    aktuell bild.
+                    EBIT summeras från de senaste 4 kvartalen, balansräkning från senaste kvartalet.
                 </p>
-                <ul style="margin-left: 20px; margin-top: 10px;">
-                    <li><strong>EBIT TTM:</strong> Vi summerar de senaste 4 kvartalen av EBIT för att få en rullande 12-månadersperiod</li>
-                    <li><strong>Balansräkning:</strong> Vi använder den senaste tillgängliga kvartalsbalansräkningen</li>
-                    <li><strong>Krav:</strong> Ett bolag måste ha minst 4 kvartal av EBIT-data och kvartalsbalansräkning för att beräknas</li>
-                    <li><strong>Ingen årsdata:</strong> Vi använder inte årsdata som fallback - endast bolag med komplett kvartalsdata beräknas</li>
-                </ul>
-                <p style="margin-top: 15px;">
-                    I tabellen kan du se vilka perioder som används för varje beräkning:
-                </p>
-                <ul style="margin-left: 20px; margin-top: 10px;">
-                    <li><strong>EBIT Periods:</strong> Visar vilka kvartal som summerats (t.ex. "2024-12-31 to 2024-03-31")</li>
-                    <li><strong>Balance Sheet Period:</strong> Visar vilket kvartal som används för balansräkningen (t.ex. "2025-06-30")</li>
-                    <li><strong>TTM:</strong> Visar ✓ om TTM används, eller "Annual" om årsdata används (vilket inte sker längre)</li>
-                </ul>
-                <p style="margin-top: 15px; font-weight: 600;">
-                    Detta ger dig en mer aktuell bild än om vi bara använde årsdata, eftersom kvartalsdata uppdateras oftare.
+                <p style="margin-bottom: 0;">
+                    I tabellen kan du se vilka perioder som används: <strong>EBIT Periods</strong> (vilka kvartal som
+                    summerats),
+                    <strong>Balance Sheet Period</strong> (vilket kvartal som används), och <strong>TTM</strong> (visar
+                    ✓ för beräknade bolag).
                 </p>
             </div>
 
             <h2>Varför vissa bolag inte har Magic Formula Score</h2>
-            <div class="note" style="background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 20px; margin: 20px 0;">
-                <p>
-                    Om ett bolag har "N/A" som Magic Formula Score finns det en specifik anledning. Här är de vanligaste:
+            <div class="note"
+                style="background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin: 20px 0;">
+                <p style="margin-bottom: 10px;">
+                    Endast bolag med komplett kvartalsdata och som passerat alla kontroller får en score. Vanliga
+                    anledningar till "N/A":
                 </p>
-                <ul style="margin-left: 20px; margin-top: 10px;">
-                    <li><strong>Exkluderad: Finansiellt bolag</strong> - Finansbolag, investeringsbolag och fastighetsbolag exkluderas</li>
-                    <li><strong>Saknar kvartalsdata för EBIT (behöver 4 kvartal)</strong> - Bolaget saknar tillräckligt med kvartalsdata</li>
-                    <li><strong>Saknar kvartalsdata för balansräkning</strong> - Balansräkningsdata saknas</li>
-                    <li><strong>Negativ EBIT (förluster)</strong> - Bolaget har förluster istället för vinst</li>
-                    <li><strong>Negativ/noll Earnings Yield</strong> - EBIT är negativ eller noll i förhållande till Enterprise Value</li>
-                    <li><strong>Negativ/noll Return on Capital</strong> - Bolaget har negativ eller noll avkastning på kapital</li>
-                    <li><strong>Saknar Enterprise Value</strong> - Enterprise Value saknas i datan</li>
-                    <li><strong>Valuta är [currency], endast SEK-aktier beräknas</strong> - Endast svenska kronor (SEK) stöds</li>
+                <ul style="margin-left: 20px; margin-top: 5px; margin-bottom: 0;">
+                    <li>Exkluderad: Finansiellt/fastighetsbolag</li>
+                    <li>Saknar kvartalsdata (behöver 4 kvartal EBIT + balansräkning)</li>
+                    <li>Negativ EBIT, Earnings Yield eller Return on Capital</li>
+                    <li>Saknar Enterprise Value eller annan nödvändig data</li>
+                    <li>Felaktig valuta (endast SEK stöds)</li>
                 </ul>
-                <p style="margin-top: 15px;">
-                    Varje bolag har en <strong>magic_formula_reason</strong> som förklarar exakt varför det inte har en score.
-                </p>
             </div>
 
             <h2>Historik</h2>
-            <div class="note" style="background-color: #d4edda; border-left: 4px solid #28a745; padding: 20px; margin: 20px 0;">
-                <p>
-                    <strong>Endast bolag med giltig Magic Formula Score sparas i historiken.</strong>
-                </p>
-                <p style="margin-top: 10px;">
-                    Detta innebär att historiken endast innehåller bolag som faktiskt är rankade enligt Magic Formula, 
-                    vilket gör det enklare att följa utvecklingen över tid för de bolag som är relevanta för strategin.
+            <div class="note"
+                style="background-color: #d4edda; border-left: 4px solid #28a745; padding: 15px; margin: 20px 0;">
+                <p style="margin: 0;">
+                    Endast bolag med giltig Magic Formula Score sparas i historiken för att följa utvecklingen över tid.
                 </p>
             </div>
 
-            <h2>Lästips!</h2>
+            <h2>Lästips</h2>
             <p>
-                Vill du lära dig mer om Magic Formula rekommenderar jag
                 <strong>"The Little Book That Beats The Market"</strong> av Joel Greenblatt.
             </p>
         </div>

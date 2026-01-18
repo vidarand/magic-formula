@@ -89,7 +89,7 @@ class StockSchema:
     magic_formula_reason: str  # Always present: "Beräknad" if valid, or reason why N/A
     magic_formula_ebit_periods: StockValue  # Periods used for EBIT calculation (e.g., "2024-Q1 to 2024-Q4" for TTM, or annual period)
     magic_formula_balance_sheet_period: StockValue  # Period used for balance sheet data (quarterly date or annual period)
-    magic_formula_uses_ttm: bool  # Whether TTM (Trailing Twelve Months) was used for calculation
+    magic_formula_uses_ttm: Optional[bool]  # Whether TTM (Trailing Twelve Months) was used for calculation (None if not calculated)
     exclusion_reason: Optional[
         str
     ]  # Reason for exclusion from ranking (financial/investment companies), None if not excluded
@@ -211,7 +211,7 @@ def create_empty_stock(ticker: str, name: str, yfinance_ticker: str) -> dict:
         "magic_formula_reason": "Ej beräknad",
         "magic_formula_ebit_periods": "N/A",  # Periods used for EBIT calculation
         "magic_formula_balance_sheet_period": "N/A",  # Period used for balance sheet
-        "magic_formula_uses_ttm": False,  # Whether TTM was used
+        "magic_formula_uses_ttm": None,  # Whether TTM was used (None if not calculated, True/False if calculated)
         "exclusion_reason": None,
         "default_excluded": False,
     }

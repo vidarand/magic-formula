@@ -2,6 +2,7 @@
   "AZN": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "AstraZeneca PLC",
       "price": 1738.0,
       "market_cap": 2694392840192,
       "ebit": 10373000000.0,
@@ -82,6 +83,7 @@
   "ABB": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "ABB Ltd",
       "price": 709.8,
       "market_cap": 1292505317376,
       "ebit": 5332000000.0,
@@ -162,6 +164,7 @@
   "ATCO.A": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Atlas Copco AB (publ)",
       "price": 191.1,
       "market_cap": 930522398720,
       "ebit": 38718000000.0,
@@ -242,6 +245,7 @@
   "VOLV.A": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "AB Volvo (publ)",
       "price": 312.4,
       "market_cap": 635250409472,
       "ebit": 68802000000.0,
@@ -322,6 +326,7 @@
   "ERIC.A": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Telefonaktiebolaget LM Ericsson (publ)",
       "price": 87.4,
       "market_cap": 291467296768,
       "ebit": 6143000000.0,
@@ -402,6 +407,7 @@
   "EPI.A": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Epiroc AB (publ)",
       "price": 228.7,
       "market_cap": 276496842752,
       "ebit": 12371000000.0,
@@ -482,6 +488,7 @@
   "ALFA": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Alfa Laval AB (publ)",
       "price": 507.4,
       "market_cap": 209721769984,
       "ebit": 10489000000.0,
@@ -562,6 +569,7 @@
   "LUMI": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Lundin Mining Corporation",
       "price": 226.6,
       "market_cap": 193595162624,
       "ebit": 507674000.0,
@@ -642,6 +650,7 @@
   "LUG": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Lundin Gold Inc.",
       "price": 779.5,
       "market_cap": 188196667392,
       "ebit": 873385000.0,
@@ -722,6 +731,7 @@
   "ESSITY.A": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Essity AB (publ)",
       "price": 271.5,
       "market_cap": 185508478976,
       "ebit": 18634000000.0,
@@ -802,6 +812,7 @@
   "BOL": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Boliden AB (publ)",
       "price": 572.2,
       "market_cap": 162553692160,
       "ebit": 13798000000.0,
@@ -882,6 +893,7 @@
   "8TRA": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Traton SE",
       "price": 333.8,
       "market_cap": 168743010304,
       "ebit": 4446000000.0,
@@ -962,6 +974,7 @@
   "TELIA": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Telia Company AB (publ)",
       "price": 39.11,
       "market_cap": 153784795136,
       "ebit": 10590000000.0,
@@ -1042,6 +1055,7 @@
   "EVO": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Evolution AB (publ)",
       "price": 600.6,
       "market_cap": 119735468032,
       "ebit": 1445294000.0,
@@ -1122,6 +1136,7 @@
   "SOBI": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Swedish Orphan Biovitrum AB (publ)",
       "price": 331.6,
       "market_cap": 114756509696,
       "ebit": 5646000000.0,
@@ -1202,6 +1217,7 @@
   "SKF.A": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "AB SKF (publ)",
       "price": 257.0,
       "market_cap": 117025226752,
       "ebit": 10178000000.0,
@@ -1282,6 +1298,7 @@
   "TEL2.A": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Tele2 AB (publ)",
       "price": 155.0,
       "market_cap": 108628246528,
       "ebit": 5946000000.0,
@@ -1362,6 +1379,7 @@
   "STE.A": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Stora Enso Oyj",
       "price": 114.0,
       "market_cap": 92272615424,
       "ebit": 102000000.0,
@@ -1442,6 +1460,7 @@
   "STE.R": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Stora Enso Oyj",
       "price": 113.1,
       "market_cap": 92279111680,
       "ebit": 102000000.0,
@@ -1522,6 +1541,7 @@
   "ALIV.SDB": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Autoliv, Inc.",
       "price": 1189.0,
       "market_cap": 90729021440,
       "ebit": 983000000.0,
@@ -1602,6 +1622,7 @@
   "INDT": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Indutrade AB (publ)",
       "price": 236.8,
       "market_cap": 86271688704,
       "ebit": 4117000000.0,
@@ -1682,6 +1703,7 @@
   "SCA.A": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Svenska Cellulosa Aktiebolaget SCA (publ)",
       "price": 120.6,
       "market_cap": 84702502912,
       "ebit": 5071000000.0,
@@ -1762,6 +1784,7 @@
   "SSAB.A": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "SSAB AB (publ)",
       "price": 76.58,
       "market_cap": 76320980992,
       "ebit": 9051000000.0,
@@ -1842,6 +1865,7 @@
   "AAK": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "AAK AB (publ.)",
       "price": 258.4,
       "market_cap": 67300540416,
       "ebit": 4895000000.0,
@@ -1922,6 +1946,7 @@
   "AXFO": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Axfood AB (publ)",
       "price": 307.5,
       "market_cap": 66395930624,
       "ebit": 3303000000.0,
@@ -2002,6 +2027,7 @@
   "HOLM.A": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Holmen AB (publ)",
       "price": 352.0,
       "market_cap": 54927949824,
       "ebit": 3765000000.0,
@@ -2082,6 +2108,7 @@
   "SWEC.A": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Sweco AB (publ)",
       "price": 149.0,
       "market_cap": 53833031680,
       "ebit": 3043000000.0,
@@ -2162,6 +2189,7 @@
   "MYCR": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Mycronic AB (publ)",
       "price": 216.1,
       "market_cap": 42197848064,
       "ebit": 2099000000.0,
@@ -2242,6 +2270,7 @@
   "CAMX": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Camurus AB (publ)",
       "price": 691.5,
       "market_cap": 41241186304,
       "ebit": 553521000.0,
@@ -2322,6 +2351,7 @@
   "MTRS": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Munters Group AB (publ)",
       "price": 173.4,
       "market_cap": 31652683776,
       "ebit": 1853000000.0,
@@ -2402,6 +2432,7 @@
   "HUSQ.A": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Husqvarna AB (publ)",
       "price": 47.7,
       "market_cap": 27273269248,
       "ebit": 2644000000.0,
@@ -2482,6 +2513,7 @@
   "LOOMIS": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Loomis AB (publ)",
       "price": 380.2,
       "market_cap": 25834608640,
       "ebit": 2999000000.0,
@@ -2562,6 +2594,7 @@
   "THULE": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Thule Group AB (publ)",
       "price": 236.2,
       "market_cap": 25471373312,
       "ebit": 1609000000.0,
@@ -2642,6 +2675,7 @@
   "BILL": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Billerud AB (publ)",
       "price": 94.0,
       "market_cap": 23378264064,
       "ebit": 2663000000.0,
@@ -2722,6 +2756,7 @@
   "NCC.A": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "NCC AB (publ)",
       "price": 231.0,
       "market_cap": 22590038016,
       "ebit": 2087000000.0,
@@ -2802,6 +2837,7 @@
   "ALLEI": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Alleima AB (publ)",
       "price": 84.75,
       "market_cap": 21200822272,
       "ebit": 1621000000.0,
@@ -2882,6 +2918,7 @@
   "SHOT": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Scandic Hotels Group AB (publ)",
       "price": 90.1,
       "market_cap": 19382968320,
       "ebit": 2873000000.0,
@@ -2962,6 +2999,7 @@
   "HMS": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "HMS Networks AB (publ)",
       "price": 403.6,
       "market_cap": 20254461952,
       "ebit": 484520000.0,
@@ -3042,6 +3080,7 @@
   "BUFAB": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Bufab AB (publ)",
       "price": 100.5,
       "market_cap": 19043309568,
       "ebit": 904000000.0,
@@ -3122,6 +3161,7 @@
   "IPCO": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "International Petroleum Corporation",
       "price": 174.3,
       "market_cap": 19548708864,
       "ebit": 171449000.0,
@@ -3202,6 +3242,7 @@
   "ELUX.A": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "AB Electrolux (publ)",
       "price": 71.0,
       "market_cap": 19205238784,
       "ebit": 1252000000.0,
@@ -3282,6 +3323,7 @@
   "SYSR": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Systemair AB (publ)",
       "price": 87.8,
       "market_cap": 18220734464,
       "ebit": 1014900000.0,
@@ -3362,6 +3404,7 @@
   "VITR": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Vitrolife AB (publ)",
       "price": 133.1,
       "market_cap": 18028021760,
       "ebit": 772000000.0,
@@ -3442,6 +3485,7 @@
   "AQ": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "AQ Group AB (publ)",
       "price": 189.1,
       "market_cap": 17346670592,
       "ebit": 858000000.0,
@@ -3522,6 +3566,7 @@
   "AFRY": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Afry AB",
       "price": 152.2,
       "market_cap": 17236914176,
       "ebit": 2005000000.0,
@@ -3602,6 +3647,7 @@
   "HACK": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Hacksaw AB (publ)",
       "price": 58.03,
       "market_cap": 16782043136,
       "ebit": 115553000.0,
@@ -3682,6 +3728,7 @@
   "PDX": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Paradox Interactive AB (publ)",
       "price": 155.4,
       "market_cap": 16413816832,
       "ebit": 763467000.0,
@@ -3762,6 +3809,7 @@
   "VIMIAN": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Vimian Group AB (publ)",
       "price": 30.72,
       "market_cap": 16186471424,
       "ebit": 54300000.0,
@@ -3842,6 +3890,7 @@
   "GRNG": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Gränges AB (publ)",
       "price": 149.1,
       "market_cap": 15873507328,
       "ebit": 1516000000.0,
@@ -3922,6 +3971,7 @@
   "ALIG": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Alimak Group AB (publ)",
       "price": 147.6,
       "market_cap": 15620581376,
       "ebit": 1057000000.0,
@@ -4002,6 +4052,7 @@
   "HEM": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Hemnet Group AB (publ)",
       "price": 159.6,
       "market_cap": 14940611584,
       "ebit": 637200000.0,
@@ -4082,6 +4133,7 @@
   "LIAB": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Lindab International AB (publ)",
       "price": 198.0,
       "market_cap": 15253114880,
       "ebit": 733000000.0,
@@ -4162,6 +4214,7 @@
   "IVSO": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Invisio AB (publ)",
       "price": 307.0,
       "market_cap": 14177146880,
       "ebit": 407900000.0,
@@ -4242,6 +4295,7 @@
   "RUSTA": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Rusta AB (publ)",
       "price": 81.45,
       "market_cap": 12457910272,
       "ebit": 870000000.0,
@@ -4322,6 +4376,7 @@
   "BILI.A": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Bilia AB (publ)",
       "price": 130.3,
       "market_cap": 12059781120,
       "ebit": 1283000000.0,
@@ -4402,6 +4457,7 @@
   "ATT": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Attendo AB (publ)",
       "price": 84.0,
       "market_cap": 12266492928,
       "ebit": 1428000000.0,
@@ -4482,6 +4538,7 @@
   "DYVOX": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Dynavox Group AB (publ)",
       "price": 104.8,
       "market_cap": 11061881856,
       "ebit": 225100000.0,
@@ -4562,6 +4619,7 @@
   "INWI": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Inwido AB (publ)",
       "price": 163.0,
       "market_cap": 9449522176,
       "ebit": 867400000.0,
@@ -4642,6 +4700,7 @@
   "SYNSAM": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Synsam AB (publ)",
       "price": 66.7,
       "market_cap": 9524968448,
       "ebit": 700000000.0,
@@ -4722,6 +4781,7 @@
   "JM": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "JM AB (publ)",
       "price": 147.7,
       "market_cap": 9527364608,
       "ebit": 715000000.0,
@@ -4802,6 +4862,7 @@
   "APOTEA": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Apotea AB (publ)",
       "price": 87.06,
       "market_cap": 9060418560,
       "ebit": 270000000.0,
@@ -4882,6 +4943,7 @@
   "TROAX": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Troax Group AB (publ)",
       "price": 147.4,
       "market_cap": 8821201920,
       "ebit": 45028000.0,
@@ -4962,6 +5024,7 @@
   "MIPS": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Mips AB (publ)",
       "price": 330.2,
       "market_cap": 8747368448,
       "ebit": 184000000.0,
@@ -5042,6 +5105,7 @@
   "NCAB": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "NCAB Group AB (publ)",
       "price": 49.6,
       "market_cap": 9273774080,
       "ebit": 403663000.0,
@@ -5122,6 +5186,7 @@
   "MER": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Meren Energy Inc.",
       "price": 12.88,
       "market_cap": 8705710080,
       "ebit": -274200000.0,
@@ -5202,6 +5267,7 @@
   "VOLO": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Volati AB (publ)",
       "price": 103.6,
       "market_cap": 9230221312,
       "ebit": 531000000.0,
@@ -5282,6 +5348,7 @@
   "MCAP": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "MedCap AB (publ)",
       "price": 524.0,
       "market_cap": 7861899776,
       "ebit": 280100000.0,
@@ -5362,6 +5429,7 @@
   "INSTAL": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Instalco AB (publ)",
       "price": 26.44,
       "market_cap": 7097665536,
       "ebit": 648000000.0,
@@ -5442,6 +5510,7 @@
   "FAG": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Fagerhult Group AB",
       "price": 39.55,
       "market_cap": 6973946368,
       "ebit": 707800000.0,
@@ -5522,6 +5591,7 @@
   "MILDEF": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "MilDef Group AB (publ)",
       "price": 149.8,
       "market_cap": 7054815744,
       "ebit": -198100000.0,
@@ -5602,6 +5672,7 @@
   "XVIVO": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Xvivo Perfusion AB (publ)",
       "price": 208.4,
       "market_cap": 6564489216,
       "ebit": 201208000.0,
@@ -5682,6 +5753,7 @@
   "GOTL.A": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Rederiaktiebolaget Gotland (publ)",
       "price": 2640.0,
       "market_cap": 6600000000,
       "ebit": 507718000.0,
@@ -5762,6 +5834,7 @@
   "BETCO": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Better Collective A/S",
       "price": 112.8,
       "market_cap": 6613334016,
       "ebit": 58212000.0,
@@ -5842,6 +5915,7 @@
   "YUBICO": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Yubico AB",
       "price": 73.7,
       "market_cap": 6369660928,
       "ebit": 465900000.0,
@@ -5922,6 +5996,7 @@
   "SCST": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Scandi Standard AB (publ)",
       "price": 99.5,
       "market_cap": 6509364224,
       "ebit": 504000000.0,
@@ -6002,6 +6077,7 @@
   "OVZON": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Ovzon AB (publ)",
       "price": 52.5,
       "market_cap": 5855351808,
       "ebit": -108000000.0,
@@ -6082,6 +6158,7 @@
   "SECARE": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Swedencare AB (publ)",
       "price": 35.85,
       "market_cap": 5730298368,
       "ebit": 232700000.0,
@@ -6162,6 +6239,7 @@
   "DUNI": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Duni AB (publ)",
       "price": 103.6,
       "market_cap": 4869099520,
       "ebit": 426000000.0,
@@ -6242,6 +6320,7 @@
   "NOTE": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "NOTE AB (publ)",
       "price": 170.5,
       "market_cap": 4867536384,
       "ebit": 349594000.0,
@@ -6322,6 +6401,7 @@
   "SNM": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "ShaMaran Petroleum Corp.",
       "price": 1.62,
       "market_cap": 4669729792,
       "ebit": 109928000.0,
@@ -6402,6 +6482,7 @@
   "HTRO": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Hexatronic Group AB (publ)",
       "price": 23.18,
       "market_cap": 4766670848,
       "ebit": 698000000.0,
@@ -6482,6 +6563,7 @@
   "ITAB": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "ITAB Shop Concept AB (publ)",
       "price": 19.16,
       "market_cap": 4891079168,
       "ebit": 496000000.0,
@@ -6562,6 +6644,7 @@
   "NYAB": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Nyab AB (publ)",
       "price": 6.08,
       "market_cap": 4327483392,
       "ebit": 22045000.0,
@@ -6642,6 +6725,7 @@
   "MEKO": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Meko AB (publ)",
       "price": 71.1,
       "market_cap": 4005259264,
       "ebit": 917000000.0,
@@ -6722,6 +6806,7 @@
   "HAYPP": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Haypp Group AB (publ)",
       "price": 123.0,
       "market_cap": 3766659584,
       "ebit": 73614000.0,
@@ -6802,6 +6887,7 @@
   "CEVI": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "CellaVision AB (publ)",
       "price": 160.0,
       "market_cap": 3816247808,
       "ebit": 178746000.0,
@@ -6882,6 +6968,7 @@
   "HUMBLE": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Humble Group AB (publ)",
       "price": 8.07,
       "market_cap": 3626367232,
       "ebit": 358000000.0,
@@ -6962,6 +7049,7 @@
   "EPEN": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Ependion AB",
       "price": 108.4,
       "market_cap": 3464751104,
       "ebit": 248268000.0,
@@ -7042,6 +7130,7 @@
   "NELLY": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Nelly Group AB (publ)",
       "price": 111.4,
       "market_cap": 3345489920,
       "ebit": 99600000.0,
@@ -7122,6 +7211,7 @@
   "KAMBI": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Kambi Group plc",
       "price": 123.1,
       "market_cap": 3345433088,
       "ebit": 19878000.0,
@@ -7202,6 +7292,7 @@
   "BMAX": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Byggmax Group AB (publ)",
       "price": 57.1,
       "market_cap": 3347490048,
       "ebit": 181000000.0,
@@ -7282,6 +7373,7 @@
   "KNOW": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Knowit AB (publ)",
       "price": 120.0,
       "market_cap": 3276792064,
       "ebit": 208200000.0,
@@ -7362,6 +7454,7 @@
   "VIVA": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Viva Wine Group AB",
       "price": 35.2,
       "market_cap": 3155042560,
       "ebit": 270000000.0,
@@ -7442,6 +7535,7 @@
   "SANION": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Saniona AB (publ)",
       "price": 23.55,
       "market_cap": 3250609408,
       "ebit": 214177000.0,
@@ -7522,6 +7616,7 @@
   "VESTUM": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Vestum AB (publ)",
       "price": 8.2,
       "market_cap": 3081637632,
       "ebit": 140000000.0,
@@ -7602,6 +7697,7 @@
   "TEQ": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Teqnion AB (publ)",
       "price": 174.8,
       "market_cap": 3000574208,
       "ebit": 144000000.0,
@@ -7682,6 +7778,7 @@
   "PACT": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Proact IT Group AB (publ)",
       "price": 112.4,
       "market_cap": 2998207488,
       "ebit": 306409000.0,
@@ -7762,6 +7859,7 @@
   "GREEN": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Green Landscaping Group AB (publ)",
       "price": 47.55,
       "market_cap": 2692893440,
       "ebit": 418000000.0,
@@ -7842,6 +7940,7 @@
   "KBC": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "KB Components AB (publ)",
       "price": 42.0,
       "market_cap": 2268000000,
       "ebit": 206134000.0,
@@ -7922,6 +8021,7 @@
   "ABSO": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Absolent Air Care Group AB (publ)",
       "price": 203.0,
       "market_cap": 2298156544,
       "ebit": 222198000.0,
@@ -8002,6 +8102,7 @@
   "CTT": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "CTT Systems AB (publ)",
       "price": 182.2,
       "market_cap": 2282864640,
       "ebit": 110800000.0,
@@ -8082,6 +8183,7 @@
   "SVIK": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Studsvik AB (publ)",
       "price": 296.0,
       "market_cap": 2432708864,
       "ebit": 32797000.0,
@@ -8162,6 +8264,7 @@
   "LYKO.A": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Lyko Group AB (publ)",
       "price": 129.6,
       "market_cap": 1984177664,
       "ebit": 112500000.0,
@@ -8242,6 +8345,7 @@
   "BYGGP": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "ByggPartner Gruppen AB (publ)",
       "price": 41.5,
       "market_cap": 1881711104,
       "ebit": 88424000.0,
@@ -8322,6 +8426,7 @@
   "ARISE": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Arise AB (publ)",
       "price": 44.6,
       "market_cap": 1819012224,
       "ebit": 208000000.0,
@@ -8402,6 +8507,7 @@
   "EWRK": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Ework Group AB (publ)",
       "price": 96.5,
       "market_cap": 1668222080,
       "ebit": 199209000.0,
@@ -8482,6 +8588,7 @@
   "FG": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Fasadgruppen Group AB (publ)",
       "price": 29.9,
       "market_cap": 1606164608,
       "ebit": 165600000.0,
@@ -8562,6 +8669,7 @@
   "SUS": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Surgical Science Sweden AB (publ)",
       "price": 30.6,
       "market_cap": 1561402880,
       "ebit": 163773000.0,
@@ -8642,6 +8750,7 @@
   "STIL": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Stille AB",
       "price": 173.0,
       "market_cap": 1554482304,
       "ebit": 74208000.0,
@@ -8722,6 +8831,7 @@
   "INT": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Intellego Technologies AB",
       "price": 46.55,
       "market_cap": 1459666816,
       "ebit": 97655000.0,
@@ -8802,6 +8912,7 @@
   "BORG": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Björn Borg AB (publ)",
       "price": 59.9,
       "market_cap": 1506388224,
       "ebit": 98059000.0,
@@ -8882,6 +8993,7 @@
   "RUG": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "RugVista Group AB (publ)",
       "price": 69.2,
       "market_cap": 1438331648,
       "ebit": 66174000.0,
@@ -8962,6 +9074,7 @@
   "GENO": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Genovis AB (publ.)",
       "price": 21.7,
       "market_cap": 1433562624,
       "ebit": 50285000.0,
@@ -9042,6 +9155,7 @@
   "CANTA": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Cantargia AB (publ)",
       "price": 5.34,
       "market_cap": 1327586176,
       "ebit": -161654000.0,
@@ -9122,6 +9236,7 @@
   "MSON.A": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Midsona AB (publ)",
       "price": 10.6,
       "market_cap": 1541537664,
       "ebit": 121000000.0,
@@ -9202,6 +9317,7 @@
   "BICO": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "BICO Group AB (publ)",
       "price": 19.3,
       "market_cap": 1362095488,
       "ebit": 27000000.0,
@@ -9282,6 +9398,7 @@
   "PAX": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Paxman AB (publ)",
       "price": 53.6,
       "market_cap": 1247455104,
       "ebit": 42648000.0,
@@ -9362,6 +9479,7 @@
   "SIVI": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Siljansvik AB (publ)",
       "price": 90.2,
       "market_cap": 1240342656,
       "ebit": 2594050000.0,
@@ -9442,6 +9560,7 @@
   "FIRE": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Firefly AB (publ)",
       "price": 190.2,
       "market_cap": 1141466240,
       "ebit": 73608000.0,
@@ -9522,6 +9641,7 @@
   "CHEF": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Cheffelo AB (publ)",
       "price": 83.5,
       "market_cap": 1087205376,
       "ebit": 46400000.0,
@@ -9602,6 +9722,7 @@
   "BULTEN": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Bulten AB (publ)",
       "price": 49.9,
       "market_cap": 1047300864,
       "ebit": 331000000.0,
@@ -9682,6 +9803,7 @@
   "ARPL": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Arla Plast AB",
       "price": 49.9,
       "market_cap": 1046902016,
       "ebit": 119100000.0,
@@ -9762,6 +9884,7 @@
   "CINT": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Cint Group AB (publ)",
       "price": 2.81,
       "market_cap": 997483648,
       "ebit": -9271000.0,
@@ -9842,6 +9965,7 @@
   "PIERCE": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Pierce Group AB (publ)",
       "price": 12.85,
       "market_cap": 1019957184,
       "ebit": 46000000.0,
@@ -9922,6 +10046,7 @@
   "ADDV.A": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "ADDvise Group AB (publ)",
       "price": 1.66,
       "market_cap": 1009102848,
       "ebit": 304700000.0,
@@ -10002,6 +10127,7 @@
   "CTEK": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "CTEK AB (publ)",
       "price": 13.2,
       "market_cap": 923686784,
       "ebit": -25800000.0,
@@ -10082,6 +10208,7 @@
   "LUC": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Lucara Diamond Corp.",
       "price": 1.81,
       "market_cap": 824137600,
       "ebit": 49264000.0,
@@ -10162,6 +10289,7 @@
   "EMBELL": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Embellence Group AB (publ)",
       "price": 38.0,
       "market_cap": 894471424,
       "ebit": 87513000.0,
@@ -10242,6 +10370,7 @@
   "ADVE": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Advenica AB (publ)",
       "price": 19.52,
       "market_cap": 858604736,
       "ebit": 9184000.0,
@@ -10322,6 +10451,7 @@
   "CAG": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "CAG Group AB (publ)",
       "price": 107.5,
       "market_cap": 770517184,
       "ebit": 69328000.0,
@@ -10402,6 +10532,7 @@
   "FRACTL": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Fractal Gaming Group AB (publ)",
       "price": 25.3,
       "market_cap": 736723328,
       "ebit": 62827000.0,
@@ -10482,6 +10613,7 @@
   "LUMEN": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "LumenRadio AB (publ)",
       "price": 60.5,
       "market_cap": 761137280,
       "ebit": 36353000.0,
@@ -10562,6 +10694,7 @@
   "GRANGX": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Grangex AB",
       "price": 11.46,
       "market_cap": 733224768,
       "ebit": -77414000.0,
@@ -10642,6 +10775,7 @@
   "G5EN": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "G5 Entertainment AB (publ)",
       "price": 90.9,
       "market_cap": 724582080,
       "ebit": 126246000.0,
@@ -10722,6 +10856,7 @@
   "RAIL": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Railcare Group AB (publ)",
       "price": 30.25,
       "market_cap": 729756096,
       "ebit": 62026000.0,
@@ -10802,6 +10937,7 @@
   "ATIC": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Actic Group AB (publ)",
       "price": 29.8,
       "market_cap": 678120128,
       "ebit": 42523000.0,
@@ -10882,6 +11018,7 @@
   "SINT": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "SinterCast AB (publ)",
       "price": 102.0,
       "market_cap": 718315520,
       "ebit": 43600000.0,
@@ -10962,6 +11099,7 @@
   "CX": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "CombinedX AB (publ)",
       "price": 36.9,
       "market_cap": 711862208,
       "ebit": 68200000.0,
@@ -11042,6 +11180,7 @@
   "HAKI.A": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "HAKI Safety AB (publ)",
       "price": 25.0,
       "market_cap": 745340032,
       "ebit": 78000000.0,
@@ -11122,6 +11261,7 @@
   "ITECH": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "I-Tech AB",
       "price": 51.8,
       "market_cap": 621484864,
       "ebit": 49214000.0,
@@ -11202,6 +11342,7 @@
   "SKMO": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Skåne-möllan AB (publ)",
       "price": 58.0,
       "market_cap": 638000000,
       "ebit": 16496000.0,
@@ -11282,6 +11423,7 @@
   "DONE": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Done.ai Group AB",
       "price": 7.89,
       "market_cap": 671164288,
       "ebit": 1901510000.0,
@@ -11362,6 +11504,7 @@
   "SNX": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Premium Snacks Nordic AB (publ)",
       "price": 45.5,
       "market_cap": 618875200,
       "ebit": 16298000.0,
@@ -11442,6 +11585,7 @@
   "GENI": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Generic Sweden AB",
       "price": 48.65,
       "market_cap": 598006784,
       "ebit": 34368000.0,
@@ -11522,6 +11666,7 @@
   "CARE": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Careium AB (Publ)",
       "price": 23.6,
       "market_cap": 574098688,
       "ebit": 90900000.0,
@@ -11602,6 +11747,7 @@
   "ALCA": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Alcadon Group AB (publ)",
       "price": 23.7,
       "market_cap": 580911360,
       "ebit": 81400000.0,
@@ -11682,6 +11828,7 @@
   "CEDER": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Cedergrenska AB (publ)",
       "price": 45.8,
       "market_cap": 579870976,
       "ebit": 44422000.0,
@@ -11762,6 +11909,7 @@
   "TERNOR": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Terranor Group AB (publ)",
       "price": 28.2,
       "market_cap": 564000000,
       "ebit": 64493000.0,
@@ -11842,6 +11990,7 @@
   "SLEEP": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Sleep Cycle AB (publ)",
       "price": 26.25,
       "market_cap": 532286048,
       "ebit": 79830000.0,
@@ -11922,6 +12071,7 @@
   "ACUVI": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Acuvi AB",
       "price": 15.28,
       "market_cap": 509666752,
       "ebit": 34335000.0,
@@ -12002,6 +12152,7 @@
   "OPTER": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Opter AB (publ)",
       "price": 85.4,
       "market_cap": 512400000,
       "ebit": 22125000.0,
@@ -12082,6 +12233,7 @@
   "KJELL": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Kjell Group AB (publ)",
       "price": 8.42,
       "market_cap": 498361920,
       "ebit": 15325000.0,
@@ -12162,6 +12314,7 @@
   "BOTX": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Botnia Gold AB (publ)",
       "price": 12.55,
       "market_cap": 512103104,
       "ebit": -6284000.0,
@@ -12242,6 +12395,7 @@
   "SGG": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Sensys Gatso Group AB (publ)",
       "price": 40.2,
       "market_cap": 463520448,
       "ebit": 29481000.0,
@@ -12322,6 +12476,7 @@
   "4C": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "4C Group AB (publ)",
       "price": 12.2,
       "market_cap": 466955008,
       "ebit": 980000.0,
@@ -12402,6 +12557,7 @@
   "TOBII": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Tobii AB (publ)",
       "price": 2.06,
       "market_cap": 481382784,
       "ebit": -113000000.0,
@@ -12482,6 +12638,7 @@
   "INFREA": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Infrea AB",
       "price": 14.25,
       "market_cap": 427266176,
       "ebit": 16800000.0,
@@ -12562,6 +12719,7 @@
   "SIBEK": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Sibek AB (publ)",
       "price": 41.2,
       "market_cap": 418314624,
       "ebit": 25251000.0,
@@ -12642,6 +12800,7 @@
   "DEDI": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Dedicare AB (publ)",
       "price": 43.4,
       "market_cap": 415018720,
       "ebit": 64731000.0,
@@ -12722,6 +12881,7 @@
   "B3": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "B3 Consulting Group AB (publ)",
       "price": 42.2,
       "market_cap": 384511584,
       "ebit": 110700000.0,
@@ -12802,6 +12962,7 @@
   "TRANS": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Transtema Group AB",
       "price": 8.69,
       "market_cap": 373245568,
       "ebit": 33125000.0,
@@ -12882,6 +13043,7 @@
   "POLYG": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Polygiene Group AB",
       "price": 9.46,
       "market_cap": 345545344,
       "ebit": 12929000.0,
@@ -12962,6 +13124,7 @@
   "ENRO": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Eniro Group AB (publ)",
       "price": 0.37,
       "market_cap": 267906608,
       "ebit": 69000000.0,
@@ -13042,6 +13205,7 @@
   "EMB": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "EMB Mission Bound AB (publ)",
       "price": 0.77,
       "market_cap": 230190912,
       "ebit": -17749000.0,
@@ -13122,6 +13286,7 @@
   "CDMIL": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "CodeMill AB (publ)",
       "price": 16.15,
       "market_cap": 219989696,
       "ebit": 11476000.0,
@@ -13202,6 +13367,7 @@
   "LYGRD": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Lyckegård Group AB (publ)",
       "price": 2.94,
       "market_cap": 200104000,
       "ebit": -54998545.0,
@@ -13282,6 +13448,7 @@
   "NOTEK": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Norditek Group AB (publ)",
       "price": 14.85,
       "market_cap": 203908128,
       "ebit": 17394000.0,
@@ -13356,6 +13523,7 @@
   "VUXEN": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Vuxen Group AB",
       "price": 18.05,
       "market_cap": 202159984,
       "ebit": 5114000.0,
@@ -13436,6 +13604,7 @@
   "DRIL": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Drillcon AB (publ)",
       "price": 4.11,
       "market_cap": 183306000,
       "ebit": 30312000.0,
@@ -13516,6 +13685,7 @@
   "SODER": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Söder Sportfiske AB",
       "price": 21.9,
       "market_cap": 185240592,
       "ebit": 10500000.0,
@@ -13596,6 +13766,7 @@
   "SFTR": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Safeture AB (publ)",
       "price": 4.16,
       "market_cap": 163443872,
       "ebit": -167000.0,
@@ -13676,6 +13847,7 @@
   "STWK": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Stockwik Förvaltning AB (publ)",
       "price": 22.4,
       "market_cap": 161527312,
       "ebit": 41900000.0,
@@ -13756,6 +13928,7 @@
   "KLIMAT": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Klimator AB (publ)",
       "price": 3.94,
       "market_cap": 138139744,
       "ebit": -1869918.0,
@@ -13836,6 +14009,7 @@
   "GIGA": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Gigasun AB (publ)",
       "price": 2.45,
       "market_cap": 140133200,
       "ebit": 58238000.0,
@@ -13916,6 +14090,7 @@
   "BONG": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Bong AB (publ)",
       "price": 0.65,
       "market_cap": 137283280,
       "ebit": 40392000.0,
@@ -13996,6 +14171,7 @@
   "TALK": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "TalkPool AG",
       "price": 15.3,
       "market_cap": 117130360,
       "ebit": 1308108.0,
@@ -14076,6 +14252,7 @@
   "ARCOMA": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Arcoma AB",
       "price": 7.72,
       "market_cap": 110461696,
       "ebit": 14028000.0,
@@ -14156,6 +14333,7 @@
   "GGEO": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Guideline Geo AB (publ)",
       "price": 10.2,
       "market_cap": 111221560,
       "ebit": 4471000.0,
@@ -14236,6 +14414,7 @@
   "IS": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Image Systems AB",
       "price": 1.12,
       "market_cap": 99466712,
       "ebit": 8900000.0,
@@ -14316,6 +14495,7 @@
   "SDOS": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "ScandiDos AB (publ)",
       "price": 1.16,
       "market_cap": 66132860,
       "ebit": 751000.0,
@@ -14396,6 +14576,7 @@
   "HEXI": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Hexicon AB (publ)",
       "price": 0.12,
       "market_cap": 43656320,
       "ebit": -86920000.0,
@@ -14476,6 +14657,7 @@
   "NITRO": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Nitro Games Oyj",
       "price": 1.41,
       "market_cap": 35143352,
       "ebit": 648848.0,
@@ -14556,6 +14738,7 @@
   "BETS.B": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Betsson AB (publ)",
       "price": 106.4,
       "market_cap": 14669101056,
       "ebit": 253077000.0,
@@ -14636,6 +14819,7 @@
   "HM.B": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "H & M Hennes & Mauritz AB",
       "price": 177.55,
       "market_cap": 284061696000,
       "ebit": 18196000000.0,
@@ -14716,6 +14900,7 @@
   "LIFCO.B": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Lifco AB (publ)",
       "price": 334.8,
       "market_cap": 152071602176,
       "ebit": 4970000000.0,
@@ -14796,6 +14981,7 @@
   "GETI.B": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Getinge AB (publ)",
       "price": 222.4,
       "market_cap": 60574990336,
       "ebit": 2888000000.0,
@@ -14876,6 +15062,7 @@
   "BEIJ.B": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Beijer Ref AB (publ)",
       "price": 144.25,
       "market_cap": 73121120256,
       "ebit": 3621000000.0,
@@ -14956,6 +15143,7 @@
   "HEXA.B": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Hexagon AB (publ)",
       "price": 106.2,
       "market_cap": 285080911872,
       "ebit": 1433600000.0,
@@ -15036,6 +15224,7 @@
   "NIBE.B": {
     "2026-01-18": {
       "date": "2026-01-18",
+      "name": "Nibe Industrier AB (publ)",
       "price": 37.0,
       "market_cap": 74594459648,
       "ebit": 2955000000.0,

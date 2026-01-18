@@ -381,6 +381,7 @@ def add_to_history(ticker: str, stock_data: Dict, history: Dict):
     # Only store Magic Formula relevant fields
     history_entry = {
         "date": date_str,
+        "name": stock_data.get("name", "N/A"),  # Company name for display
         "price": stock_data.get("price"),
         "market_cap": stock_data.get("market_cap"),
         "ebit": stock_data.get("ebit"),
@@ -410,9 +411,9 @@ def add_to_history(ticker: str, stock_data: Dict, history: Dict):
         "roc_rank_5b": stock_data.get("roc_rank_5b"),
         "magic_formula_ebit_periods": stock_data.get("magic_formula_ebit_periods", "N/A"),  # Periods used for EBIT calculation
         "magic_formula_balance_sheet_period": stock_data.get("magic_formula_balance_sheet_period", "N/A"),  # Period used for balance sheet
-        "magic_formula_uses_ttm": stock_data.get("magic_formula_uses_ttm", False),  # Whether TTM was used
+        "magic_formula_uses_ttm": stock_data.get("magic_formula_uses_ttm"),  # Whether TTM was used (None if not calculated)
         "sector": stock_data.get("sector"),  # Needed for exclusion logic
-        "industry": stock_data.get("industry"),  # Needed for exclusion logic
+        "industry": stock_data.get("industry"),  # Needed for filtering
         "exclusion_reason": stock_data.get("exclusion_reason"),  # Needed for filtering
     }
 
@@ -472,6 +473,7 @@ def update_history_with_calculated_scores(current_data: Dict, history: Dict):
             added_count += 1
         else:
             # Update existing entry with calculated scores
+            history[ticker][today]["name"] = stock_data.get("name", history[ticker][today].get("name", "N/A"))  # Update name if available
             history[ticker][today]["magic_formula_score"] = stock_data.get("magic_formula_score", "N/A")
             history[ticker][today]["magic_formula_score_100m"] = stock_data.get("magic_formula_score_100m", "N/A")
             history[ticker][today]["magic_formula_score_500m"] = stock_data.get("magic_formula_score_500m", "N/A")
@@ -489,7 +491,7 @@ def update_history_with_calculated_scores(current_data: Dict, history: Dict):
             history[ticker][today]["roc_rank_5b"] = stock_data.get("roc_rank_5b", "N/A")
             history[ticker][today]["magic_formula_ebit_periods"] = stock_data.get("magic_formula_ebit_periods", "N/A")
             history[ticker][today]["magic_formula_balance_sheet_period"] = stock_data.get("magic_formula_balance_sheet_period", "N/A")
-            history[ticker][today]["magic_formula_uses_ttm"] = stock_data.get("magic_formula_uses_ttm", False)
+            history[ticker][today]["magic_formula_uses_ttm"] = stock_data.get("magic_formula_uses_ttm")  # None if not calculated
             updated_count += 1
     
     if added_count > 0:

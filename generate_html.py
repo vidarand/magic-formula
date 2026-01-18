@@ -247,10 +247,9 @@ def calculate_magic_formula_scores(stocks):
 
 def generate_html(stocks):
     """Generate simple HTML table."""
-
+    
     # Note: Magic Formula scores should already be calculated and saved in current_stocks.json
-    # by fetch_stocks.py. We recalculate here to ensure they're up to date.
-    stocks = calculate_magic_formula_scores(stocks)
+    # by fetch_stocks.py and calculate_magic_formula.py. This function just displays the data.
 
     # Separate excluded companies (financial/investment) from included ones
     excluded_stocks = []
@@ -821,11 +820,16 @@ def generate_html(stocks):
                 }}
                 
                 // Format TTM indicator
+                // Only show ✓ if stock has valid score AND valid periods (since we only use TTM from quarterly data)
                 let ttmDisplay = '<span style="color: #6c757d;">-</span>';
-                if (magicScore !== 'N/A' && typeof magicScore === 'number' && usesTTM) {{
+                if (magicScore !== 'N/A' && typeof magicScore === 'number' && 
+                    ebitPeriods && ebitPeriods !== 'N/A' && 
+                    balanceSheetPeriod && balanceSheetPeriod !== 'N/A') {{
+                    // Stock has valid score and valid periods - uses TTM
                     ttmDisplay = '<span style="color: #28a745; font-weight: 600;">✓</span>';
                 }} else if (magicScore !== 'N/A' && typeof magicScore === 'number') {{
-                    ttmDisplay = '<span style="color: #6c757d;">Annual</span>';
+                    // Stock has score but missing periods - data inconsistency, show as N/A
+                    ttmDisplay = '<span style="color: #dc3545;">N/A</span>';
                 }}
                 
                 // Get EY and RoC ranks based on selected score variant
