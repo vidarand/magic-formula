@@ -4,7 +4,7 @@
 import gzip
 import json
 import shutil
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict
 
@@ -18,6 +18,9 @@ TARGET_SHARD_SIZE_BYTES = 4 * 1024 * 1024
 
 def _json_bytes(data: Dict) -> bytes:
     return json.dumps(data, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+
+
+EMPTY_JSON_OBJECT_BYTES = len(_json_bytes({}))
 
 
 def load_history_data() -> Dict:
@@ -65,19 +68,19 @@ def save_history_data(history: Dict):
 
     shards = []
     current_shard: Dict = {}
-    current_size = 2  # {}
+    current_size = EMPTY_JSON_OBJECT_BYTES
 
     for ticker in sorted(history.keys()):
         ticker_data = history[ticker]
-        ticker_size = len(_json_bytes({ticker: ticker_data}))
-
-        if current_shard and (current_size + ticker_size) > TARGET_SHARD_SIZE_BYTES:
+        candidate_shard = {**current_shard, ticker: ticker_data}
+        candidate_size = len(_json_bytes(candidate_shard))
+        if current_shard and candidate_size > TARGET_SHARD_SIZE_BYTES:
             shards.append(current_shard)
             current_shard = {}
-            current_size = 2
+            current_size = EMPTY_JSON_OBJECT_BYTES
 
         current_shard[ticker] = ticker_data
-        current_size += ticker_size
+        current_size = len(_json_bytes(current_shard))
 
     if current_shard:
         shards.append(current_shard)
@@ -102,7 +105,7 @@ def save_history_data(history: Dict):
             {
                 "version": 1,
                 "format": "sharded-gzip",
-                "created_at": datetime.utcnow().isoformat() + "Z",
+                "created_at": datetime.now(timezone.utc).isoformat(),
                 "shard_count": len(manifest_shards),
                 "total_tickers": len(history),
                 "shards": manifest_shards,
@@ -120,7 +123,7 @@ def save_history_data(history: Dict):
                 "shards_dir": str(HISTORY_SHARDS_DIR),
                 "shard_count": len(manifest_shards),
                 "total_tickers": len(history),
-                "created_at": datetime.utcnow().isoformat() + "Z",
+                "created_at": datetime.now(timezone.utc).isoformat(),
             },
             f,
             indent=2,

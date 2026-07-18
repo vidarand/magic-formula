@@ -5,6 +5,7 @@ Updates stocks that need updating and tracks last_updated timestamps.
 """
 
 import json
+import shutil
 import yfinance as yf
 import pandas as pd
 import time
@@ -13,7 +14,13 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, Optional, Union
 from schema import create_empty_stock, normalize_stock
-from history_storage import HISTORY_DATA, save_history_data, load_history_data
+from history_storage import (
+    HISTORY_DATA,
+    HISTORY_MANIFEST,
+    HISTORY_SHARDS_DIR,
+    save_history_data,
+    load_history_data,
+)
 
 # Type alias for stock values
 StockValue = Union[int, float, str, None]
@@ -105,13 +112,34 @@ def load_history() -> Dict:
         print(
             f"⚠️  Warning: History file is corrupted (line {e.lineno}, col {e.colno}). Starting fresh."
         )
-        # Backup corrupted file
-        backup_path = HISTORY_DATA.with_suffix(".json.backup")
+
         try:
-            if backup_path.exists():
-                backup_path.unlink()
-            HISTORY_DATA.rename(backup_path)
-            print(f"   Corrupted file backed up to {backup_path}")
+            if HISTORY_MANIFEST.exists() or HISTORY_SHARDS_DIR.exists():
+                manifest_backup = HISTORY_MANIFEST.with_suffix(".json.backup")
+                shards_backup = HISTORY_SHARDS_DIR.with_name(
+                    f"{HISTORY_SHARDS_DIR.name}_backup"
+                )
+
+                if HISTORY_MANIFEST.exists():
+                    if manifest_backup.exists():
+                        manifest_backup.unlink()
+                    HISTORY_MANIFEST.rename(manifest_backup)
+                    print(f"   Corrupted manifest backed up to {manifest_backup}")
+
+                if HISTORY_SHARDS_DIR.exists():
+                    if shards_backup.exists():
+                        if shards_backup.is_dir():
+                            shutil.rmtree(shards_backup)
+                        else:
+                            shards_backup.unlink()
+                    HISTORY_SHARDS_DIR.rename(shards_backup)
+                    print(f"   Corrupted shards backed up to {shards_backup}")
+            elif HISTORY_DATA.exists():
+                backup_path = HISTORY_DATA.with_suffix(".json.backup")
+                if backup_path.exists():
+                    backup_path.unlink()
+                HISTORY_DATA.rename(backup_path)
+                print(f"   Corrupted file backed up to {backup_path}")
         except Exception:
             pass  # If backup fails, just continue
         return {}
