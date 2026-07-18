@@ -109,8 +109,13 @@ def load_history() -> Dict:
 
         return history
     except json.JSONDecodeError as e:
+        storage_hint = (
+            "sharded manifest or shard files"
+            if HISTORY_MANIFEST.exists() or HISTORY_SHARDS_DIR.exists()
+            else "single history file"
+        )
         print(
-            f"⚠️  Warning: History data is corrupted (line {e.lineno}, col {e.colno}). Starting fresh."
+            f"⚠️  Warning: History data in {storage_hint} is corrupted (line {e.lineno}, col {e.colno}). Starting fresh."
         )
 
         try:

@@ -103,12 +103,14 @@ def save_history_data(history: Dict):
             }
         )
 
+    created_at = datetime.now(tz=timezone.utc).isoformat()
+
     with open(HISTORY_MANIFEST, "w", encoding="utf-8") as f:
         json.dump(
             {
                 "version": 1,
                 "format": "sharded-gzip",
-                "created_at": datetime.now(tz=timezone.utc).isoformat(),
+                "created_at": created_at,
                 "shard_count": len(manifest_shards),
                 "total_tickers": len(history),
                 "shards": manifest_shards,
@@ -126,7 +128,7 @@ def save_history_data(history: Dict):
                 "shards_dir": str(HISTORY_SHARDS_DIR),
                 "shard_count": len(manifest_shards),
                 "total_tickers": len(history),
-                "created_at": datetime.now(tz=timezone.utc).isoformat(),
+                "created_at": created_at,
             },
             f,
             indent=2,
