@@ -7,10 +7,10 @@ Reads from data/current_stocks.json and generates stocks.html
 import json
 from pathlib import Path
 from datetime import datetime
+from history_storage import load_history_data as load_shared_history_data
 
 # Data source
 STOCKS_DATA = Path("data/current_stocks.json")
-HISTORY_DATA = Path("data/stock_history.json")
 OUTPUT_HTML = Path("stocks.html")
 HISTORY_HTML = Path("history.html")
 
@@ -1154,12 +1154,7 @@ def generate_html(stocks):
 
 def load_history_data():
     """Load historical stock data from JSON file."""
-    if not HISTORY_DATA.exists():
-        print(f"Warning: {HISTORY_DATA} not found!")
-        return {}
-
-    with open(HISTORY_DATA, "r", encoding="utf-8") as f:
-        return json.load(f)
+    return load_shared_history_data()
 
 
 def generate_history_html():
