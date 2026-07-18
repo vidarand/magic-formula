@@ -128,10 +128,7 @@ def load_history() -> Dict:
 
                 if HISTORY_SHARDS_DIR.exists():
                     if shards_backup.exists():
-                        if shards_backup.is_dir():
-                            shutil.rmtree(shards_backup)
-                        else:
-                            shards_backup.unlink()
+                        shutil.rmtree(shards_backup)
                     HISTORY_SHARDS_DIR.rename(shards_backup)
                     print(f"   Corrupted shards backed up to {shards_backup}")
             elif HISTORY_DATA.exists():
