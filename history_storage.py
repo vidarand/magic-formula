@@ -128,7 +128,6 @@ def save_history_data(history: Dict):
                 "shards_dir": str(HISTORY_SHARDS_DIR),
                 "shard_count": len(manifest_shards),
                 "total_tickers": len(history),
-                "created_at": created_at,
             },
             f,
             indent=2,
