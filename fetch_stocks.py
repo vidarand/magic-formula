@@ -13,6 +13,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, Optional, Union
 from schema import create_empty_stock, normalize_stock
+from history_storage import HISTORY_DATA, save_history_data, load_history_data
 
 # Type alias for stock values
 StockValue = Union[int, float, str, None]
@@ -22,7 +23,6 @@ StockValue = Union[int, float, str, None]
 # File paths
 STOCKS_JSON = Path("stockholm_stocks.json")
 CURRENT_DATA = Path("data/current_stocks.json")
-HISTORY_DATA = Path("data/stock_history.json")
 
 
 def load_tickers() -> list:
@@ -58,79 +58,71 @@ def load_history() -> Dict:
     Load historical stock data.
     Converts old format (list of entries) to new format (dict by date) if needed.
     """
-    if HISTORY_DATA.exists():
+    try:
+        history = load_history_data()
+
+        # Convert old format (list) to new format (dict by date)
+        converted = False
+        for ticker, entries in history.items():
+            if isinstance(entries, list):
+                # Old format: list of entries
+                converted = True
+                new_entries = {}
+                for entry in entries:
+                    # Extract date from timestamp
+                    timestamp = entry.get("timestamp", "")
+                    if isinstance(timestamp, str):
+                        date_str = timestamp.split("T")[0]
+                    else:
+                        continue
+
+                    # Only keep Magic Formula fields
+                    new_entry = {
+                        "date": date_str,
+                        "price": entry.get("price"),
+                        "market_cap": entry.get("market_cap"),
+                        "ebit": entry.get("ebit"),
+                        "enterprise_value": entry.get("enterprise_value"),
+                        "total_assets": entry.get("total_assets"),
+                        "current_liabilities": entry.get("current_liabilities"),
+                        "current_assets": entry.get("current_assets"),
+                        "net_fixed_assets": entry.get("net_fixed_assets"),
+                        "magic_formula_score": entry.get("magic_formula_score"),
+                    }
+                    # Keep only the latest entry per day
+                    if date_str not in new_entries:
+                        new_entries[date_str] = new_entry
+
+                history[ticker] = new_entries
+
+        if converted:
+            # Save converted format
+            save_history(history)
+            print("   Converted history to new format (one entry per day)")
+
+        return history
+    except json.JSONDecodeError as e:
+        print(
+            f"⚠️  Warning: History file is corrupted (line {e.lineno}, col {e.colno}). Starting fresh."
+        )
+        # Backup corrupted file
+        backup_path = HISTORY_DATA.with_suffix(".json.backup")
         try:
-            with open(HISTORY_DATA, "r", encoding="utf-8") as f:
-                content = f.read()
-                if not content.strip():
-                    return {}
-                history = json.loads(content)
-
-                # Convert old format (list) to new format (dict by date)
-                converted = False
-                for ticker, entries in history.items():
-                    if isinstance(entries, list):
-                        # Old format: list of entries
-                        converted = True
-                        new_entries = {}
-                        for entry in entries:
-                            # Extract date from timestamp
-                            timestamp = entry.get("timestamp", "")
-                            if isinstance(timestamp, str):
-                                date_str = timestamp.split("T")[0]
-                            else:
-                                continue
-
-                            # Only keep Magic Formula fields
-                            new_entry = {
-                                "date": date_str,
-                                "price": entry.get("price"),
-                                "market_cap": entry.get("market_cap"),
-                                "ebit": entry.get("ebit"),
-                                "enterprise_value": entry.get("enterprise_value"),
-                                "total_assets": entry.get("total_assets"),
-                                "current_liabilities": entry.get("current_liabilities"),
-                                "current_assets": entry.get("current_assets"),
-                                "net_fixed_assets": entry.get("net_fixed_assets"),
-                                "magic_formula_score": entry.get("magic_formula_score"),
-                            }
-                            # Keep only the latest entry per day
-                            if date_str not in new_entries:
-                                new_entries[date_str] = new_entry
-
-                        history[ticker] = new_entries
-
-                if converted:
-                    # Save converted format
-                    save_history(history)
-                    print("   Converted history to new format (one entry per day)")
-
-                return history
-        except json.JSONDecodeError as e:
-            print(
-                f"⚠️  Warning: History file is corrupted (line {e.lineno}, col {e.colno}). Starting fresh."
-            )
-            # Backup corrupted file
-            backup_path = HISTORY_DATA.with_suffix(".json.backup")
-            try:
-                if backup_path.exists():
-                    backup_path.unlink()
-                HISTORY_DATA.rename(backup_path)
-                print(f"   Corrupted file backed up to {backup_path}")
-            except Exception:
-                pass  # If backup fails, just continue
-            return {}
-        except Exception as e:
-            print(f"⚠️  Warning: Error loading history file: {e}. Starting fresh.")
-            return {}
-    return {}
+            if backup_path.exists():
+                backup_path.unlink()
+            HISTORY_DATA.rename(backup_path)
+            print(f"   Corrupted file backed up to {backup_path}")
+        except Exception:
+            pass  # If backup fails, just continue
+        return {}
+    except Exception as e:
+        print(f"⚠️  Warning: Error loading history file: {e}. Starting fresh.")
+        return {}
 
 
 def save_history(history: Dict):
     """Save historical stock data."""
-    HISTORY_DATA.parent.mkdir(exist_ok=True)
-    with open(HISTORY_DATA, "w", encoding="utf-8") as f:
-        json.dump(history, f, indent=2, ensure_ascii=False)
+    save_history_data(history)
 
 
 def get_market_cap_category(market_cap: StockValue) -> str:
