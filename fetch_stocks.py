@@ -110,7 +110,7 @@ def load_history() -> Dict:
         return history
     except json.JSONDecodeError as e:
         print(
-            f"⚠️  Warning: History file is corrupted (line {e.lineno}, col {e.colno}). Starting fresh."
+            f"⚠️  Warning: History data is corrupted (line {e.lineno}, col {e.colno}). Starting fresh."
         )
 
         try:

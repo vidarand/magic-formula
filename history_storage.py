@@ -72,15 +72,18 @@ def save_history_data(history: Dict):
 
     for ticker in sorted(history.keys()):
         ticker_data = history[ticker]
-        candidate_shard = {**current_shard, ticker: ticker_data}
-        candidate_size = len(_json_bytes(candidate_shard))
+        ticker_size = len(_json_bytes({ticker: ticker_data})) - EMPTY_JSON_OBJECT_BYTES
+        separator_size = 1 if current_shard else 0
+        candidate_size = current_size + separator_size + ticker_size
+
         if current_shard and candidate_size > TARGET_SHARD_SIZE_BYTES:
             shards.append(current_shard)
             current_shard = {}
             current_size = EMPTY_JSON_OBJECT_BYTES
+            separator_size = 0
 
         current_shard[ticker] = ticker_data
-        current_size = len(_json_bytes(current_shard))
+        current_size = current_size + separator_size + ticker_size
 
     if current_shard:
         shards.append(current_shard)
