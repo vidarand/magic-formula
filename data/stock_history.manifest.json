@@ -1,7 +1,7 @@
 {
   "version": 1,
   "format": "sharded-gzip",
-  "created_at": "2026-07-23T05:53:26.968800+00:00",
+  "created_at": "2026-07-24T05:50:47.172130+00:00",
   "shard_count": 19,
   "total_tickers": 277,
   "shards": [
