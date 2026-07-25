@@ -3,5 +3,5 @@
   "manifest": "data/stock_history.manifest.json",
   "shards_dir": "data/stock_history_shards",
   "shard_count": 19,
-  "total_tickers": 277
+  "total_tickers": 279
 }
