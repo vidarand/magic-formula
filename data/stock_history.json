@@ -2,6 +2,6 @@
   "_storage": "sharded-gzip",
   "manifest": "data/stock_history.manifest.json",
   "shards_dir": "data/stock_history_shards",
-  "shard_count": 21,
+  "shard_count": 22,
   "total_tickers": 280
 }
