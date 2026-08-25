@@ -1,7 +1,7 @@
 {
   "version": 1,
   "format": "sharded-gzip",
-  "created_at": "2026-08-24T03:35:24.345944+00:00",
+  "created_at": "2026-08-25T03:32:20.201565+00:00",
   "shard_count": 22,
   "total_tickers": 280,
   "shards": [
@@ -71,7 +71,7 @@
     },
     {
       "file": "stock_history.part0017.json.gz",
-      "ticker_count": 15
+      "ticker_count": 14
     },
     {
       "file": "stock_history.part0018.json.gz",
@@ -83,15 +83,15 @@
     },
     {
       "file": "stock_history.part0020.json.gz",
-      "ticker_count": 12
+      "ticker_count": 11
     },
     {
       "file": "stock_history.part0021.json.gz",
-      "ticker_count": 13
+      "ticker_count": 14
     },
     {
       "file": "stock_history.part0022.json.gz",
-      "ticker_count": 8
+      "ticker_count": 9
     }
   ]
 }
