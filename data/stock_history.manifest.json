@@ -1,7 +1,7 @@
 {
   "version": 1,
   "format": "sharded-gzip",
-  "created_at": "2026-08-27T12:55:10.690696+00:00",
+  "created_at": "2026-08-28T14:14:53.034072+00:00",
   "shard_count": 22,
   "total_tickers": 280,
   "shards": [
@@ -43,7 +43,7 @@
     },
     {
       "file": "stock_history.part0010.json.gz",
-      "ticker_count": 11
+      "ticker_count": 10
     },
     {
       "file": "stock_history.part0011.json.gz",
@@ -91,7 +91,7 @@
     },
     {
       "file": "stock_history.part0022.json.gz",
-      "ticker_count": 10
+      "ticker_count": 11
     }
   ]
 }
