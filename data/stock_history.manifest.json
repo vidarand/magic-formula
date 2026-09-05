@@ -1,7 +1,7 @@
 {
   "version": 1,
   "format": "sharded-gzip",
-  "created_at": "2026-09-04T07:23:13.991478+00:00",
+  "created_at": "2026-09-05T07:14:59.379736+00:00",
   "shard_count": 23,
   "total_tickers": 280,
   "shards": [
@@ -11,7 +11,7 @@
     },
     {
       "file": "stock_history.part0002.json.gz",
-      "ticker_count": 13
+      "ticker_count": 12
     },
     {
       "file": "stock_history.part0003.json.gz",
@@ -31,7 +31,7 @@
     },
     {
       "file": "stock_history.part0007.json.gz",
-      "ticker_count": 13
+      "ticker_count": 12
     },
     {
       "file": "stock_history.part0008.json.gz",
@@ -39,63 +39,63 @@
     },
     {
       "file": "stock_history.part0009.json.gz",
-      "ticker_count": 16
-    },
-    {
-      "file": "stock_history.part0010.json.gz",
-      "ticker_count": 11
-    },
-    {
-      "file": "stock_history.part0011.json.gz",
-      "ticker_count": 10
-    },
-    {
-      "file": "stock_history.part0012.json.gz",
       "ticker_count": 15
     },
     {
-      "file": "stock_history.part0013.json.gz",
+      "file": "stock_history.part0010.json.gz",
       "ticker_count": 12
     },
     {
-      "file": "stock_history.part0014.json.gz",
-      "ticker_count": 12
-    },
-    {
-      "file": "stock_history.part0015.json.gz",
-      "ticker_count": 11
-    },
-    {
-      "file": "stock_history.part0016.json.gz",
-      "ticker_count": 14
-    },
-    {
-      "file": "stock_history.part0017.json.gz",
-      "ticker_count": 12
-    },
-    {
-      "file": "stock_history.part0018.json.gz",
-      "ticker_count": 16
-    },
-    {
-      "file": "stock_history.part0019.json.gz",
-      "ticker_count": 12
-    },
-    {
-      "file": "stock_history.part0020.json.gz",
+      "file": "stock_history.part0011.json.gz",
       "ticker_count": 9
     },
     {
-      "file": "stock_history.part0021.json.gz",
+      "file": "stock_history.part0012.json.gz",
       "ticker_count": 13
+    },
+    {
+      "file": "stock_history.part0013.json.gz",
+      "ticker_count": 13
+    },
+    {
+      "file": "stock_history.part0014.json.gz",
+      "ticker_count": 11
+    },
+    {
+      "file": "stock_history.part0015.json.gz",
+      "ticker_count": 12
+    },
+    {
+      "file": "stock_history.part0016.json.gz",
+      "ticker_count": 13
+    },
+    {
+      "file": "stock_history.part0017.json.gz",
+      "ticker_count": 11
+    },
+    {
+      "file": "stock_history.part0018.json.gz",
+      "ticker_count": 14
+    },
+    {
+      "file": "stock_history.part0019.json.gz",
+      "ticker_count": 14
+    },
+    {
+      "file": "stock_history.part0020.json.gz",
+      "ticker_count": 11
+    },
+    {
+      "file": "stock_history.part0021.json.gz",
+      "ticker_count": 9
     },
     {
       "file": "stock_history.part0022.json.gz",
-      "ticker_count": 13
+      "ticker_count": 15
     },
     {
       "file": "stock_history.part0023.json.gz",
-      "ticker_count": 5
+      "ticker_count": 11
     }
   ]
 }
